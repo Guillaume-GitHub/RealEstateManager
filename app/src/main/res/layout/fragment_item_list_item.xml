@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/fragment_item_list_item_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+
+    <!--***************** IMAGE CONTAINER (Top part) *******************-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragment_item_list_item_image_container"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_item_list_item_image_container_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--***************** TEXT CONTAINER (Bottom part) *******************-->
+
+    <LinearLayout
+        android:id="@+id/fragment_item_list_item_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fragment_item_list_item_text_container_category"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="clip_vertical"
+            android:textColor="@android:color/darker_gray"
+            tools:text ="Business Shop" />
+
+        <TextView
+            android:id="@+id/fragment_item_list_item_text_container_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="clip_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Head office of Google France"
+            android:maxLines="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragment_item_list_item_text_container_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                tools:text="345000 $"/>
+
+            <Space
+                android:id="@+id/fragment_item_list_item_text_container_space"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/fragment_item_list_item_text_container_price" />
+
+            <TextView
+                android:id = "@+id/fragment_item_list_item_text_container_address"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/fragment_item_list_item_text_container_space"
+                tools:text = "8 Rue de Londres, 75009 Paris"
+                android:lines="1"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
