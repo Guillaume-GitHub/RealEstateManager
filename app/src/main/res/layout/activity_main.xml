@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/activity_main_framelayout"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.MainActivity">
-</FrameLayout>
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/activity_main_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".controller.MainActivity"/>
+
+</LinearLayout>
