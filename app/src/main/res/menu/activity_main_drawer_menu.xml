@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/main_activity_menu_first_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_new"
+            android:icon="@drawable/ic_twotone_add_circle_24px"
+            android:title="@string/drawer_menu_new" />
+        <item
+            android:id="@+id/activity_main_drawer_map"
+            android:icon="@drawable/ic_twotone_map_24px"
+            android:title="@string/drawer_menu_map" />
+        <item
+            android:id="@+id/activity_main_drawer_simulation"
+            android:icon="@drawable/ic_twotone_insert_chart_24px"
+            android:title="@string/drawer_menu_simulation" />
+        <item
+            android:id="@+id/activity_main_drawer_complete"
+            android:icon="@drawable/ic_twotone_edit_24px"
+            android:title="@string/drawer_menu_complete" />
+    </group>
+
+
+    <group
+        android:id="@+id/main_activity_menu_second_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/activity_main_drawer_profile"
+            android:icon="@drawable/ic_twotone_account_circle_24px"
+            android:title="@string/drawer_menu_profile" />
+        <item
+            android:id="@+id/activity_main_drawer_settings"
+            android:icon="@drawable/ic_twotone_settings_24px"
+            android:title="@string/drawer_menu_settings" />
+    </group>
+
+</menu>

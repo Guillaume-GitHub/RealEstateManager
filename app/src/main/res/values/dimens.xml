@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--DEFAULT APP PADDING-->
+    <dimen name="small_app_padding">5dp</dimen>
+    <dimen name="default_app_padding">10dp</dimen>
+    <dimen name="large_app_padding">5dp</dimen>
+
+    <!--DEFAULT APP MARGIN-->
+    <dimen name="small_app_margin">5dp</dimen>
+    <dimen name="default_app_margin">10dp</dimen>
+    <dimen name="large_app_margin">15dp</dimen>
+
+    <dimen name="default_app_radius">10dp</dimen>
+    <dimen name="default_app_elevation">5dp</dimen>
+
+    <!--SEARCH BAR-->
+    <dimen name="search_bar_height">55dp</dimen>
+    <dimen name="search_bar_hint_size">18sp</dimen>
+
+
+    <dimen name="toolbar_text_size">20sp</dimen>
+
+    <dimen name="title_text_size">22sp</dimen>
+
+    <!--ITEM CARD VIEW-->
+    <dimen name="cardview_title_text_size">16sp</dimen>
+    <dimen name="custom_cardview_height">200dp</dimen>
+    <dimen name="item_top_part_height">140dp</dimen>
+    <dimen name="item_bottom_part_height">60dp</dimen>
+
+    <!--NavigationView-->
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_image_width">60dp</dimen>
+    <dimen name="nav_header_image_height">60dp</dimen>
+
+</resources>

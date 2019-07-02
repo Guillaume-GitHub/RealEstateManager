@@ -11,7 +11,6 @@ class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.fragment_item_list_item, parent,false)){
 
     val title: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_title)
-    val category: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_category)
     val price: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_price)
     val address: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_address)
 
@@ -19,8 +18,7 @@ class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun displayItem(estate: Estate){
         title.text = estate.title
-        category.text = estate.category
-        price.text = estate.price.toString()
+        price.text = estate.price.toInt().toString() + " $"
         address.text = estate.address
     }
 }

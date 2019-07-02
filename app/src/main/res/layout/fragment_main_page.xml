@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Using cardview for elevation -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_app_margin"
+        app:cardCornerRadius="@dimen/default_app_radius"
+        app:cardElevation="@dimen/default_app_elevation">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:hint = "@string/search_bar_hint"
+            android:textSize="@dimen/search_bar_hint_size"
+            android:gravity="center|start"
+            android:padding="@dimen/large_app_padding"
+            android:drawablePadding="@dimen/default_app_padding"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_app_margin"
+                app:cardCornerRadius="@dimen/default_app_radius">
+
+                <ImageView
+                    android:background="@color/colorPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Rated"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_text_size"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_app_margin"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                android:text="@string/categories_title_main_page_fragment" />
+
+            <!-- TODO: CATEGORIES LAYOUT -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_app_margin"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                android:text="@string/latest_estate_title_main_page_fragment" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_item_list_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
-import kotlinx.android.synthetic.main.fragment_item_list.*
+import kotlinx.android.synthetic.main.fragment_main_page.*
 
-class ItemListFragment : Fragment() {
+class MainPageFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var recyclerView: RecyclerView
@@ -23,7 +24,7 @@ class ItemListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        this.rootView = inflater.inflate(R.layout.fragment_item_list, container, false)
+        this.rootView = inflater.inflate(R.layout.fragment_main_page, container, false)
         return rootView
     }
 
@@ -36,7 +37,7 @@ class ItemListFragment : Fragment() {
     // Configure RecyclerView
     private fun recyclerViewConfig(){
             this.recyclerView = fragment_item_list_recyclerview.apply {
-            this.layoutManager = GridLayoutManager(this.context,2)
+            this.layoutManager = GridLayoutManager(context,2)
             this.adapter = ItemListAdapter(estates)
         }
     }

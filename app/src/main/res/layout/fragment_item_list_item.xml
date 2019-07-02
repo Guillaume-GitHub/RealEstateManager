@@ -5,17 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="@dimen/custom_cardview_height"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="@dimen/default_app_margin">
 
 
     <!--***************** IMAGE CONTAINER (Top part) *******************-->
     <androidx.cardview.widget.CardView
         android:id="@+id/fragment_item_list_item_image_container"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:cardCornerRadius="10dp">
+        android:layout_height="@dimen/item_top_part_height"
+        app:cardCornerRadius="@dimen/default_app_radius">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/fragment_item_list_item_image_container_imageview"
@@ -24,6 +24,15 @@
             android:src="@drawable/ic_launcher_background"
             android:scaleType="centerCrop"/>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_app_padding"
+            android:layout_margin="@dimen/small_app_margin"
+            android:background="@android:color/holo_red_light"
+            android:text="@string/item_list_sale_indicator"
+            android:textColor="@android:color/white"/>
+
     </androidx.cardview.widget.CardView>
 
     <!--***************** TEXT CONTAINER (Bottom part) *******************-->
@@ -31,25 +40,16 @@
     <LinearLayout
         android:id="@+id/fragment_item_list_item_text_container"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/item_bottom_part_height"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fragment_item_list_item_text_container_category"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="clip_vertical"
-            android:textColor="@android:color/darker_gray"
-            tools:text ="Business Shop" />
 
         <TextView
             android:id="@+id/fragment_item_list_item_text_container_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="clip_vertical"
-            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/cardview_title_text_size"
             android:textStyle="bold"
             tools:text="Head office of Google France"
             android:maxLines="1" />
@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"
                 tools:text="345000 $"/>
@@ -80,7 +81,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/fragment_item_list_item_text_container_space"
-                tools:text = "8 Rue de Londres, 75009 Paris"
+                android:gravity="center_vertical"
+                tools:text = "Paris"
                 android:lines="1"/>
 
         </RelativeLayout>
