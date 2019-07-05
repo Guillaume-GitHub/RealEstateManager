@@ -12,7 +12,7 @@
 
     <!--***************** IMAGE CONTAINER (Top part) *******************-->
     <androidx.cardview.widget.CardView
-        android:id="@+id/fragment_item_list_item_image_container"
+        android:id="@+id/recyclerview_list_item_card_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_top_part_height"
         app:cardCornerRadius="@dimen/default_app_radius">
@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/default_app_padding"
             android:layout_margin="@dimen/small_app_margin"
-            android:background="@android:color/holo_red_light"
             android:text="@string/item_list_sale_indicator"
+            android:background="@drawable/sale_tag_background"
             android:textColor="@android:color/white"/>
 
     </androidx.cardview.widget.CardView>

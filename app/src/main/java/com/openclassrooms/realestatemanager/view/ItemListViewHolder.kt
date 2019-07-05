@@ -8,13 +8,11 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
 
 class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.fragment_item_list_item, parent,false)){
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.recyclerview_list_item, parent,false)){
 
-    val title: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_title)
-    val price: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_price)
-    val address: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_address)
-
-
+    private val title: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_title)
+    private val price: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_price)
+    private val address: TextView =  itemView.findViewById(R.id.fragment_item_list_item_text_container_address)
 
     fun displayItem(estate: Estate){
         title.text = estate.title

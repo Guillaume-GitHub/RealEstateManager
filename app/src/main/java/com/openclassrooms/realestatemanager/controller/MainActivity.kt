@@ -12,8 +12,6 @@ class MainActivity : AppCompatActivity() {
         this.displayListFragment()
     }
 
-
-
     private fun displayListFragment(){
         val itemFragment = MainPageFragment()
         supportFragmentManager.beginTransaction().add(R.id.activity_main_framelayout_list,itemFragment).commit()

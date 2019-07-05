@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.FilterActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_filter_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <SearchView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:iconifiedByDefault="false"
+            android:layout_gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/activity_filter_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/activity_filter_toolbar"
+        android:layout_margin="@dimen/large_app_margin">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/activity_filter_container_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_app_margin"
+            android:spinnerMode="dropdown" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/activity_filter_container_chip_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_app_margin">
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_filter_price"
+            android:textSize="@dimen/title_text_size"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/activity_filter_container_seekbar_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_filter_surface"
+            android:textSize="@dimen/title_text_size"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/activity_filter_container_seekbar_surface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_filter_room"
+            android:textSize="@dimen/title_text_size"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/activity_filter_container_seekbar_rooms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_filter_type"
+            android:textSize="@dimen/title_text_size"
+            android:layout_marginBottom="@dimen/large_app_margin"/>
+
+        <GridLayout
+            android:id="@+id/activity_filter_container_checkbox_gridlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:checked="true"
+                android:text="Housse" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:text="Mansion"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:text="Cotage"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:text="Apartment"/>
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:text="Bengalow"/>
+
+        </GridLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activity_filter_container_input_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_corner_background"
+            android:text="@string/activity_filter_input_btn"
+            android:layout_margin="@dimen/large_app_margin"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

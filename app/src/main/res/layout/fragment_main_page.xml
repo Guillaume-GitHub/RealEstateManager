@@ -16,6 +16,7 @@
         app:cardElevation="@dimen/default_app_elevation">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_main_page_search_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             android:drawableStart="@drawable/ic_search_black_24dp"
@@ -44,16 +45,16 @@
                 <ImageView
                     android:background="@color/colorPrimary"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="@dimen/main_page_image_view" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Top Rated"
+                    android:text="@string/latest_estate_title_main_page_fragment"
                     android:layout_gravity="center"
                     android:textColor="@android:color/white"
-                    android:textSize="@dimen/title_text_size"
-                    />
+                    android:textStyle="bold"
+                    android:textSize="@dimen/title_text_size" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -64,7 +65,12 @@
                 android:textStyle="bold"
                 android:text="@string/categories_title_main_page_fragment" />
 
-            <!-- TODO: CATEGORIES LAYOUT -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_item_list_recyclerview_categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/default_app_padding">
+            </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -72,12 +78,12 @@
                 android:layout_margin="@dimen/default_app_margin"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold"
-                android:text="@string/latest_estate_title_main_page_fragment" />
+                android:text="@string/sold_title_main_page_fragment" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_item_list_recyclerview"
+                android:id="@+id/fragment_item_list_recyclerview_sold"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>

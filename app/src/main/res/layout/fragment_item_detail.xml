@@ -65,8 +65,11 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        app:cardElevation="15dp">
+                        app:cardElevation="@dimen/default_app_elevation"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginEnd="@dimen/small_app_margin">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -75,16 +78,17 @@
 
                             <androidx.viewpager.widget.ViewPager
                                 android:layout_width="match_parent"
-                                android:layout_height="175dp" />
+                                android:layout_height="@dimen/fragment_item_detail_view_pager_height" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:lines="2"
-                                android:padding="10dp"
+                                android:padding="@dimen/default_app_padding"
                                 android:text="Private sea Facing Bungalow with full facilities available"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
@@ -92,62 +96,57 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:padding="10dp"
-                        app:cardElevation="15dp">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginEnd="@dimen/small_app_margin"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="@dimen/default_app_padding">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="15dp"
-                                android:padding="10dp"
-                                android:text="Criteria "
-                                android:textSize="18sp"
+                                android:layout_marginBottom="@dimen/large_app_margin"
+                                android:text="@string/fragment_item_detail_title_detail"
+                                android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
                             <GridLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:columnCount="1"
-                                android:rowCount="2">
+                                android:columnCount="4">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
+                                    android:layout_marginEnd="@dimen/large_app_margin"
+                                    android:drawableTop="@drawable/ic_twotone_home_36px"
+                                    android:text="6 rooms"/>
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawableStart="@drawable/ic_aspect_ratio_black_24dp"
-                                        android:gravity="center"
-                                        android:padding="10dp"
-                                        android:text="154 m2" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/large_app_margin"
+                                    android:drawableTop="@drawable/ic_twotone_surface_36px"
+                                    android:text="730m2"/>
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawableStart="@drawable/ic_location_city_black_24dp"
-                                        android:gravity="center"
-                                        android:padding="10dp"
-                                        android:text="Housse" />
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/large_app_margin"
+                                    android:drawableTop="@drawable/ic_twotone_bedroom_36px"
+                                    android:text="3 Bedrooms"/>
 
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:drawableStart="@drawable/ic_number_room_black_24dp"
-                                        android:gravity="center"
-                                        android:padding="10dp"
-                                        android:text="5 rooms" />
-                                </LinearLayout>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/large_app_margin"
+                                    android:drawableTop="@drawable/ic_twotone_bathroom_36px"
+                                    android:text="1 Bathroom"/>
 
                             </GridLayout>
 
@@ -158,34 +157,36 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        app:cardElevation="10dp">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginEnd="@dimen/small_app_margin"
+                        app:cardElevation="@dimen/default_app_elevation"
+                        app:cardCornerRadius="@dimen/default_app_radius">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="@dimen/default_app_padding">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="15dp"
-                                android:padding="10dp"
-                                android:text="Description"
-                                android:textSize="18sp"
+                                android:layout_marginBottom="@dimen/large_app_margin"
+                                android:text="@string/fragment_item_detail_title_description"
+                                android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="10dp"
+                                android:paddingBottom="@dimen/default_app_padding"
                                 android:text="Clerval sur l'Axe Besançon-Belfort Montbéliard Charmante Maison Individuel T7 de 200 m2 ( possible appartement indépendant ) avec Grandes Terrasses, Dépendances, Tonnelle, Barbecue sur un Terrain Paysagé et Arboré de 1781 m2." />
 
 
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="150dp"
+                                android:layout_height="@dimen/fragment_item_detail_image_map_height"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/map" />
 
@@ -193,7 +194,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:drawableStart="@drawable/ic_location_on_black_24dp"
-                                android:padding="10dp"
+                                android:layout_marginTop="@dimen/default_app_margin"
+                                android:paddingBottom="@dimen/default_app_padding"
                                 android:text="11 rue de beauregard, 70190 Voray-sur-L'Ognon" />
                         </LinearLayout>
 
@@ -202,27 +204,30 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        app:cardElevation="10dp">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginEnd="@dimen/small_app_margin"
+                        app:cardElevation="@dimen/default_app_elevation"
+                        app:cardCornerRadius="@dimen/default_app_radius">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:padding="@dimen/default_app_padding">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="15dp"
-                                android:padding="10dp"
-                                android:text="Nearby"
-                                android:textSize="18sp"
+                                android:layout_marginBottom="@dimen/large_app_margin"
+                                android:text="@string/fragment_item_detail_title_nearby"
+                                android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="10dp"
+                                android:paddingBottom="@dimen/default_app_padding"
                                 android:text="jshdfksdfkqlfsdbjfbqdsnldsnflksbdnfbjksdbjksdbf,nbsdnkjgbknskjbdsbndkjgbds,d,,f,fndbsn,,,fnsbhdh"/>
 
                         </LinearLayout>
@@ -232,45 +237,43 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        app:cardElevation="10dp">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginEnd="@dimen/small_app_margin"
+                        app:cardElevation="@dimen/default_app_elevation"
+                        app:cardCornerRadius="@dimen/default_app_radius">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginEnd="10dp"
-                            android:layout_marginBottom="10dp">
+                            android:padding="@dimen/default_app_padding">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Posted By"
-                                android:paddingTop="10dp"
-                                android:paddingStart="10dp"
-                                android:paddingEnd="10dp"
-                                android:textSize="18sp"
+                                android:text="@string/fragment_item_detail_title_posted"
+                                android:paddingBottom="@dimen/default_app_padding"
+                                android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:paddingStart="10dp"
-                                android:paddingEnd="10dp">
+                                android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
                                     android:layout_alignParentStart="true"
                                     android:layout_centerInParent="true"
-                                    android:layout_marginEnd="10dp"
                                     android:text="Guillaume BAGUE" />
 
                                 <ImageView
-                                    android:layout_width="60dp"
-                                    android:layout_height="60dp"
+                                    android:layout_width="@dimen/fragment_item_detail_profile_image_width"
+                                    android:layout_height="@dimen/fragment_item_detail_profile_image_height"
                                     android:src="@color/colorPrimary"
+                                    android:background="@drawable/circle_stroke_background"
                                     android:layout_alignParentEnd="true" />
 
                             </RelativeLayout>

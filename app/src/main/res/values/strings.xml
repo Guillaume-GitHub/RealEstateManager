@@ -5,6 +5,8 @@
     <string name="search_bar_hint">Search</string>
     <string name="latest_estate_title_main_page_fragment">Latest Estate</string>
     <string name="categories_title_main_page_fragment">Categories</string>
+    <string name="sold_title_main_page_fragment">Recently Sold</string>
+
 
     <!--DRAWER MENU-->
     <string name="drawer_menu_new">New</string>
@@ -15,7 +17,18 @@
     <string name="drawer_menu_settings">Settings</string>
 
     <!--ITEM LIST-->
-    <string name="item_list_sale_indicator">Sale</string>
+    <string name="item_list_sale_indicator">Sold</string>
 
+    <!--FILTER ACTIVITY TEXT-->
+    <string name="activity_filter_price">Price</string>
+    <string name="activity_filter_surface">Surface</string>
+    <string name="activity_filter_room">Rooms</string>
+    <string name="activity_filter_type">Type</string>
+    <string name="activity_filter_input_btn">Apply</string>
 
+    <!--DETAIL FRAGMENT-->
+    <string name="fragment_item_detail_title_detail">Criteria</string>
+    <string name="fragment_item_detail_title_description">Description</string>
+    <string name="fragment_item_detail_title_nearby">Nearby</string>
+    <string name="fragment_item_detail_title_posted">Posted By</string>
 </resources>
