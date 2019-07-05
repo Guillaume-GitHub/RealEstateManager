@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/recyclerview_home_list_item_root_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/custom_cardview_height"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/default_app_margin">
+
+
+    <!--***************** IMAGE CONTAINER (Top part) *******************-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/recyclerview_home_list_item_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_top_part_height"
+        app:cardCornerRadius="@dimen/default_app_radius">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/recyclerview_home_list_item_card_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="centerCrop"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/recyclerview_home_list_item_card_view_sold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_app_padding"
+            android:layout_margin="@dimen/small_app_margin"
+            android:text="@string/item_list_sale_indicator"
+            android:background="@drawable/sale_tag_background"
+            android:textColor="@android:color/white"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--***************** TEXT CONTAINER (Bottom part) *******************-->
+
+    <LinearLayout
+        android:id="@+id/recyclerview_home_list_item_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_bottom_part_height"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recyclerview_home_list_item_text_container_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/cardview_title_text_size"
+            android:textStyle="bold"
+            tools:text="Head office of Google France"
+            android:maxLines="1" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recyclerview_home_list_item_text_container_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                tools:text="345000 $"/>
+
+            <Space
+                android:id="@+id/recyclerview_home_list_item_text_container_spacer"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/recyclerview_home_list_item_text_container_price" />
+
+            <TextView
+                android:id = "@+id/recyclerview_home_list_item_text_container_location"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/recyclerview_home_list_item_text_container_spacer"
+                android:gravity="center_vertical"
+                tools:text = "Paris"
+                android:lines="1"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

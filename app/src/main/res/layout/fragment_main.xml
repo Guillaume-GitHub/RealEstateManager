@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
+    android:id="@+id/fragment_main_root_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         app:cardElevation="@dimen/default_app_elevation">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment_main_page_search_view"
+            android:id="@+id/fragment_main_search_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
             android:drawableStart="@drawable/ic_search_black_24dp"
@@ -43,11 +44,13 @@
                 app:cardCornerRadius="@dimen/default_app_radius">
 
                 <ImageView
+                    android:id="@+id/fragment_main_latest_estate_imageview"
                     android:background="@color/colorPrimary"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/main_page_image_view" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragment_main_latest_estate_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/latest_estate_title_main_page_fragment"
@@ -58,6 +61,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/fragment_main_category_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_app_margin"
@@ -66,13 +70,14 @@
                 android:text="@string/categories_title_main_page_fragment" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_item_list_recyclerview_categories"
+                android:id="@+id/fragment_main_recyclerview_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingEnd="@dimen/default_app_padding">
             </androidx.recyclerview.widget.RecyclerView>
 
             <TextView
+                android:id="@+id/fragment_main_sold_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/default_app_margin"
@@ -81,7 +86,7 @@
                 android:text="@string/sold_title_main_page_fragment" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_item_list_recyclerview_sold"
+                android:id="@+id/fragment_main_recyclerview_sold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>

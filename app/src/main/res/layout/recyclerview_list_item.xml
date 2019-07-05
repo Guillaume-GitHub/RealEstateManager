@@ -1,92 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/fragment_item_list_item_layout"
+<androidx.cardview.widget.CardView
+    android:id="@+id/recycler_list_item_card_view_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/custom_cardview_height"
-    android:orientation="vertical"
+    android:layout_height="140dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/default_app_radius"
+    app:cardElevation="@dimen/default_app_elevation"
     android:layout_margin="@dimen/default_app_margin">
 
-
-    <!--***************** IMAGE CONTAINER (Top part) *******************-->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/recyclerview_list_item_card_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_top_part_height"
-        app:cardCornerRadius="@dimen/default_app_radius">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fragment_item_list_item_image_container_imageview"
-            android:layout_width="match_parent"
+            android:id="@+id/recycler_list_item_image"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher_background"
-            android:scaleType="centerCrop"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/default_app_padding"
-            android:layout_margin="@dimen/small_app_margin"
-            android:text="@string/item_list_sale_indicator"
-            android:background="@drawable/sale_tag_background"
-            android:textColor="@android:color/white"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <!--***************** TEXT CONTAINER (Bottom part) *******************-->
-
-    <LinearLayout
-        android:id="@+id/fragment_item_list_item_text_container"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_bottom_part_height"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fragment_item_list_item_text_container_title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/cardview_title_text_size"
-            android:textStyle="bold"
-            tools:text="Head office of Google France"
-            android:maxLines="1" />
+            android:scaleType="centerCrop"
+            tools:background="@drawable/rounded_corner_background"
+            tools:backgroundTint="@color/colorPrimary" />
 
         <RelativeLayout
+            android:id="@+id/recycler_list_item_text_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/default_app_padding">
 
-            <TextView
-                android:id="@+id/fragment_item_list_item_text_container_price"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textColor="@color/colorAccent"
-                tools:text="345000 $"/>
-
-            <Space
-                android:id="@+id/fragment_item_list_item_text_container_space"
-                android:layout_width="10dp"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recycler_list_item_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/fragment_item_list_item_text_container_price" />
+                android:maxLines="1"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                tools:text="Big modern mansion"/>
 
-            <TextView
-                android:id = "@+id/fragment_item_list_item_text_container_address"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/fragment_item_list_item_text_container_space"
-                android:gravity="center_vertical"
-                tools:text = "Paris"
-                android:lines="1"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recycler_list_item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Mansion"
+                android:gravity="bottom"
+                android:layout_below="@id/recycler_list_item_title"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recycler_list_item_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Manhattan, USA"
+                android:layout_above="@id/recycler_list_item_date"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/recycler_list_item_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="1,000,000 $"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorAccent"
+                    android:layout_alignParentBottom="true"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/recycler_list_item_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="12/06/2019 14:56"
+                    android:layout_above="@id/recycler_list_item_price"/>
 
         </RelativeLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,26 +1,23 @@
 package com.openclassrooms.realestatemanager.controller
 
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
+import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.EstateCategory
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_main_page.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
-class MainPageFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -32,7 +29,7 @@ class MainPageFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        this.rootView = inflater.inflate(R.layout.fragment_main_page, container, false)
+        this.rootView = inflater.inflate(R.layout.fragment_main, container, false)
         return rootView
     }
 
@@ -42,28 +39,34 @@ class MainPageFragment : Fragment() {
         this.addCategory()
         this.recyclerViewItemConfig()
         this.recyclerViewCategoryConfig()
-
-        fragment_main_page_search_view.setOnClickListener(View.OnClickListener { v: View? ->
-            val detailFragment = ItemDetailFragment()
-            fragmentManager!!.beginTransaction().replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment").addToBackStack(null).commit()
-        })
-
+        this.onClickLastestEstate()
     }
 
     // Configure RecyclerView of estates items
     private fun recyclerViewItemConfig(){
-            this.itemRecycler = fragment_item_list_recyclerview_sold.apply {
+            this.itemRecycler = fragment_main_recyclerview_sold.apply {
             this.layoutManager = GridLayoutManager(context,2) as RecyclerView.LayoutManager?
-            this.adapter = ItemListAdapter(estates)
+            this.adapter = ItemHomeAdapter(estates)
         }
     }
 
     // Configure RecyclerView of categories
     private fun recyclerViewCategoryConfig(){
-        this.categoryRecycler = fragment_item_list_recyclerview_categories.apply {
+        this.categoryRecycler = fragment_main_recyclerview_categories.apply {
             this.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
             this.adapter = ItemCategoryAdapter(categories)
         }
+    }
+
+    private fun onClickLastestEstate(){
+        fragment_main_latest_estate_imageview.setOnClickListener(View.OnClickListener { v: View? ->
+            val detailFragment = DetailFragment()
+            fragmentManager!!.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
+                    .addToBackStack(null)
+                    .commit()
+        })
     }
 
     //TODO : Remove this example

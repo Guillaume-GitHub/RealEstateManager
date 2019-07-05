@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayListFragment(){
-        val itemFragment = MainPageFragment()
+        val itemFragment = HomeFragment()
         supportFragmentManager.beginTransaction().add(R.id.activity_main_framelayout_list,itemFragment).commit()
     }
 }
