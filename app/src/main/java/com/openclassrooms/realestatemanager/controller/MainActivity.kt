@@ -25,8 +25,9 @@ class MainActivity : AppCompatActivity() {
     private fun configToolbar(){
         // Set the toolbar as support action bar
         setSupportActionBar(activity_main_toolbar)
-        // get the support action bar
-        val actionBar = supportActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.elevation = 5.0f
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_twotone_menu_white_24px)
     }
 
 
@@ -35,8 +36,5 @@ class MainActivity : AppCompatActivity() {
         var drawerLayout = activity_main_drawer_layout
         var toggle = ActionBarDrawerToggle(this, drawerLayout, activity_main_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.elevation = 5.0f
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_twotone_menu_white_24px)
     }
 }

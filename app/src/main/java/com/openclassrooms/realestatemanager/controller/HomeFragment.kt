@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.controller
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var categoryRecycler: RecyclerView
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
+    private val RQ_FILTER_ACTIVITY = 5
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,7 @@ class HomeFragment : Fragment() {
         this.recyclerViewItemConfig()
         this.recyclerViewCategoryConfig()
         this.onClickLastestEstate()
+        this.onClickSearchView()
     }
 
     // Configure RecyclerView of estates items
@@ -69,6 +72,12 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private fun onClickSearchView(){
+        fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
+            var intent = Intent(context,FilterActivity::class.java)
+            startActivityForResult(intent,RQ_FILTER_ACTIVITY)
+        })
+    }
     //TODO : Remove this example
     private fun addEstate(){
         estates.add(Estate("Apartement","Apartment 2 rooms with balcony", "322 Lindsay St Chapel Hill", 130000.00))

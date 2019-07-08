@@ -13,11 +13,21 @@ import androidx.transition.TransitionManager
 import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_filter.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class FilterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
+        this.configToolbar()
+    }
+
+    private fun configToolbar() {
+        // Set the toolbar as support action bar
+        setSupportActionBar(activity_filter_toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+        supportActionBar?.elevation = 5.0f
     }
 }
