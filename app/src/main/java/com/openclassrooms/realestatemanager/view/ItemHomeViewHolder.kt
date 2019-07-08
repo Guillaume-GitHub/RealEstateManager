@@ -1,10 +1,12 @@
 package com.openclassrooms.realestatemanager.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.RecyclerViewItemClickListener
 import com.openclassrooms.realestatemanager.model.Estate
 
 class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -18,5 +20,10 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         title.text = estate.title
         price.text = estate.price.toInt().toString() + " $"
         address.text = estate.address
+    }
+
+    fun setOnclickListener(callback:RecyclerViewItemClickListener, position: Int){
+        this.itemView.setOnClickListener(View.OnClickListener {
+            v: View? -> callback.OnRecyclerViewItemclick(position) })
     }
 }

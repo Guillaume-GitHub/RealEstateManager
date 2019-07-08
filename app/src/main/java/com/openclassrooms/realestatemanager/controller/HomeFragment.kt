@@ -3,6 +3,7 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +14,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.RecyclerViewItemClickListener
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.EstateCategory
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),RecyclerViewItemClickListener {
+
+    override fun OnRecyclerViewItemclick(position: Int) {
+        Log.d("TAG","RECEIVE CALLBACK CLICK")
+        this.showDetailFragment()
+    }
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -26,6 +33,8 @@ class HomeFragment : Fragment() {
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
     private val RQ_FILTER_ACTIVITY = 5
+    private val callback: RecyclerViewItemClickListener = this
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +58,7 @@ class HomeFragment : Fragment() {
     private fun recyclerViewItemConfig(){
             this.itemRecycler = fragment_main_recyclerview_sold.apply {
             this.layoutManager = GridLayoutManager(context,2) as RecyclerView.LayoutManager?
-            this.adapter = ItemHomeAdapter(estates)
+            this.adapter = ItemHomeAdapter(estates,callback)
         }
     }
 
@@ -70,6 +79,15 @@ class HomeFragment : Fragment() {
                     .addToBackStack(null)
                     .commit()
         })
+    }
+
+    private fun showDetailFragment(){
+            val detailFragment = DetailFragment()
+            fragmentManager!!.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    .replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
+                    .addToBackStack(null)
+                    .commit()
     }
 
     private fun onClickSearchView(){
