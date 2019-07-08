@@ -21,7 +21,7 @@
             android:id="@+id/recycler_category_item_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorSecondary"/>
 
         <TextView
             android:id="@+id/recycler_category_item_text_view"

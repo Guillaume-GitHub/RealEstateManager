@@ -60,8 +60,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="1,000,000 $"
+                    android:textSize="@dimen/medium_text_size"
                     android:textStyle="bold"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorSecondary"
                     android:layout_alignParentBottom="true"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
