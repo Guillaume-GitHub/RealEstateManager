@@ -21,7 +21,7 @@
         <item
             android:id="@+id/activity_main_drawer_complete"
             android:icon="@drawable/ic_twotone_edit_24px"
-            android:title="@string/drawer_menu_complete" />
+            android:title="@string/drawer_menu_draft" />
     </group>
 
 

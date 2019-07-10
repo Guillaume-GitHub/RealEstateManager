@@ -12,7 +12,7 @@
     <string name="drawer_menu_new">New</string>
     <string name="drawer_menu_map">Map</string>
     <string name="drawer_menu_simulation">Simulation</string>
-    <string name="drawer_menu_complete">To Complete</string>
+    <string name="drawer_menu_draft">Draft</string>
     <string name="drawer_menu_profile">Profile</string>
     <string name="drawer_menu_settings">Settings</string>
 

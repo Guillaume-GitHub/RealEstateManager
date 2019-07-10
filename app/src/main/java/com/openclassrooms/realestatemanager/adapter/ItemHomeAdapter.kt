@@ -15,8 +15,7 @@ class ItemHomeAdapter(private val dataset: ArrayList<Estate>, private val callba
     }
 
     override fun onBindViewHolder(holder: ItemHomeViewHolder, position: Int) {
-        holder.displayItem(dataset[position])
-        holder.setOnclickListener(callback,position)
+        holder.bind(dataset[position],callback)
     }
 
     override fun getItemCount(): Int {

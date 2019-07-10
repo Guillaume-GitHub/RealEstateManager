@@ -16,14 +16,19 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private val price: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_price)
     private val address: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_location)
 
-    fun displayItem(estate: Estate){
+    private fun displayItem(estate: Estate){
         title.text = estate.title
         price.text = estate.price.toInt().toString() + " $"
         address.text = estate.address
     }
 
-    fun setOnclickListener(callback:RecyclerViewItemClickListener, position: Int){
+    private fun setOnclickListener(callback:RecyclerViewItemClickListener, estate: Estate){
         this.itemView.setOnClickListener(View.OnClickListener {
-            v: View? -> callback.OnRecyclerViewItemclick(position) })
+            v: View? -> callback.onRecyclerViewItemclick(estate) })
+    }
+
+    fun bind(estate: Estate, callback: RecyclerViewItemClickListener){
+        this.displayItem(estate)
+        this.setOnclickListener(callback,estate)
     }
 }

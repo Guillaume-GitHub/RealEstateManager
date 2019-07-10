@@ -21,9 +21,10 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class HomeFragment : Fragment(),RecyclerViewItemClickListener {
 
-    override fun OnRecyclerViewItemclick(position: Int) {
-        this.showDetailFragment()
+    override fun onRecyclerViewItemclick(estate: Estate) {
+        this.showDetailFragment(estate)
     }
+
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -48,7 +49,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         this.addCategory()
         this.recyclerViewItemConfig()
         this.recyclerViewCategoryConfig()
-        this.onClickLastestEstate()
+        this.onClickLatestEstate()
         this.onClickSearchView()
     }
 
@@ -68,19 +69,19 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         }
     }
 
-    private fun onClickLastestEstate(){
+    private fun onClickLatestEstate(){
         fragment_main_latest_estate_imageview.setOnClickListener(View.OnClickListener { v: View? ->
-            val detailFragment = DetailFragment()
+            val listFragment = ListFragment()
             fragmentManager?.beginTransaction()
                     ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
+                    ?.replace(R.id.activity_main_framelayout_list,listFragment,"listFragment")
                     ?.addToBackStack(null)
                     ?.commit()
         })
     }
 
-    private fun showDetailFragment(){
-            val detailFragment = DetailFragment()
+    private fun showDetailFragment(estate: Estate){
+            val detailFragment = DetailFragment(estate)
             fragmentManager?.beginTransaction()
                     ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                     ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
