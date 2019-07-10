@@ -26,6 +26,17 @@
     <string name="activity_filter_type">Type</string>
     <string name="activity_filter_input_btn">Apply</string>
 
+    <!--NEW ESTATE ACTIVITY TEXT-->
+    <string name="activity_new_estate_toolbar_title">Post an Estate</string>
+    <string name="activity_new_estate_title">Estate\'s Details</string>
+    <string name="activity_new_estate_edit_text_title">Title</string>
+    <string name="activity_new_estate_edit_text_type">Type</string>
+    <string name="activity_new_estate_edit_text_location">Location</string>
+    <string name="activity_new_estate_edit_text_surface">Surface</string>
+    <string name="activity_new_estate_edit_text_rooms">Rooms</string>
+    <string name="activity_new_estate_edit_text_description">Description</string>
+    <string name="activity_new_estate_edit_text_price">Price</string>
+
     <!--DETAIL FRAGMENT-->
     <string name="fragment_item_detail_title_detail">Criteria</string>
     <string name="fragment_item_detail_title_description">Description</string>

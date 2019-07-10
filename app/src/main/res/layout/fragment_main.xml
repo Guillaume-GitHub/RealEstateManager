@@ -1,97 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    android:id="@+id/fragment_main_root_container"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <!-- Using cardview for elevation -->
-    <androidx.cardview.widget.CardView
+    <LinearLayout
+        android:id="@+id/fragment_main_root_container"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Using cardview for elevation -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/large_app_margin"
+            app:cardCornerRadius="@dimen/default_app_radius"
+            app:cardElevation="@dimen/default_app_elevation">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_main_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_bar_height"
+                android:drawableStart="@drawable/ic_search_black_24dp"
+                android:hint = "@string/search_bar_hint"
+                android:textSize="@dimen/search_bar_hint_size"
+                android:gravity="center|start"
+                android:padding="@dimen/large_app_padding"
+                android:drawablePadding="@dimen/default_app_padding"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_app_margin"
+                    app:cardCornerRadius="@dimen/default_app_radius">
+
+                    <ImageView
+                        android:id="@+id/fragment_main_latest_estate_imageview"
+                        android:background="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/main_page_image_view" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fragment_main_latest_estate_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latest_estate_title_main_page_fragment"
+                        android:layout_gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/title_text_size" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/fragment_main_category_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_app_margin"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
+                    android:text="@string/categories_title_main_page_fragment" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_main_recyclerview_categories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/default_app_padding">
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/fragment_main_sold_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/default_app_margin"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
+                    android:text="@string/sold_title_main_page_fragment" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_main_recyclerview_sold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="65dp">
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/activity_main_floating_btn"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/large_app_margin"
-        app:cardCornerRadius="@dimen/default_app_radius"
-        app:cardElevation="@dimen/default_app_elevation">
+        android:src="@drawable/ic_twotone_add_24px"
+        android:tint="@color/colorTextOnPrimary"
+        app:layout_anchor="@+id/fragment_main_root_container"
+        app:layout_anchorGravity="end|bottom" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/fragment_main_search_view"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/search_bar_height"
-            android:drawableStart="@drawable/ic_search_black_24dp"
-            android:hint = "@string/search_bar_hint"
-            android:textSize="@dimen/search_bar_hint_size"
-            android:gravity="center|start"
-            android:padding="@dimen/large_app_padding"
-            android:drawablePadding="@dimen/default_app_padding"/>
-    </androidx.cardview.widget.CardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_app_margin"
-                app:cardCornerRadius="@dimen/default_app_radius">
-
-                <ImageView
-                    android:id="@+id/fragment_main_latest_estate_imageview"
-                    android:background="@color/colorPrimary"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/main_page_image_view" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/fragment_main_latest_estate_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/latest_estate_title_main_page_fragment"
-                    android:layout_gravity="center"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/title_text_size" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/fragment_main_category_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_app_margin"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                android:text="@string/categories_title_main_page_fragment" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_main_recyclerview_categories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/default_app_padding">
-            </androidx.recyclerview.widget.RecyclerView>
-
-            <TextView
-                android:id="@+id/fragment_main_sold_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/default_app_margin"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                android:text="@string/sold_title_main_page_fragment" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_main_recyclerview_sold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-</LinearLayout>

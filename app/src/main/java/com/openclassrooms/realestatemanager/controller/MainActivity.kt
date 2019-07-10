@@ -1,13 +1,16 @@
 package com.openclassrooms.realestatemanager.controller
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +34,25 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    // 2 - Configure Drawer Layout
+    // Configure Drawer Layout
     private fun configureDrawerLayout() {
-        var drawerLayout = activity_main_drawer_layout
-        var toggle = ActionBarDrawerToggle(this, drawerLayout, activity_main_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        // config open/close drawer
+        val drawerLayout = activity_main_drawer_layout
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, activity_main_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle)
+
+        //config click on drawer items
+        val navigationView = activity_main_nav_view
+        navigationView.setNavigationItemSelectedListener(this)
+
     }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+       when(item.itemId){
+           R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
+       }
+        return true
+    }
+
 }

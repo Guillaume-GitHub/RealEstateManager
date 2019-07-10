@@ -188,7 +188,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/fragment_item_detail_image_map_height"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/map" />
+                                android:src="@drawable/map"
+                                android:background="@color/colorSecondary"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="match_parent"

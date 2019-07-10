@@ -30,7 +30,8 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:background="@color/transparentGrey"
+            android:textAppearance="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textSize="@dimen/medium_text_size"
             tools:text="Apartment" />
 
     </androidx.cardview.widget.CardView>

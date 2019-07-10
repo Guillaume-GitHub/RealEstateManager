@@ -12,11 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".controller.FilterActivity"
+            android:name=".controller.NewEstateActivity"
             android:parentActivityName=".controller.MainActivity">
         </activity>
         <activity
-            android:name=".controller.MainActivity">
+            android:name=".controller.FilterActivity"
+            android:parentActivityName=".controller.MainActivity">
+        </activity>
+        <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,4 +27,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

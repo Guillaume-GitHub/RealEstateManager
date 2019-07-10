@@ -24,27 +24,10 @@
             app:titleTextColor="@color/colorTextOnPrimary">
         </androidx.appcompat.widget.Toolbar>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <FrameLayout
                 android:id="@+id/activity_main_framelayout_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/activity_main_floating_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.Design.FloatingActionButton"
-                android:layout_margin="@dimen/large_app_margin"
-                app:layout_anchor="@+id/activity_main_framelayout_list"
-                app:layout_anchorGravity="end|bottom"
-                android:src="@drawable/ic_twotone_add_24px"
-                android:tint="@color/colorTextOnPrimary" />
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 

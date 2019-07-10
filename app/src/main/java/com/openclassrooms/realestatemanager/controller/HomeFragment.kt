@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class HomeFragment : Fragment(),RecyclerViewItemClickListener {
 
     override fun OnRecyclerViewItemclick(position: Int) {
-        Log.d("TAG","RECEIVE CALLBACK CLICK")
         this.showDetailFragment()
     }
 
@@ -73,26 +71,26 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
     private fun onClickLastestEstate(){
         fragment_main_latest_estate_imageview.setOnClickListener(View.OnClickListener { v: View? ->
             val detailFragment = DetailFragment()
-            fragmentManager!!.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
-                    .addToBackStack(null)
-                    .commit()
+            fragmentManager?.beginTransaction()
+                    ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
+                    ?.addToBackStack(null)
+                    ?.commit()
         })
     }
 
     private fun showDetailFragment(){
             val detailFragment = DetailFragment()
-            fragmentManager!!.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    .replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
-                    .addToBackStack(null)
-                    .commit()
+            fragmentManager?.beginTransaction()
+                    ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                    ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
+                    ?.addToBackStack(null)
+                    ?.commit()
     }
 
     private fun onClickSearchView(){
         fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
-            var intent = Intent(context,FilterActivity::class.java)
+            val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent,RQ_FILTER_ACTIVITY)
         })
     }
@@ -115,7 +113,5 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         categories.add(EstateCategory("Colonial"))
         categories.add(EstateCategory("Mansion"))
     }
-
-
 
 }
