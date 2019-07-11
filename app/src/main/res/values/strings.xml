@@ -38,10 +38,11 @@
     <string name="activity_new_estate_edit_text_price">Price</string>
 
     <!--DETAIL FRAGMENT-->
-    <string name="fragment_item_detail_title_detail">Criteria</string>
-    <string name="fragment_item_detail_title_description">Description</string>
-    <string name="fragment_item_detail_title_nearby">Nearby</string>
-    <string name="fragment_item_detail_title_posted">Posted By</string>
+    <string name="fragment_detail_title_toolbar">Details</string>
+    <string name="fragment_detail_title_detail">Criteria</string>
+    <string name="fragment_detail_title_description">Description</string>
+    <string name="fragment_detail_title_nearby">Nearby</string>
+    <string name="fragment_detail_title_posted">Posted By</string>
 
     <!-- Used in NavigationDrawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

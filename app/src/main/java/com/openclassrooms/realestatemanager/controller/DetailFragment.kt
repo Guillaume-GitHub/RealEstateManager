@@ -2,13 +2,11 @@ package com.openclassrooms.realestatemanager.controller
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
@@ -25,8 +23,25 @@ class DetailFragment(val estate: Estate) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.bind()
+        configureToolbar()
     }
 
+    // Hide activity toolbar and set click back btn
+    private fun configureToolbar(){
+        this.hideActivityToolbar(true)
+        fragment_detail_toolbar.setNavigationOnClickListener(View.OnClickListener {
+            this.hideActivityToolbar(false)
+            activity?.onBackPressed()
+        })
+    }
+
+    private fun hideActivityToolbar(hide: Boolean){
+        if (hide)
+            (activity as AppCompatActivity).supportActionBar?.hide()
+        else
+            (activity as AppCompatActivity).supportActionBar?.show()
+
+    }
     private fun bind(){
         fragment_detail_title.text = estate.title
         fragment_detail_price.text = estate.price.toString()

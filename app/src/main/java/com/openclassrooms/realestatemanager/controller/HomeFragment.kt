@@ -86,7 +86,6 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
     private fun showDetailFragment(estate: Estate){
             val detailFragment = DetailFragment(estate)
             fragmentManager?.beginTransaction()
-                    ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                     ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
                     ?.addToBackStack(null)
                     ?.commit()

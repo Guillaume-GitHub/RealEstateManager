@@ -7,52 +7,25 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_main"
+            android:id="@+id/fragment_detail_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            app:layout_anchorGravity="bottom|center">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/fragment_detail_price"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="215000 $"
-                    android:textSize="18sp"
-                    android:gravity="start|center"
-                    android:textColor="@color/colorSecondary"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity = "end|center"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:background="@drawable/custom_rounded_btn"
-                    android:text="Check availability"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
+            app:title="@string/fragment_detail_title_toolbar"
+            app:titleTextColor="@color/colorTextOnPrimary">
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
-            android:id="@+id/frameLayout"
+            android:id="@+id/fragment_detail_frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/toolbar_main">
+            android:layout_below="@id/fragment_detail_toolbar">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
@@ -70,7 +43,8 @@
                         app:cardCornerRadius="@dimen/default_app_radius"
                         android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
-                        android:layout_marginEnd="@dimen/small_app_margin">
+                        android:layout_marginEnd="@dimen/small_app_margin"
+                        android:layout_marginTop="@dimen/default_app_margin">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -80,9 +54,11 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/fragment_detail_recycler_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="@dimen/fragment_item_detail_view_pager_height" />
+                                android:layout_height="@dimen/fragment_item_detail_view_pager_height"
+                                android:padding="-10dp"
+                                android:layout_margin="-10dp"/>
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/fragment_detail_title"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -91,6 +67,27 @@
                                 android:text="Private sea Facing Bungalow with full facilities available"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/fragment_detail_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/default_app_padding"
+                                android:paddingEnd="@dimen/default_app_padding"
+                                android:text="12/05/2019 13:56"
+                                android:gravity="end"/>
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/fragment_detail_price"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="@dimen/default_app_padding"
+                                android:paddingEnd="@dimen/default_app_padding"
+                                android:paddingBottom="@dimen/default_app_padding"
+                                android:text="215000 $"
+                                android:textSize="18sp"
+                                android:textColor="@color/colorSecondary"/>
+
 
                         </LinearLayout>
 
@@ -102,7 +99,8 @@
                         android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        app:cardElevation="@dimen/default_app_elevation">
+                        app:cardElevation="@dimen/default_app_elevation"
+                        app:cardCornerRadius="@dimen/default_app_radius">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -114,7 +112,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/large_app_margin"
-                                android:text="@string/fragment_item_detail_title_detail"
+                                android:text="@string/fragment_detail_title_detail"
                                 android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
@@ -180,7 +178,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/large_app_margin"
-                                android:text="@string/fragment_item_detail_title_description"
+                                android:text="@string/fragment_detail_title_description"
                                 android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
@@ -230,7 +228,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/large_app_margin"
-                                android:text="@string/fragment_item_detail_title_nearby"
+                                android:text="@string/fragment_detail_title_nearby"
                                 android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
@@ -262,7 +260,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/fragment_item_detail_title_posted"
+                                android:text="@string/fragment_detail_title_posted"
                                 android:paddingBottom="@dimen/default_app_padding"
                                 android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
