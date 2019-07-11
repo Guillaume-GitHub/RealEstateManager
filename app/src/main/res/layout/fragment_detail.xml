@@ -6,7 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fragment_detail_floating_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="end|bottom"
+        android:layout_margin="@dimen/large_app_margin"
+        android:src="@drawable/ic_twotone_edit_24px"
+        android:tint="@color/colorTextOnPrimary"/>
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -28,6 +40,7 @@
             android:layout_below="@id/fragment_detail_toolbar">
 
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/fragment_detail_nested_scroll_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -39,12 +52,12 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardElevation="@dimen/default_app_elevation"
-                        app:cardCornerRadius="@dimen/default_app_radius"
-                        android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
+                        android:layout_marginTop="@dimen/default_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        android:layout_marginTop="@dimen/default_app_margin">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -55,8 +68,8 @@
                                 android:id="@+id/fragment_detail_recycler_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/fragment_item_detail_view_pager_height"
-                                android:padding="-10dp"
-                                android:layout_margin="-10dp"/>
+                                android:layout_margin="-10dp"
+                                android:padding="-10dp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/fragment_detail_title"
@@ -72,21 +85,19 @@
                                 android:id="@+id/fragment_detail_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+
                                 android:paddingStart="@dimen/default_app_padding"
                                 android:paddingEnd="@dimen/default_app_padding"
-                                android:text="12/05/2019 13:56"
-                                android:gravity="end"/>
+                                android:text="12/05/2019 13:56" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/fragment_detail_price"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingStart="@dimen/default_app_padding"
-                                android:paddingEnd="@dimen/default_app_padding"
-                                android:paddingBottom="@dimen/default_app_padding"
+                                android:padding="@dimen/default_app_padding"
                                 android:text="215000 $"
-                                android:textSize="18sp"
-                                android:textColor="@color/colorSecondary"/>
+                                android:textColor="@color/colorSecondary"
+                                android:textSize="18sp" />
 
 
                         </LinearLayout>
@@ -96,11 +107,11 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        app:cardElevation="@dimen/default_app_elevation"
-                        app:cardCornerRadius="@dimen/default_app_radius">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -127,7 +138,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/large_app_margin"
                                     android:drawableTop="@drawable/ic_twotone_home_36px"
-                                    android:text="6 rooms"/>
+                                    android:text="6 rooms" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/fragment_detail_nb_surface"
@@ -135,7 +146,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/large_app_margin"
                                     android:drawableTop="@drawable/ic_twotone_surface_36px"
-                                    android:text="730m2"/>
+                                    android:text="730m2" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/fragment_detail_nb_bedrooms"
@@ -143,7 +154,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/large_app_margin"
                                     android:drawableTop="@drawable/ic_twotone_bedroom_36px"
-                                    android:text="3 Bedrooms"/>
+                                    android:text="3 Bedrooms" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
                                     android:id="@+id/fragment_detail_nb_bathrooms"
@@ -151,7 +162,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/large_app_margin"
                                     android:drawableTop="@drawable/ic_twotone_bathroom_36px"
-                                    android:text="1 Bathroom"/>
+                                    android:text="1 Bathroom" />
 
                             </GridLayout>
 
@@ -162,11 +173,11 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        app:cardElevation="@dimen/default_app_elevation"
-                        app:cardCornerRadius="@dimen/default_app_radius">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -193,16 +204,16 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/fragment_item_detail_image_map_height"
+                                android:background="@color/colorSecondary"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/map"
-                                android:background="@color/colorSecondary"/>
+                                android:src="@drawable/map" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/fragment_detail_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/ic_location_on_black_24dp"
                                 android:layout_marginTop="@dimen/default_app_margin"
+                                android:drawableStart="@drawable/ic_location_on_black_24dp"
                                 android:paddingBottom="@dimen/default_app_padding"
                                 android:text="11 rue de beauregard, 70190 Voray-sur-L'Ognon" />
                         </LinearLayout>
@@ -212,11 +223,11 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        app:cardElevation="@dimen/default_app_elevation"
-                        app:cardCornerRadius="@dimen/default_app_radius">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -236,7 +247,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:paddingBottom="@dimen/default_app_padding"
-                                android:text="jshdfksdfkqlfsdbjfbqdsnldsnflksbdnfbjksdbjksdbf,nbsdnkjgbknskjbdsbndkjgbds,d,,f,fndbsn,,,fnsbhdh"/>
+                                android:text="jshdfksdfkqlfsdbjfbqdsnldsnflksbdnfbjksdbjksdbf,nbsdnkjgbknskjbdsbndkjgbds,d,,f,fndbsn,,,fnsbhdh" />
 
                         </LinearLayout>
 
@@ -245,11 +256,11 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/default_app_margin"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        app:cardElevation="@dimen/default_app_elevation"
-                        app:cardCornerRadius="@dimen/default_app_radius">
+                        android:layout_marginBottom="@dimen/default_app_margin"
+                        app:cardCornerRadius="@dimen/default_app_radius"
+                        app:cardElevation="@dimen/default_app_elevation">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -260,8 +271,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/fragment_detail_title_posted"
                                 android:paddingBottom="@dimen/default_app_padding"
+                                android:text="@string/fragment_detail_title_posted"
                                 android:textSize="@dimen/title_text_size"
                                 android:textStyle="bold" />
 
@@ -281,9 +292,9 @@
                                 <ImageView
                                     android:layout_width="@dimen/fragment_item_detail_profile_image_width"
                                     android:layout_height="@dimen/fragment_item_detail_profile_image_height"
-                                    android:src="@color/colorPrimary"
+                                    android:layout_alignParentEnd="true"
                                     android:background="@drawable/circle_stroke_background"
-                                    android:layout_alignParentEnd="true" />
+                                    android:src="@color/colorPrimary" />
 
                             </RelativeLayout>
 

@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
        when(item.itemId){
            R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
+           R.id.activity_main_drawer_draft -> startActivity(Intent(this, DraftActivity::class.java))
        }
         return true
     }
