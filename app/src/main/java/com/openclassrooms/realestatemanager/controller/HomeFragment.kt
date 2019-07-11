@@ -51,6 +51,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         this.recyclerViewCategoryConfig()
         this.onClickLatestEstate()
         this.onClickSearchView()
+        this.onClickFloatingAddButton()
     }
 
     // Configure RecyclerView of estates items
@@ -69,6 +70,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         }
     }
 
+    // Display ListFragment when "Latest Estate" ImageView clicked
     private fun onClickLatestEstate(){
         fragment_main_latest_estate_imageview.setOnClickListener(View.OnClickListener { v: View? ->
             val listFragment = ListFragment()
@@ -80,6 +82,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         })
     }
 
+    //Display DetailFragment
     private fun showDetailFragment(estate: Estate){
             val detailFragment = DetailFragment(estate)
             fragmentManager?.beginTransaction()
@@ -89,10 +92,18 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
                     ?.commit()
     }
 
+    // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
         fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
             val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent,RQ_FILTER_ACTIVITY)
+        })
+    }
+
+    // Start NewEstateActivity when floating btn clicked
+    private fun onClickFloatingAddButton(){
+        activity_main_floating_btn.setOnClickListener(View.OnClickListener {
+            v: View? -> startActivity(Intent(context, NewEstateActivity::class.java))
         })
     }
     //TODO : Remove this example
