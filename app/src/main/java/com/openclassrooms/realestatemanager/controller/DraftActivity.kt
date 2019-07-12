@@ -21,7 +21,7 @@ class DraftActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction().add(R.id.activity_draft_frame_layout,draftFragment).commit()
     }
 
-    //Configure toolabr and navigation
+    //Configure toolbar and navigation
     private fun configToolbar(){
         // Set the toolbar as support action bar
         setSupportActionBar(activity_draft_toolbar)

@@ -3,8 +3,10 @@ package com.openclassrooms.realestatemanager.controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -52,7 +54,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
        when(item.itemId){
            R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
            R.id.activity_main_drawer_draft -> startActivity(Intent(this, DraftActivity::class.java))
+           R.id.activity_main_drawer_map -> startActivity(Intent(this, MapsActivity::class.java))
        }
+        activity_main_drawer_layout.closeDrawers()
         return true
     }
 
