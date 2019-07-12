@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
         app:title="@string/activity_new_estate_toolbar_title"
         app:titleTextColor="@color/colorTextOnPrimary">
 
@@ -27,144 +27,10 @@
             android:padding="@dimen/large_app_padding" />
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
+        android:id="@+id/activity_new_estate_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/activity_new_estate_toolbar">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_below="@id/activity_new_estate_toolbar"
-            android:layout_margin="@dimen/default_app_margin">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/activity_new_estate_title"
-                android:textSize="@dimen/title_text_size"
-                android:layout_marginBottom="@dimen/large_app_margin"/>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/activity_new_estate_image"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_new_estate_recycler_height"
-                android:background="@android:color/darker_gray" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_anchor="@+id/activity_new_estate_image"
-                android:layout_gravity="end"
-                android:layout_marginTop="-30dp"
-                android:layout_marginEnd="@dimen/large_app_margin"
-                android:src="@drawable/ic_twotone_add_24px"
-                android:tint="@color/colorTextOnPrimary"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_title" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_type"
-                    android:inputType="textAutoComplete"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_location"
-                    android:inputType="textPostalAddress"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_surface"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_surface"
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_surface"
-                    android:inputType="numberSigned"
-                    android:maxLength="8"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_rooms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_rooms"
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_rooms"
-                    android:inputType="numberSigned"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_description"
-                    android:inputType="textMultiLine"
-                    android:maxHeight="250dp"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/activity_new_estate_input_layout_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/activity_new_estate_edit_text_price"
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:hint="@string/activity_new_estate_edit_text_price"
-                    android:inputType="numberSigned"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        android:layout_below="@id/activity_new_estate_toolbar"/>
 
 </RelativeLayout>

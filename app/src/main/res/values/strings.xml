@@ -28,14 +28,16 @@
 
     <!--NEW ESTATE ACTIVITY TEXT-->
     <string name="activity_new_estate_toolbar_title">Post an Estate</string>
-    <string name="activity_new_estate_title">Estate\'s Details</string>
-    <string name="activity_new_estate_edit_text_title">Title</string>
-    <string name="activity_new_estate_edit_text_type">Type</string>
-    <string name="activity_new_estate_edit_text_location">Location</string>
-    <string name="activity_new_estate_edit_text_surface">Surface</string>
-    <string name="activity_new_estate_edit_text_rooms">Rooms</string>
-    <string name="activity_new_estate_edit_text_description">Description</string>
-    <string name="activity_new_estate_edit_text_price">Price</string>
+
+    <!--NEW ESTATE FRAGMENT TEXT-->
+    <string name="fragment_new_estate_title">Estate\'s Details</string>
+    <string name="fragment_new_estate_edit_text_title">Title</string>
+    <string name="fragment_new_estate_edit_text_type">Type</string>
+    <string name="fragment_new_estate_edit_text_location">Location</string>
+    <string name="fragment_new_estate_edit_text_surface">Surface</string>
+    <string name="fragment_new_estate_edit_text_rooms">Rooms</string>
+    <string name="fragment_new_estate_edit_text_description">Description</string>
+    <string name="fragment_new_estate_edit_text_price">Price</string>
 
     <!--DETAIL FRAGMENT-->
     <string name="fragment_detail_title_toolbar">Details</string>
@@ -48,6 +50,4 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

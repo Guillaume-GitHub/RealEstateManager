@@ -40,13 +40,15 @@
     <!--MAIN PAGE IMAGE VIEW-->
     <dimen name="main_page_image_view">150dp</dimen>
 
-    <!--ACTIVITY NEW ESTATE-->
-    <dimen name="activity_new_estate_recycler_height">150dp</dimen>
-
     <!--Detail Fragment-->
     <dimen name="fragment_item_detail_profile_image_height">70dp</dimen>
     <dimen name="fragment_item_detail_profile_image_width">70dp</dimen>
     <dimen name="fragment_item_detail_image_map_height">150dp</dimen>
     <dimen name="fragment_item_detail_view_pager_height">175dp</dimen>
+
+    <!--FRAGMENT NEW ESTATE-->
+    <dimen name="fragment_new_estate_recycler_height">150dp</dimen>
+    <dimen name="fragment_new_estate_input_text_width">120dp</dimen>
+
 
 </resources>
