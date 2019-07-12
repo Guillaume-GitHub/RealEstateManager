@@ -1,8 +1,13 @@
 package com.openclassrooms.realestatemanager.controller
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,23 +15,34 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.OnSuccessListener
 import com.openclassrooms.realestatemanager.R
-import kotlinx.android.synthetic.main.activity_draft.*
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.fragment_new_estate.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var mMap: GoogleMap
+    private lateinit var map: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var lastLocation: Location
+
+    // Create constant request code
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+
+        // Configure the toolbar
+        this.configToolbar()
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        this.configToolbar()
+        this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     /**
@@ -39,12 +55,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        map = googleMap
+        map.uiSettings.isMyLocationButtonEnabled = true
+        map.uiSettings.isZoomControlsEnabled = true
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        // Check and ask permission if they are denied
+        this.setUpAccessLocationPermissions()
+
     }
 
     //Configure toolbar and navigation
@@ -53,5 +70,41 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setSupportActionBar(activity_maps_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 5.0f
+    }
+
+    // Check if permissions are Granted and request permission if Denied
+    private fun setUpAccessLocationPermissions(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+        else {
+            map.isMyLocationEnabled = true
+            fusedLocationClient.lastLocation.addOnSuccessListener(this, OnSuccessListener { location ->
+                if(location != null){
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                    lastLocation = location
+                }
+            })
+        }
+    }
+
+    // Check permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE ->
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    this.setUpAccessLocationPermissions()
+                }
+            }
+        return
+    }
+
+    // Add marker on map
+    private fun addMarker(position: LatLng, title: String?){
+        map.addMarker(MarkerOptions().position(position)?.title(title))
+
     }
 }
