@@ -1,13 +1,17 @@
 package com.openclassrooms.realestatemanager.controller
 
 import android.Manifest
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,7 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.fragment_new_estate.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -29,6 +32,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     // Create constant request code
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        private const val CHECK_SETTINGS_REQUEST_CODE = 2
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +65,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Check and ask permission if they are denied
         this.setUpAccessLocationPermissions()
-
+        this.setUpLocationService()
     }
 
     //Configure toolbar and navigation
@@ -102,9 +106,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return
     }
 
+
     // Add marker on map
     private fun addMarker(position: LatLng, title: String?){
         map.addMarker(MarkerOptions().position(position)?.title(title))
+    }
 
+
+    private fun setUpLocationService() {
+        // Create location request
+        val locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.fastestInterval = 5000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        // Build Location settings request & check settings
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        val settingsClient = LocationServices.getSettingsClient(this)
+        val task = settingsClient.checkLocationSettings(builder.build())
+
+        // Check  Location settings
+        task.addOnFailureListener { error ->
+            if (error is ResolvableApiException) {
+                // Location settings are disable -> showing the user a dialog
+                try {
+                    // Show Location service dialog
+                    error.startResolutionForResult(this, CHECK_SETTINGS_REQUEST_CODE)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                    // Do nothing
+                }
+            }
+        }
     }
 }
