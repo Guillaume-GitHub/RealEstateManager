@@ -43,7 +43,7 @@
                 android:layout_marginTop="-30dp"
                 android:layout_marginEnd="@dimen/large_app_margin"
                 android:src="@drawable/ic_twotone_add_24px"
-                android:tint="@color/colorTextOnPrimary"/>
+                android:tint="@color/colorTextOnPrimary" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_title"

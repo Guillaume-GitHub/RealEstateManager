@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/alert_dialog_image_choice_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/large_app_padding"
+        android:text="@string/alert_dialog_pick_image_gallery"
+        android:gravity="start|center"
+        android:textAllCaps="false"
+        android:drawableEnd="@drawable/ic_twotone_photo_alternate_24px"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_marginTop="@dimen/large_app_margin"
+        android:layout_marginStart="@dimen/default_app_margin"
+        android:layout_marginEnd="@dimen/default_app_margin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/alert_dialog_image_choice_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/large_app_padding"
+        android:text="@string/alert_dialog_pick_image_camera"
+        android:gravity="start|center"
+        android:textAllCaps="false"
+        android:drawableEnd="@drawable/ic_twotone_photo_camera_24px"
+        android:textSize="@dimen/medium_text_size"
+        android:layout_margin="@dimen/default_app_margin"
+        android:layout_marginTop="@dimen/large_app_margin"
+        android:layout_marginStart="@dimen/default_app_margin"
+        android:layout_marginEnd="@dimen/default_app_margin" />
+
+</LinearLayout>

@@ -53,4 +53,8 @@
     <!-- ACTIVITY MAPS -->
     <string name="title_activity_maps">Map</string>
 
+    <!-- ALERT DIALOG PICK IMAGE -->
+    <string name="alert_dialog_pick_image_gallery">with Gallery</string>
+    <string name="alert_dialog_pick_image_camera">with Camera</string>
+
 </resources>
