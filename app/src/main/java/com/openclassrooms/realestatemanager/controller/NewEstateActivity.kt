@@ -3,10 +3,12 @@ package com.openclassrooms.realestatemanager.controller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.openclassrooms.realestatemanager.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_new_estate.*
 
-class NewEstateActivity : AppCompatActivity() {
+
+class NewEstateActivity : AppCompatActivity(){
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,4 +31,7 @@ class NewEstateActivity : AppCompatActivity() {
         val newEstateFragment = NewEstateFragment()
         supportFragmentManager.beginTransaction().add(R.id.activity_new_estate_frame_layout, newEstateFragment).commit()
     }
+
+
+
 }

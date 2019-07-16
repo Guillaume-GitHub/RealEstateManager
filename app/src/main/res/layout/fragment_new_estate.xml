@@ -77,12 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fragment_new_estate_input_text_location"
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/fragment_new_estate_input_autocomplete_location"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_location"
-                    android:inputType="textPostalAddress"/>
+                    android:hint="@string/fragment_new_estate_edit_text_location" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
