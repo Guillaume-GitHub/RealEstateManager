@@ -1,6 +1,9 @@
 package com.openclassrooms.realestatemanager.controller
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -9,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
@@ -19,7 +24,12 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
+import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
+import com.openclassrooms.realestatemanager.model.EstateImage
 import kotlinx.android.synthetic.main.alert_dialog_pick_image_choice.view.*
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.recyclerview_image_item.*
 
 class NewEstateFragment(val estate: Estate? = null) : Fragment(){
 
@@ -28,11 +38,16 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         private const val AUTOCOMPLETE_REQUEST_CODE = 10
         private const val CAMERA_REQUEST_CODE = 20
         private const val IMAGE_GALLERY_REQUEST_CODE = 30
-
     }
+
     // Type of fields return in Place Object
     private val fields : List<Place.Field> = listOf(Place.Field.ADDRESS, Place.Field.LAT_LNG)
 
+    private lateinit var imageUri : Uri
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var imageAdapter: ItemImageAdapter
+    private lateinit var layoutManager: LinearLayoutManager
+    private val estateImageList = ArrayList<EstateImage>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -46,6 +61,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         if (this.estate != null) this.bind(estate)
 
         this.initView()
+        this.configRecyclerView()
     }
 
     //TODO : MANAGE NULL VALUES + FILL ALL VIEWS
@@ -55,6 +71,16 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         fragment_new_estate_input_text_type.setText((estate.category))
         fragment_new_estate_input_text_price.setText((estate.price.toString()))
         fragment_new_estate_input_autocomplete_location.setText((estate.address))
+
+    }
+
+    private fun configRecyclerView(){
+        this.recyclerView = fragment_new_estate_recycler_view_image
+        this.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recyclerView.layoutManager = this.layoutManager
+        this.imageAdapter = ItemImageAdapter(estateImageList)
+        this.recyclerView.adapter = imageAdapter
+
 
     }
 
@@ -92,6 +118,23 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
                         Log.d(this.javaClass.simpleName, "onActivityResult -> RESULT CANCELED")
                     }
                 }
+
+            IMAGE_GALLERY_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK) {
+                    val uri = data!!.data
+                    estateImageList.add(EstateImage(uri))
+                    imageAdapter.notifyDataSetChanged()
+                }
+            }
+
+            CAMERA_REQUEST_CODE -> {
+                if (resultCode == RESULT_OK) {
+                    val bitmap = data!!.extras.get("data") as Bitmap
+                    estateImageList.add(EstateImage(null, bitmap))
+                    imageAdapter.notifyDataSetChanged()
+                }
+            }
+
         }
     }
 
@@ -103,7 +146,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         fragment_new_estate_input_autocomplete_location.setOnFocusChangeListener(View.OnFocusChangeListener {
             v, hasFocus -> if(hasFocus) this.startPlacesAutocomplete()
         })
-
 
 
         //********************** fragment_new_estate_floating_btn  *****************************//

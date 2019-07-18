@@ -47,7 +47,7 @@
     <dimen name="fragment_item_detail_view_pager_height">175dp</dimen>
 
     <!--FRAGMENT NEW ESTATE-->
-    <dimen name="fragment_new_estate_recycler_height">150dp</dimen>
+    <dimen name="fragment_new_estate_recycler_height">200dp</dimen>
     <dimen name="fragment_new_estate_input_text_width">120dp</dimen>
 
 
