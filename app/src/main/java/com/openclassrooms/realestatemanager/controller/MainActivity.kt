@@ -3,10 +3,8 @@ package com.openclassrooms.realestatemanager.controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_main.*

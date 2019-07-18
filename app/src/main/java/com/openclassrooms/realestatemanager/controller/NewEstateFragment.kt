@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.places.AutocompleteFilter
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_new_estate.*
 
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
@@ -80,7 +83,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         this.imageAdapter = ItemImageAdapter(estateImageList)
         this.recyclerView.adapter = imageAdapter
 
-
     }
 
     // Start PlacesAutocomplete activity -> get result in onActivityResult()
@@ -93,7 +95,8 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         val placesClient = Places.createClient(context!!)
 
         // Create autocomplete intent with display mode
-        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(context!!)
+        val typeFiler = TypeFilter.ADDRESS
+        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).setTypeFilter(typeFiler).build(context!!)
         startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
     }
 

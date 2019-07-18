@@ -1,23 +1,15 @@
 package com.openclassrooms.realestatemanager.controller
 
-
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
-import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.NestedScrollView
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.model.Estate
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class DetailFragment(val estate: Estate) : Fragment(){
 
@@ -50,6 +42,7 @@ class DetailFragment(val estate: Estate) : Fragment(){
             (activity as AppCompatActivity).supportActionBar?.show()
 
     }
+
     private fun bind(){
         fragment_detail_title.text = estate.title
         fragment_detail_price.text = estate.price.toString()
