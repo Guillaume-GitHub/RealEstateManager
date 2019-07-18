@@ -43,7 +43,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
     // Type of fields return in Place Object
     private val fields : List<Place.Field> = listOf(Place.Field.ADDRESS, Place.Field.LAT_LNG)
 
-    private lateinit var imageUri : Uri
     private lateinit var recyclerView: RecyclerView
     private lateinit var imageAdapter: ItemImageAdapter
     private lateinit var layoutManager: LinearLayoutManager

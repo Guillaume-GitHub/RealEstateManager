@@ -1,12 +1,16 @@
 package com.openclassrooms.realestatemanager.controller
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.OnBackPressedDispatcherOwner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 
@@ -15,7 +19,8 @@ import com.openclassrooms.realestatemanager.model.Estate
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class DetailFragment(val estate: Estate) : Fragment() {
+class DetailFragment(val estate: Estate) : Fragment(){
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,14 +31,14 @@ class DetailFragment(val estate: Estate) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.bind()
-        configureToolbar()
+        this.hideActivityToolbar(true)
+        this.configureToolbar()
     }
 
     // Hide activity toolbar and set click back btn
     private fun configureToolbar(){
         this.hideActivityToolbar(true)
         fragment_detail_toolbar.setNavigationOnClickListener(View.OnClickListener {
-            this.hideActivityToolbar(false)
             activity?.onBackPressed()
         })
     }
@@ -49,5 +54,10 @@ class DetailFragment(val estate: Estate) : Fragment() {
         fragment_detail_title.text = estate.title
         fragment_detail_price.text = estate.price.toString()
         fragment_detail_address.text = estate.address
+    }
+
+    override fun onDestroyView() {
+        this.hideActivityToolbar(false)
+        super.onDestroyView()
     }
 }
