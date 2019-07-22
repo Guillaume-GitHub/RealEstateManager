@@ -50,7 +50,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         this.recyclerViewItemConfig()
         this.recyclerViewCategoryConfig()
         this.onClickLatestEstate()
-        this.onClickSearchView()
+        this.onClickFilterBtn()
         this.onClickFloatingAddButton()
     }
 
@@ -92,7 +92,7 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
     }
 
     // Start FilterActivity when search bar clicked
-    private fun onClickSearchView(){
+    private fun onClickFilterBtn(){
         fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
             val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent,RQ_FILTER_ACTIVITY)

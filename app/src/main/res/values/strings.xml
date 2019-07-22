@@ -2,7 +2,7 @@
     <string name="app_name">Real Estate Manager</string>
 
     <!--MAIN FRAGMENT-->
-    <string name="search_bar_hint">Search</string>
+    <string name="search_bar_hint">What are you looking for ?</string>
     <string name="latest_estate_title_main_page_fragment">Latest Estate</string>
     <string name="categories_title_main_page_fragment">Categories</string>
     <string name="sold_title_main_page_fragment">Recently Sold</string>
@@ -25,6 +25,16 @@
     <string name="activity_filter_room">Rooms</string>
     <string name="activity_filter_type">Type</string>
     <string name="activity_filter_input_btn">Apply</string>
+    <string name="activity_filter_location">Location</string>
+    <string name="activity_filter_location_hint">Where you going</string>
+
+            <!-- Type of Estate -->
+            <string name="activity_filter_type_house_text">House</string>
+            <string name="activity_filter_type_mansion_text">Mansion</string>
+            <string name="activity_filter_type_duplex_text">Duplex</string>
+            <string name="activity_filter_type__text">House</string>
+            <string name="activity_filter_type_penthouse_text">Penthouse</string>
+            <string name="activity_filter_type_flat_text">Flat</string>
 
     <!--NEW ESTATE ACTIVITY TEXT-->
     <string name="activity_new_estate_toolbar_title">Post an Estate</string>

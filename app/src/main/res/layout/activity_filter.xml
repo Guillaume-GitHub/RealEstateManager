@@ -15,112 +15,279 @@
         app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/activity_filter_search_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:iconifiedByDefault="false"
-            app:searchIcon="@drawable/places_ic_search" />
-
+            app:searchIcon="@drawable/places_ic_search"
+            app:queryHint="Search" />
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/activity_filter_container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@id/activity_filter_toolbar"
-        android:layout_margin="@dimen/large_app_margin">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_filter_toolbar">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/activity_filter_container_spinner"
+        <LinearLayout
+            android:id="@+id/activity_filter_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_app_margin"
-            android:spinnerMode="dropdown" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/activity_filter_container_chip_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_app_margin">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/default_app_elevation"
+                app:contentPadding="@dimen/large_app_padding"
+                android:layout_marginBottom="@dimen/small_app_margin"
+                android:layout_marginTop="@dimen/small_app_margin">
 
-        </com.google.android.material.chip.ChipGroup>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_filter_price"
-            android:textSize="@dimen/title_text_size"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_filter_location"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_marginBottom="@dimen/large_app_margin"/>
 
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/activity_filter_container_seekbar_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/default_app_margin"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/activity_filter_location_hint"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_filter_surface"
-            android:textSize="@dimen/title_text_size"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/activity_filter_container_chip_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/large_app_margin"
+                        android:layout_marginTop="@dimen/default_app_margin">
+                    </com.google.android.material.chip.ChipGroup>
 
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/activity_filter_container_seekbar_surface"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/radius_primary_colored_border"
+                        android:text="Add new location"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/small_app_padding" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_filter_room"
-            android:textSize="@dimen/title_text_size"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+                </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatSeekBar
-            android:id="@+id/activity_filter_container_seekbar_rooms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+            </androidx.cardview.widget.CardView>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activity_filter_type"
-            android:textSize="@dimen/title_text_size"
-            android:layout_marginBottom="@dimen/large_app_margin"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/default_app_elevation"
+                app:contentPadding="@dimen/large_app_padding"
+                android:layout_marginBottom="@dimen/small_app_margin">
 
-        <GridLayout
-            android:id="@+id/activity_filter_container_checkbox_gridlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:checked="true"
-                android:text="Housse" />
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:text="Mansion"/>
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:text="Cotage"/>
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:text="Apartment"/>
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:text="Bengalow"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_filter_price"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_marginBottom="@dimen/large_app_margin"/>
 
-        </GridLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/activity_filter_container_input_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/rounded_corner_background"
-            android:text="@string/activity_filter_input_btn"
-            android:layout_margin="@dimen/large_app_margin"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_price_min_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            tools:text="0"/>
 
-    </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_price_max_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            tools:text="1000000"/>
+
+                    </LinearLayout>
+
+                    <com.appyvet.materialrangebar.RangeBar
+                        android:id="@+id/activity_filter_price_rangebar"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        app:mrb_rangeBar="true"
+                        app:mrb_pinMaxFont="0sp"
+                        app:mrb_pinRadius="0dp"
+                        app:mrb_pinMinFont="0sp"
+                        app:mrb_tickHeight="0dp"
+                        app:mrb_selectorSize="6dp"
+                        app:mrb_connectingLineWeight="2dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_filter_surface"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_marginBottom="@dimen/large_app_margin"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_surface_min_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            tools:text="50"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_surface_max_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            tools:text="1000"/>
+
+                    </LinearLayout>
+
+                    <com.appyvet.materialrangebar.RangeBar
+                        android:id="@+id/activity_filter_surface_rangebar"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        app:mrb_rangeBar="true"
+                        app:mrb_pinMaxFont="0sp"
+                        app:mrb_pinRadius="0dp"
+                        app:mrb_pinMinFont="0sp"
+                        app:mrb_tickHeight="0dp"
+                        app:mrb_selectorSize="6dp"
+                        app:mrb_connectingLineWeight="2dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_filter_room"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_marginBottom="@dimen/large_app_margin"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_room_min_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="start"
+                            tools:text="1"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/activity_filter_room_max_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            tools:text="20"/>
+
+                    </LinearLayout>
+
+                    <com.appyvet.materialrangebar.RangeBar
+                        android:id="@+id/activity_filter_room_rangebar"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        app:mrb_connectingLineWeight="2dp"
+                        app:mrb_pinMaxFont="0sp"
+                        app:mrb_pinMinFont="0sp"
+                        app:mrb_pinRadius="0dp"
+                        app:mrb_rangeBar="true"
+                        app:mrb_selectorSize="6dp"
+                        app:mrb_tickHeight="0dp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="@dimen/default_app_elevation"
+                app:contentPadding="@dimen/large_app_padding"
+                android:layout_marginBottom="@dimen/small_app_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_filter_type"
+                        android:textSize="@dimen/medium_text_size"
+                        android:layout_marginBottom="@dimen/large_app_margin"/>
+
+                    <GridLayout
+                        android:id="@+id/activity_filter_checkbox_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:columnCount="2">
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/activity_filter_checkbox_house"
+                            android:checked="true"
+                            android:text="@string/activity_filter_type_house_text" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/activity_filter_checkbox_penthouse_text"
+                            android:text="@string/activity_filter_type_penthouse_text" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/activity_filter_checkbox_mansion_text"
+                            android:text="@string/activity_filter_type_mansion_text" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/activity_filter_checkbox_flat_text"
+                            android:text="@string/activity_filter_type_flat_text" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/activity_filter_checkbox_duplex_text"
+                            android:text="@string/activity_filter_type_duplex_text" />
+
+                    </GridLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/activity_filter_container_input_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/rounded_corner_background"
+                android:text="@string/activity_filter_input_btn"
+                android:layout_margin="@dimen/large_app_margin"
+                app:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorTextOnPrimary"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

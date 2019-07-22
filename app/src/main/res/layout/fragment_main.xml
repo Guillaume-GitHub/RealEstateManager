@@ -20,16 +20,18 @@
             app:cardCornerRadius="@dimen/default_app_radius"
             app:cardElevation="@dimen/default_app_elevation">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_main_search_view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/search_bar_height"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:hint = "@string/search_bar_hint"
-                android:textSize="@dimen/search_bar_hint_size"
-                android:gravity="center|start"
-                android:padding="@dimen/large_app_padding"
-                android:drawablePadding="@dimen/default_app_padding"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/fragment_main_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:hint = "@string/search_bar_hint"
+            android:textSize="@dimen/search_bar_hint_size"
+            android:gravity="center|start"
+            android:padding="@dimen/large_app_padding"
+            android:drawablePadding="@dimen/default_app_padding"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_tune_black_24dp"/>
         </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView

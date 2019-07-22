@@ -4,7 +4,7 @@
     <!--DEFAULT APP PADDING-->
     <dimen name="small_app_padding">5dp</dimen>
     <dimen name="default_app_padding">10dp</dimen>
-    <dimen name="large_app_padding">5dp</dimen>
+    <dimen name="large_app_padding">15dp</dimen>
 
     <!--DEFAULT APP MARGIN-->
     <dimen name="small_app_margin">5dp</dimen>
