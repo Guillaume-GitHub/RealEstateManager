@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.database.dao
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -12,6 +13,9 @@ interface EstateDao {
 
     @Query("SELECT * FROM estate ORDER BY uid DESC LIMIT 10")
     fun getLatestEstates():LiveData<List<Estate>>
+
+    @Query("SELECT * FROM estate ORDER BY uid DESC LIMIT :nbOfEstates")
+    fun getEstatesWithCursor(nbOfEstates: Long):Cursor
 
    // @Query("SELECT * FROM estate WHERE LIMIT 10")
    // fun getLatestEstates():LiveData<List<Estate>>
