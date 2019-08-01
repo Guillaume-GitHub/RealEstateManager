@@ -42,10 +42,10 @@ class ListFragment : Fragment() {
 
     //TODO : Remove this example
     private fun addEstate(){
-        estates.add(Estate("Apartement","Apartment 2 rooms with balcony", "322 Lindsay St Chapel Hill", 130000.00))
-        estates.add(Estate("House","Big house, 5 rooms with garden", "112 Brooks St Chapel Hill", 219000.00))
-        estates.add(Estate("House","Big house, 4 rooms, 152 m2", "112 Brooks St Chapel Hill", 199999.00))
-        estates.add(Estate("Appartement","35 m2, 1 room","152 Lindsay St Chapel Hill", 80000.00 ))
-        estates.add(Estate("Business Shop", "Head office of Google France","8 Rue de Londres, 75009 Paris",1000000.00))
+        estates.add(Estate(0,"Apartement","Apartment 2 rooms with balcony", "322 Lindsay St Chapel Hill", 130000))
+        estates.add(Estate(1,"House","Big house, 5 rooms with garden", "112 Brooks St Chapel Hill", 219000))
+        estates.add(Estate(2,"House","Big house, 4 rooms, 152 m2", "112 Brooks St Chapel Hill", 199999))
+        estates.add(Estate(3,"Appartement","35 m2, 1 room","152 Lindsay St Chapel Hill", 80000))
+        estates.add(Estate(4,"Business Shop", "Head office of Google France","8 Rue de Londres, 75009 Paris",1000000))
     }
 }

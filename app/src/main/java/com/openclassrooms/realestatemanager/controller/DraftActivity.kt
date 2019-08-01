@@ -29,7 +29,8 @@ class DraftActivity : AppCompatActivity(){
         supportActionBar?.elevation = 5.0f
 
         //for navigation
-        activity_draft_toolbar.setNavigationOnClickListener(View.OnClickListener {
-            v: View? -> onBackPressed()  })
+        activity_draft_toolbar.setNavigationOnClickListener(View.OnClickListener { v: View? ->
+            this.onBackPressed()
+        })
     }
 }

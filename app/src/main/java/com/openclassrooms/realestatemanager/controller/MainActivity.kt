@@ -3,6 +3,8 @@ package com.openclassrooms.realestatemanager.controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.google.android.material.navigation.NavigationView
@@ -15,14 +17,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        this.displayListFragment()
+
+        this.displayListFragment(HomeFragment())
         this.configToolbar()
         this.configureDrawerLayout()
     }
-
-    private fun displayListFragment(){
-        val itemFragment = HomeFragment()
-        supportFragmentManager.beginTransaction().add(R.id.activity_main_framelayout_list,itemFragment).commit()
+/*
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+    }
+*/
+    private fun displayListFragment(fragment: HomeFragment){
+        supportFragmentManager.beginTransaction().replace(R.id.activity_main_framelayout_list,fragment,"estateFragment").commit()
     }
 
     private fun configToolbar(){

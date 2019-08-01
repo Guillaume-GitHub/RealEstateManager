@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="isTabletMode">false</bool>
+
+    <string name="house">House</string>
+    <string name="penthouse">Penthouse</string>
+    <string name="mansion">Mansion</string>
+    <string name="flat">Flat</string>
+    <string name="duplex">Duplex</string>
+
+    <string-array name="categoryArray">
+        <item>@string/house</item>
+        <item>@string/penthouse</item>
+        <item>@string/mansion</item>
+        <item>@string/flat</item>
+        <item>@string/duplex</item>
+    </string-array>
+
 </resources>

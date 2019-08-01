@@ -16,16 +16,8 @@
         android:background="@color/colorPrimary"
         app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
         app:title="@string/activity_new_estate_toolbar_title"
-        app:titleTextColor="@color/colorTextOnPrimary">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/small_app_margin"
-            android:background="@android:color/transparent"
-            android:padding="@dimen/large_app_padding" />
-    </androidx.appcompat.widget.Toolbar>
+        app:titleTextColor="@color/colorTextOnPrimary"
+        app:menu="@menu/activity_new_estate_toolbar_menu" />
 
     <FrameLayout
         android:id="@+id/activity_new_estate_frame_layout"

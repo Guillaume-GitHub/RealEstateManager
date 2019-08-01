@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ class ItemHomeAdapter(private val dataset: ArrayList<Estate>, private val callba
     }
 
     override fun getItemCount(): Int {
+        Log.d("RECYCLER ITEM SIZE ", dataset.size.toString() )
        return dataset.size
     }
 }

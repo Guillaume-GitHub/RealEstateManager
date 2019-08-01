@@ -28,7 +28,6 @@
                 android:textSize="@dimen/title_text_size"
                 android:layout_marginBottom="@dimen/large_app_margin"/>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/fragment_new_estate_recycler_view_image"
                 android:layout_width="match_parent"
@@ -45,100 +44,122 @@
                 android:src="@drawable/ic_twotone_add_24px"
                 android:tint="@color/colorTextOnPrimary" />
 
+                            <!-- EDIT TEXT TITLE -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_title"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_text_title"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_title" />
+                    android:layout_height="match_parent" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- AUTOCOMPTETE TYPE -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_type"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:hint="@string/fragment_new_estate_edit_text_type"
+                app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/fragment_new_estate_input_text_type"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_type"
-                    android:inputType="textAutoComplete"/>
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    android:editable="false"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- EDIT TEXT LOCATION -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_location"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_location"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
-                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_autocomplete_location"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_location" />
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- EDIT TEXT SURFACE -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_surface"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_surface"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_text_surface"
                     android:layout_width="@dimen/fragment_new_estate_input_text_width"
                     android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_surface"
                     android:inputType="numberSigned"
                     android:maxLength="6"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- EDIT TEXT ROOMS -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_rooms"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_rooms"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_text_rooms"
                     android:layout_width="@dimen/fragment_new_estate_input_text_width"
                     android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_rooms"
                     android:inputType="numberSigned"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- EDIT TEXT DESCRIPTION -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_text_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_description"
                     android:inputType="textMultiLine"
                     android:maxHeight="250dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
+                            <!-- EDIT TEXT PRICE -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_new_estate_input_layout_price"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="@string/fragment_new_estate_edit_text_price"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fragment_new_estate_input_text_price"
                     android:layout_width="@dimen/fragment_new_estate_input_text_width"
                     android:layout_height="match_parent"
-                    android:hint="@string/fragment_new_estate_edit_text_price"
                     android:inputType="numberSigned"/>
 
             </com.google.android.material.textfield.TextInputLayout>

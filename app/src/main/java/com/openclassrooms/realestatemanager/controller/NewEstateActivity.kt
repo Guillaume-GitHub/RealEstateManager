@@ -2,13 +2,18 @@ package com.openclassrooms.realestatemanager.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import com.openclassrooms.realestatemanager.R
 import kotlinx.android.synthetic.main.activity_new_estate.*
+import java.util.zip.Inflater
 
 
 class NewEstateActivity : AppCompatActivity(){
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,8 @@ class NewEstateActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction().add(R.id.activity_new_estate_frame_layout, newEstateFragment).commit()
     }
 
-
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+       menuInflater.inflate(R.menu.activity_new_estate_toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 }

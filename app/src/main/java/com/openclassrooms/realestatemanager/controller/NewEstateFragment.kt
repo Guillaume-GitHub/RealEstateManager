@@ -10,9 +10,14 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.places.AutocompleteFilter
@@ -27,15 +32,17 @@ import com.google.android.libraries.places.api.model.TypeFilter
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.model.EstateImage
+import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
+import kotlinx.android.synthetic.main.activity_new_estate.*
 import kotlinx.android.synthetic.main.alert_dialog_pick_image_choice.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.recyclerview_image_item.*
 
 class NewEstateFragment(val estate: Estate? = null) : Fragment(){
-
 
     companion object{
         private const val AUTOCOMPLETE_REQUEST_CODE = 10
@@ -50,6 +57,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
     private lateinit var imageAdapter: ItemImageAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private val estateImageList = ArrayList<EstateImage>()
+    private lateinit var estateViewModel: EstateViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -64,6 +72,9 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
 
         this.initView()
         this.configRecyclerView()
+        this.configureViewModel()
+        // Control toolbar action menu in fragment
+        this.setHasOptionsMenu(true)
     }
 
     //TODO : MANAGE NULL VALUES + FILL ALL VIEWS
@@ -73,7 +84,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
         fragment_new_estate_input_text_type.setText((estate.category))
         fragment_new_estate_input_text_price.setText((estate.price.toString()))
         fragment_new_estate_input_autocomplete_location.setText((estate.address))
-
     }
 
     private fun configRecyclerView(){
@@ -136,7 +146,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
                     imageAdapter.notifyDataSetChanged()
                 }
             }
-
         }
     }
 
@@ -145,15 +154,14 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
 
         //********************** fragment_new_estate_input_autocomplete_location  *****************************//
         // Get focus on autocomplete location
-        fragment_new_estate_input_autocomplete_location.setOnFocusChangeListener(View.OnFocusChangeListener {
-            v, hasFocus -> if(hasFocus) this.startPlacesAutocomplete()
+        fragment_new_estate_input_autocomplete_location.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) this.startPlacesAutocomplete()
         })
 
 
         //********************** fragment_new_estate_floating_btn  *****************************//
-        fragment_new_estate_floating_btn.setOnClickListener(View.OnClickListener {
-            v: View? -> this.showAddingImageDialog()
-
+        fragment_new_estate_floating_btn.setOnClickListener(View.OnClickListener { v: View? ->
+            this.showAddingImageDialog()
         })
     }
 
@@ -197,6 +205,29 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(){
     // Create intent and start activity to pick image from camera
     private fun captureWithCamera(){
        startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE), CAMERA_REQUEST_CODE)
+    }
+
+    private fun configureViewModel(){
+        val viewModelFactory = Injection.provideViewModelFactory(context!!)
+        this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
+        R.id.activity_new_estate_valid_btn -> {
+            isFormValid()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    private fun isFormValid(): Boolean{
+        if(fragment_new_estate_input_text_title.text != null || fragment_new_estate_input_text_title.text!!.length < 3) {
+            fragment_new_estate_input_layout_title.error = "at least 3 char"
+        }
+        return true
     }
 }
 

@@ -39,7 +39,7 @@ class DraftFragment : Fragment(), RecyclerViewItemClickListener {
     private fun configRecyclerView(){
         recyclerView = fragment_draft_recycler_view.apply {
            this.layoutManager = LinearLayoutManager(context)
-            var estates = arrayListOf(Estate("Mansion","Big Mansion front of the sea","653 st Unknow street",199999.0))
+            val estates = arrayListOf(Estate(0,"Mansion","Big Mansion front of the sea","653 st Unknow street",199999))
             this.adapter = ItemDraftAdapter(estates, callback)
 
         }
