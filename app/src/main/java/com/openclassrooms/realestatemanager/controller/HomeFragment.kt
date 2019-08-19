@@ -9,15 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.RecyclerViewItemClickListener
+import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.EstateCategory
@@ -25,12 +24,7 @@ import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class HomeFragment : Fragment(),RecyclerViewItemClickListener {
-
-    override fun onRecyclerViewItemclick(estate: Estate) {
-        this.showDetailFragment(estate)
-    }
-
+class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), RecyclerViewItemClickListener {
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -41,26 +35,21 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var categoryAdapter: ItemCategoryAdapter
 
-    private lateinit var estateViewModel: EstateViewModel
+    //private var viewModel = estateViewModel
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
     private val RQ_FILTER_ACTIVITY = 5
     private val callback: RecyclerViewItemClickListener = this
 
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         this.rootView = inflater.inflate(R.layout.fragment_main, container, false)
         return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
-
-        this.configureViewModel()
-
         this.recyclerViewItemConfig()
         this.addEstate()
 
@@ -70,8 +59,8 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         this.onClickLatestEstate()
         this.onClickFilterBtn()
         this.onClickFloatingAddButton()
-
     }
+
 
     // Configure RecyclerView of estates items
     private fun recyclerViewItemConfig(){
@@ -89,27 +78,23 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         this.categoryAdapter = ItemCategoryAdapter(categories)
         this.categoryRecycler.layoutManager = this.linearLayoutManager
         this.categoryRecycler.adapter = this.categoryAdapter
+        LinearSnapHelper().attachToRecyclerView(this.categoryRecycler)
     }
 
     // Display ListFragment when "Latest Estate" ImageView clicked
-    private fun onClickLatestEstate(){
+    private fun onClickLatestEstate() {
         fragment_main_latest_estate_imageview.setOnClickListener(View.OnClickListener { v: View? ->
             val listFragment = ListFragment()
             fragmentManager?.beginTransaction()
                     ?.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                    ?.replace(R.id.activity_main_framelayout_list,listFragment,"listFragment")
-                    ?.addToBackStack(null)
+                    ?.replace(R.id.activity_main_framelayout_list,listFragment)
+                    ?.addToBackStack("listFragment")
                     ?.commit()
         })
     }
 
-    //Display DetailFragment
     private fun showDetailFragment(estate: Estate){
-        val detailFragment = DetailFragment(estate)
-        fragmentManager?.beginTransaction()
-                ?.replace(R.id.activity_main_framelayout_list,detailFragment,"detailFragment")
-                ?.addToBackStack(null)
-                ?.commit()
+       startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
     }
 
     // Start FilterActivity when search bar clicked
@@ -125,31 +110,30 @@ class HomeFragment : Fragment(),RecyclerViewItemClickListener {
         activity_main_floating_btn.setOnClickListener(View.OnClickListener { v: View? ->
             startActivity(Intent(context, NewEstateActivity::class.java))
         })
-
     }
 
-    private fun configureViewModel(){
-        val viewModelFactory = Injection.provideViewModelFactory(context!!)
-        this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+    override fun onRecyclerViewItemClick(estate: Estate) {
+       this.showDetailFragment(estate)
+        for (i in 0 until estate.images.size) { Log.d("URI ", estate.images[i].path) }
+    }
+
+
+    private fun addEstate(){
+        this.getAllEstate()
     }
 
     private fun getAllEstate(){
-        this.estateViewModel.getLatestEstate()!!.observe(this, Observer { list ->
+        this.estateViewModel.getLatestEstate()?.observe(this, Observer { list->
             estates.clear()
             estates.addAll(list)
             estateAdapter.notifyDataSetChanged()
         })
     }
 
-    private fun addEstate(){
-        this.getAllEstate()
-    }
-
     private fun addCategory(){
         val cat = resources.getStringArray(R.array.categoryArray)
         var i = 0
-        cat.forEach {
-            str ->
+        cat.forEach { str ->
             categories.add(EstateCategory(i.toLong(),str))
             i++
         }

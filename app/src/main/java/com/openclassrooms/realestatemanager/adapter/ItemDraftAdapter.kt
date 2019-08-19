@@ -3,7 +3,7 @@ package com.openclassrooms.realestatemanager.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.realestatemanager.RecyclerViewItemClickListener
+import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.view.ItemDraftViewHolder
 

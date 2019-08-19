@@ -14,8 +14,8 @@ class EstateDataRepository(private val estateDao:EstateDao) {
         return this.estateDao.getLatestEstates()
     }
 
-    fun insertEstate(estate: Estate){
-        this.estateDao.insertEstate(estate)
+    fun insertEstate(estate: Estate): Long{
+       return this.estateDao.insertEstate(estate)
     }
 
     fun deleteEstate(uid: Long){

@@ -35,8 +35,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="2c2c2c" />
-                            <entry key="outputName" value="ic_twotone_done_outline_24px" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/twotone-done_outline-24px.svg" />
+                            <entry key="outputName" value="ic_twotone_done_24px" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/twotone-done-24px.svg" />
                           </map>
                         </option>
                       </PersistentState>

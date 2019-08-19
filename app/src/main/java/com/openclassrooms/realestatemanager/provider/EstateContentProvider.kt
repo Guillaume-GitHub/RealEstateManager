@@ -9,7 +9,7 @@ import com.openclassrooms.realestatemanager.database.AppDatabase
 import com.openclassrooms.realestatemanager.model.Estate
 
 
-class ItemContentProvider: ContentProvider() {
+class EstateContentProvider: ContentProvider() {
 
     // FOR DATA
     val AUTHORITY = "com.openclassrooms.realestatemanager.provider"

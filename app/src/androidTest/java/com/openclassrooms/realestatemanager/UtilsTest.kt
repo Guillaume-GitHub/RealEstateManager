@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager
 
 
 import androidx.test.InstrumentationRegistry
+import com.openclassrooms.realestatemanager.Utils.Utils
 import org.junit.Assert.*
 import org.junit.Test
 

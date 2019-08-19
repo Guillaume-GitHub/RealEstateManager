@@ -3,31 +3,38 @@ package com.openclassrooms.realestatemanager.controller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
+import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var estateViewModel: EstateViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d("ON CREATE ", "MAIN ACTIVITY")
 
-        this.displayListFragment(HomeFragment())
+        this.configureViewModel()
+        this.displayHomeFragment(HomeFragment(estateViewModel))
         this.configToolbar()
         this.configureDrawerLayout()
     }
-/*
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
+
+    private fun configureViewModel(){
+        val viewModelFactory = Injection.provideViewModelFactory(this)
+        this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
     }
-*/
-    private fun displayListFragment(fragment: HomeFragment){
+
+    private fun displayHomeFragment(fragment: HomeFragment){
         supportFragmentManager.beginTransaction().replace(R.id.activity_main_framelayout_list,fragment,"estateFragment").commit()
     }
 
@@ -53,7 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
        when(item.itemId){
            R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
@@ -64,4 +70,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun onStart() {
+        Log.d("ON START ", "MAIN ACTIVITY")
+        super.onStart()
+    }
+
+    override fun onPause() {
+        Log.d("ON PAUSE ", "MAIN ACTIVITY")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("ON STOP ", "MAIN ACTIVITY")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Log.d("ON DESTROY ", "MAIN ACTIVITY")
+        super.onDestroy()
+    }
+
+    override fun onResume() {
+        Log.d("ON RESUME ", "MAIN ACTIVITY")
+        super.onResume()
+    }
+
+    override fun onBackPressed() {
+        if(supportFragmentManager.findFragmentByTag("detailFragment") != null) {
+            Log.d("FRAG NON NULL", "??????")
+            val frag : DetailFragment = supportFragmentManager.findFragmentByTag("detailFragment") as DetailFragment
+            if (frag.isVisible){
+                Log.d("FRAG VISISBLE", "??????")
+                displayHomeFragment(HomeFragment(estateViewModel))
+            }
+        }
+        else {
+            super.onBackPressed()
+        }
+    }
 }

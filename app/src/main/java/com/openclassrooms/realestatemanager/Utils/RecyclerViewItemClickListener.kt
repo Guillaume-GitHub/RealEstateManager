@@ -1,7 +1,7 @@
-package com.openclassrooms.realestatemanager
+package com.openclassrooms.realestatemanager.Utils
 
 import com.openclassrooms.realestatemanager.model.Estate
 
 interface RecyclerViewItemClickListener {
-   fun onRecyclerViewItemclick(estate: Estate)
+   fun onRecyclerViewItemClick(estate: Estate)
 }

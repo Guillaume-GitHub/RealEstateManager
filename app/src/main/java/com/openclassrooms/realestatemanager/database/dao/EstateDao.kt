@@ -11,21 +11,18 @@ import com.openclassrooms.realestatemanager.model.Estate
 @Dao
 interface EstateDao {
 
-    @Query("SELECT * FROM estate ORDER BY uid DESC LIMIT 10")
+    @Query("SELECT * FROM estate WHERE saleDate IS NULL ORDER BY publishedDate DESC LIMIT 10")
     fun getLatestEstates():LiveData<List<Estate>>
 
-    @Query("SELECT * FROM estate ORDER BY uid DESC LIMIT :nbOfEstates")
+    @Query("SELECT * FROM estate ORDER BY estateUid DESC LIMIT :nbOfEstates")
     fun getEstatesWithCursor(nbOfEstates: Long):Cursor
 
-   // @Query("SELECT * FROM estate WHERE LIMIT 10")
-   // fun getLatestEstates():LiveData<List<Estate>>
-
-    @Query("SELECT * FROM estate WHERE uid = :estateUid")
+    @Query("SELECT * FROM estate WHERE estateUid = :estateUid")
     fun getEstate(estateUid: Long):LiveData<Estate>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEstate(estate: Estate)
+    fun insertEstate(estate: Estate) :Long
 
-    @Query("DELETE FROM estate WHERE uid = :estateUid")
+    @Query("DELETE FROM estate WHERE estateUid = :estateUid")
     fun deleteEstate(estateUid: Long)
 }

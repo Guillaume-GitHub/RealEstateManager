@@ -47,6 +47,6 @@ class TestDaoEstate {
         database!!.estateDao().insertEstate(ESTATE_DEMO)
         // TEST
         val estate = LiveDataTestUtil.getValue(this.database!!.estateDao().getEstate(ESTATE_ID))
-        assertTrue(estate.uid == ESTATE_DEMO.uid && estate.address == ESTATE_DEMO.address)
+        assertTrue(estate.estateUid == ESTATE_DEMO.estateUid && estate.address == ESTATE_DEMO.address)
     }
 }

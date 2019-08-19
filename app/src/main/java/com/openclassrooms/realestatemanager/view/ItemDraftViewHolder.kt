@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.RecyclerViewItemClickListener
+import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
 import com.openclassrooms.realestatemanager.model.Estate
 import java.util.*
 
@@ -19,7 +19,7 @@ class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(estate: Estate, callback: RecyclerViewItemClickListener){
         this.fillView(estate)
-        this.setClickListener(estate, callback)
+       // this.setClickListener(estate, callback)
     }
 
     private fun fillView(estate: Estate){
@@ -27,10 +27,11 @@ class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         price.text = estate.price.toString()
         date.text = Calendar.getInstance().time.toString()
     }
-
+/*
     private fun setClickListener(estate: Estate, callback: RecyclerViewItemClickListener){
         itemView.setOnClickListener {
-            v:View? ->  callback.onRecyclerViewItemclick(estate)
+            v:View? ->  callback.onRecyclerViewItemClick(estate)
         }
     }
+*/
 }

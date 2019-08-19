@@ -13,7 +13,7 @@ import org.hamcrest.CoreMatchers.notNullValue
 import org.junit.Test
 
 
-class ItemContentProviderTest {
+class EstateContentProviderTest {
 
     // FOR DATA
     private var mContentResolver: ContentResolver? = null
@@ -34,7 +34,7 @@ class ItemContentProviderTest {
 
     @Test
     fun getItemsWhenNoItemInserted() {
-        val  cursor = mContentResolver?.query(ContentUris.withAppendedId(ItemContentProvider().URI_ITEM, NB_MAX_ESTATES), null, null, null, null)
+        val  cursor = mContentResolver?.query(ContentUris.withAppendedId(EstateContentProvider().URI_ITEM, NB_MAX_ESTATES), null, null, null, null)
         assertThat(cursor, notNullValue())
         assertThat(cursor!!.count, CoreMatchers.`is`(RESULT) )
         cursor.close()

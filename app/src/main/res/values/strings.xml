@@ -28,26 +28,30 @@
     <string name="activity_filter_location">Location</string>
     <string name="activity_filter_location_hint">Where you going</string>
 
-            <!-- Type of Estate -->
-            <string name="activity_filter_type_house_text">House</string>
-            <string name="activity_filter_type_mansion_text">Mansion</string>
-            <string name="activity_filter_type_duplex_text">Duplex</string>
-            <string name="activity_filter_type__text">House</string>
-            <string name="activity_filter_type_penthouse_text">Penthouse</string>
-            <string name="activity_filter_type_flat_text">Flat</string>
+    <!-- Type of Estate -->
+    <string name="activity_filter_type_house_text">House</string>
+    <string name="activity_filter_type_mansion_text">Mansion</string>
+    <string name="activity_filter_type_duplex_text">Duplex</string>
+    <string name="activity_filter_type__text">House</string>
+    <string name="activity_filter_type_penthouse_text">Penthouse</string>
+    <string name="activity_filter_type_flat_text">Flat</string>
 
     <!--NEW ESTATE ACTIVITY TEXT-->
     <string name="activity_new_estate_toolbar_title">Post an Estate</string>
 
     <!--NEW ESTATE FRAGMENT TEXT-->
-    <string name="fragment_new_estate_title">Estate\'s Details</string>
-    <string name="fragment_new_estate_edit_text_title">Title</string>
-    <string name="fragment_new_estate_edit_text_type">Type</string>
-    <string name="fragment_new_estate_edit_text_location">Location</string>
-    <string name="fragment_new_estate_edit_text_surface">Surface</string>
-    <string name="fragment_new_estate_edit_text_rooms">Rooms</string>
-    <string name="fragment_new_estate_edit_text_description">Description</string>
-    <string name="fragment_new_estate_edit_text_price">Price</string>
+    <string name="fragment_new_estate_image_section">Images</string>
+    <string name="fragment_new_estate_description_section">Description</string>
+    <string name="fragment_new_estate_nearby_section">Nearby</string>
+    <string name="fragment_new_estate_agent_section">Estate Agent</string>
+    <string name="fragment_new_estate_edit_text_title">Title*</string>
+    <string name="fragment_new_estate_edit_text_type">Type*</string>
+    <string name="fragment_new_estate_edit_text_location">Location*</string>
+    <string name="fragment_new_estate_edit_text_surface">Surface*</string>
+    <string name="fragment_new_estate_edit_text_rooms">Rooms*</string>
+    <string name="fragment_new_estate_edit_text_description">Description*</string>
+    <string name="fragment_new_estate_edit_text_price">Price*</string>
+    <string name="fragment_new_estate_edit_text_agent">Agent*</string>
 
     <!--DETAIL FRAGMENT-->
     <string name="fragment_detail_title_toolbar">Details</string>
@@ -64,7 +68,32 @@
     <string name="title_activity_maps">Map</string>
 
     <!-- ALERT DIALOG PICK IMAGE -->
+    <string name="alert_dialog_pick_image_title">Choose a photo</string>
     <string name="alert_dialog_pick_image_gallery">with Gallery</string>
     <string name="alert_dialog_pick_image_camera">with Camera</string>
+
+    <!-- INPUT FROM ERROR MESSAGES -->
+    <string name="form_error_characters_3">I need a title (at least 3 characters)</string>
+    <string name="form_error_characters_20">I need more precisions</string>
+    <string name="form_error_not_geolocated">I need to be geolocated</string>
+    <string name="form_error_type">I need a type</string>
+    <string name="form_error_images">I need an image</string>
+    <string name="form_error_price">I need a price</string>
+    <string name="form_error_surface">I need a surface</string>
+    <string name="form_error_rooms">I need room</string>
+    <string name="form_error_agent">I need an Estate Agent</string>
+    <string name="form_error_format_address">Incorrect Address Format</string>
+
+    <!-- CHIPs TEXT -->
+    <string name="chip_transport">Transport</string>
+    <string name="chip_store">Store</string>
+    <string name="chip_health">Health</string>
+    <string name="chip_school">School</string>
+    <string name="chip_restaurant">Restaurant</string>
+    <string name="chip_supermarket">Supermarket</string>
+    <string name="chip_sport">Sport</string>
+
+    <!-- PERMISSIONS -->
+    <string name="permission_denied">Permission Denied</string>
 
 </resources>
