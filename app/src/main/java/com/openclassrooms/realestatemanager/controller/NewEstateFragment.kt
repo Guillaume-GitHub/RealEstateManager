@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -30,9 +31,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.AddressComponentsHelper
-import com.openclassrooms.realestatemanager.Utils.FiltersHelper
-import com.openclassrooms.realestatemanager.Utils.Utils
+import com.openclassrooms.realestatemanager.Utils.*
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.adapter.AgentArrayAdapter
 import com.openclassrooms.realestatemanager.model.Estate
@@ -47,7 +46,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NewEstateFragment(val estate: Estate? = null) : Fragment() {
+class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageButtonClick {
+
+    override fun onDeleteButtonClick(position: Int) {
+        try {
+            Log.d("CLICK DELETE BTN", "-> Work")
+            this.imagesUriList.remove(this.imageAdapter.getItem(position))
+            this.imageAdapter.notifyItemRemoved(position)
+            Log.d("IMAGE LIST",  imagesUriList.toString())
+        }
+        catch (error: IndexOutOfBoundsException){
+            Log.w("Delete image error : ", error.printStackTrace().toString())
+        }
+    }
 
     companion object {
         private const val AUTOCOMPLETE_REQUEST_CODE = 10
@@ -102,8 +113,9 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment() {
         this.recyclerView = fragment_new_estate_recycler_view_image
         this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = this.layoutManager
-        this.imageAdapter = ItemImageAdapter(imagesUriList)
+        this.imageAdapter = ItemImageAdapter(imagesUriList, this)
         this.recyclerView.adapter = imageAdapter
+        PagerSnapHelper().attachToRecyclerView(this.recyclerView)
     }
 
     // Start PlacesAutocomplete activity -> get result in onActivityResult()
@@ -151,7 +163,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment() {
                         val uri = Uri.parse(path)
                         imagesUriList.add(uri)
                         imageAdapter.notifyDataSetChanged()
-                        Log.d("IMAGES GALLERY:",imagesUriList.toString())
+                        Log.d("IMAGES :",imagesUriList.toString())
                     }
                 }
             }
@@ -160,7 +172,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment() {
                 if (resultCode == RESULT_OK) {
                     imagesUriList.add(Uri.parse(photoPatch))
                     imageAdapter.notifyDataSetChanged()
-                    Log.d("IMAGES CAMERA:",imagesUriList.toString())
+                    Log.d("IMAGES :",imagesUriList.toString())
                 }
             }
         }

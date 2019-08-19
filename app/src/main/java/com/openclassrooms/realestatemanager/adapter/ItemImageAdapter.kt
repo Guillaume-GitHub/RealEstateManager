@@ -1,13 +1,14 @@
 package com.openclassrooms.realestatemanager.adapter
 
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.Utils.OnDeleteImageButtonClick
 import com.openclassrooms.realestatemanager.view.ItemImageViewHolder
 
-class ItemImageAdapter(var dataset: ArrayList<Uri>): RecyclerView.Adapter<ItemImageViewHolder>() {
+class ItemImageAdapter(private var dataset: ArrayList<Uri>, private var deleteBtnCallback: OnDeleteImageButtonClick?)
+    : RecyclerView.Adapter<ItemImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemImageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -16,10 +17,15 @@ class ItemImageAdapter(var dataset: ArrayList<Uri>): RecyclerView.Adapter<ItemIm
 
     override fun onBindViewHolder(holder: ItemImageViewHolder, position: Int) {
         holder.bind(dataset[position])
+        if (this.deleteBtnCallback != null) holder.addDeleteBtnClickListener(deleteBtnCallback,position)
+    }
+
+    fun getItem(position: Int): Uri{
+        return this.dataset[position]
     }
 
     override fun getItemCount(): Int {
-        return dataset.size
+        return this.dataset.size
     }
 
 }

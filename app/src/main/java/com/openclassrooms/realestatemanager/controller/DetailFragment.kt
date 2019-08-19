@@ -61,7 +61,7 @@ class DetailFragment(private var viewModel: EstateViewModel, private var estateI
 
     // Configure RecyclerView of estates items
     private fun recyclerViewItemConfig(){
-        this.adapter = ItemImageAdapter(imagesList)
+        this.adapter = ItemImageAdapter(imagesList,null)
         this.recyclerView = fragment_detail_recycler_view
         this.recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         this.recyclerView.adapter = this.adapter

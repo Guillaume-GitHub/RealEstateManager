@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
+import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.model.EstateCategory
@@ -24,7 +24,7 @@ import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), RecyclerViewItemClickListener {
+class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecyclerItemClick {
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -39,7 +39,7 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), RecyclerV
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
     private val RQ_FILTER_ACTIVITY = 5
-    private val callback: RecyclerViewItemClickListener = this
+    private val callback: OnRecyclerItemClick = this
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

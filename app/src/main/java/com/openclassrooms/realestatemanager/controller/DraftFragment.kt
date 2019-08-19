@@ -6,19 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
-import com.openclassrooms.realestatemanager.adapter.ItemDraftAdapter
+import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
 import com.openclassrooms.realestatemanager.model.Estate
-import kotlinx.android.synthetic.main.fragment_draft.*
 
-class DraftFragment : Fragment(), RecyclerViewItemClickListener {
+class DraftFragment : Fragment(), OnRecyclerItemClick {
 
     private lateinit var recyclerView: RecyclerView
-    private val callback: RecyclerViewItemClickListener = this
+    private val callback: OnRecyclerItemClick = this
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

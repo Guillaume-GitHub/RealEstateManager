@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.RecyclerViewItemClickListener
+import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
 import com.openclassrooms.realestatemanager.model.Estate
 
 class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -25,12 +25,12 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         image.setImageURI(estate.images[0])
     }
 
-    private fun setOnclickListener(callback: RecyclerViewItemClickListener, estate: Estate){
+    private fun setOnclickListener(callback: OnRecyclerItemClick, estate: Estate){
         this.itemView.setOnClickListener(View.OnClickListener {
             v: View? -> callback.onRecyclerViewItemClick(estate) })
     }
 
-    fun bind(estate: Estate, callback: RecyclerViewItemClickListener){
+    fun bind(estate: Estate, callback: OnRecyclerItemClick){
         this.displayItem(estate)
         this.setOnclickListener(callback,estate)
     }
