@@ -332,7 +332,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
             fragment_new_estate_input_layout_type.error = resources.getString(R.string.form_error_type)
         }
 
-        if (fragment_new_estate_input_text_surface.text.isNullOrBlank()) {
+        if (fragment_new_estate_input_text_surface.text.isNullOrBlank() || fragment_new_estate_input_text_surface.text.toString().toInt() > 0) {
             fragment_new_estate_input_layout_surface.error = resources.getString(R.string.form_error_surface)
         }
 
@@ -340,7 +340,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
             fragment_new_estate_input_layout_price.error = resources.getString(R.string.form_error_price)
         }
 
-        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank()) {
+        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank() || fragment_new_estate_input_text_rooms.text.toString().toInt() > 0) {
             fragment_new_estate_input_layout_rooms.error = resources.getString(R.string.form_error_rooms)
         }
 
@@ -437,6 +437,8 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
                    fragment_new_estate_input_text_title.text.toString(), // Title
                    fragment_new_estate_input_autocomplete_location.text.toString(), // Address
                    fragment_new_estate_input_text_description.text.toString(), // Description
+                   fragment_new_estate_input_text_surface.text.toString().toInt(), // Surface
+                   fragment_new_estate_input_text_rooms.text.toString().toInt(), // Nb of Rooms
                    fragment_new_estate_input_text_price.text.toString().toLong(), // Price
                    Calendar.getInstance().time, // Published Date = Current date when insert
                    null, // Sale Date Always Null with when new insert in database

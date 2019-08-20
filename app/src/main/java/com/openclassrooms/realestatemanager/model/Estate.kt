@@ -14,6 +14,8 @@ class Estate(
         @ColumnInfo var title: String,
         @ColumnInfo var address: String,
         @ColumnInfo var description: String,
+        @ColumnInfo var surface: Int,
+        @ColumnInfo var nbRoom: Int,
         @ColumnInfo var price: Long,
         @ColumnInfo var publishedDate: Date,
         @ColumnInfo var saleDate: Date?,
