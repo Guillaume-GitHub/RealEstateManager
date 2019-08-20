@@ -59,6 +59,7 @@
     <string name="fragment_detail_title_description">Description</string>
     <string name="fragment_detail_title_nearby">Nearby</string>
     <string name="fragment_detail_title_posted">Posted By</string>
+    <string name="fragment_detail_estate_manager">Estate Manager</string>
 
     <!-- Used in NavigationDrawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>

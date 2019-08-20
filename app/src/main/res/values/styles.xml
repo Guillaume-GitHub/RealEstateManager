@@ -12,4 +12,5 @@
         <item name="chipBackgroundColor">@color/colored_chip_filter_background</item>
         <item name="android:textColor">@color/colored_chip_filter_text</item>
     </style>
+
 </resources>

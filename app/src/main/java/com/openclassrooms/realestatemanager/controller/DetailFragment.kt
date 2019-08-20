@@ -7,16 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.Utils.FiltersHelper
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.model.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
+import kotlinx.android.synthetic.main.fragment_new_estate.*
 
 class DetailFragment(private var viewModel: EstateViewModel, private var estateId: Long) : Fragment(){
 
@@ -37,18 +41,27 @@ class DetailFragment(private var viewModel: EstateViewModel, private var estateI
     }
 
     private fun bind(estate: Estate){
+        // Images section
+        this.addImagesToRecycler(estate.images)
+        // Title section
         fragment_detail_title.text = estate.title
         fragment_detail_price.text = estate.price.toString()
         fragment_detail_date.text = estate.publishedDate.toString()
-        fragment_detail_address.text = estate.address
+        // Criteria section
+        fragment_detail_type_text.text = estate.category
+        fragment_detail_surface_text.text =  this.getSurfaceText(estate)
+        fragment_detail_room_text.text = this.getRoomText(estate)
+        // Description section
         fragment_detail_description.text = estate.description
-        fragment_detail_seller_name.text = estate.agent.name + " ${estate.agent.surname}"
-        this.addImagesToRecycler(estate.images)
+        fragment_detail_address.text = estate.address
+        // Nearby section
+        this.showNearbyPOI(estate.filters)
+        // Posted By section
+        fragment_detail_agent_name.text = this.getAgentText(estate)
     }
 
     private fun getEstate(id: Long){
         this.viewModel.getEstate(id)!!.observe(this, Observer { estate ->
-
             if(estate != null) { this.bind(estate) }
             else { Log.w(this::class.java.simpleName, "Fail to get Estate")}
         })
@@ -66,5 +79,88 @@ class DetailFragment(private var viewModel: EstateViewModel, private var estateI
         this.recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         this.recyclerView.adapter = this.adapter
         PagerSnapHelper().attachToRecyclerView(this.recyclerView)
+    }
+
+    // Return Number of rooms text
+    private fun getRoomText(estate: Estate): String {
+        return if (estate.nbRoom > 1) estate.nbRoom.toString() + " Rooms"  else estate.nbRoom.toString() + " Room"
+    }
+
+    // Return estate Surface
+    private fun getSurfaceText(estate: Estate): String {
+        return estate.surface.toString() + " m²"
+    }
+
+    // Return Agent name
+    private fun getAgentText(estate: Estate): String {
+        return estate.agent.name + " ${estate.agent.surname}"
+    }
+
+    // Display Nearby section
+    private fun showNearbyPOI(filtersList: ArrayList<String>?){
+        if(filtersList != null) {
+            filtersList.forEach { tag ->
+                when (tag) {
+                    FiltersHelper.SCHOOL_TAG -> this.addChip(FiltersHelper.SCHOOL_TAG)
+                    FiltersHelper.HEALTH_TAG -> this.addChip(FiltersHelper.HEALTH_TAG)
+                    FiltersHelper.RESTAURANT_TAG -> this.addChip(FiltersHelper.RESTAURANT_TAG)
+                    FiltersHelper.SPORT_TAG -> this.addChip(FiltersHelper.SPORT_TAG)
+                    FiltersHelper.STORE_TAG -> this.addChip(FiltersHelper.STORE_TAG)
+                    FiltersHelper.SUPERMARKET_TAG -> this.addChip(FiltersHelper.SUPERMARKET_TAG)
+                    FiltersHelper.TRANSPORT_TAG -> this.addChip(FiltersHelper.TRANSPORT_TAG)
+                }
+            }
+        }
+        else {
+            fragment_detail_nearby_container.visibility = View.GONE
+        }
+    }
+
+    // Add new chip in chip group
+    private fun addChip(tag: String){
+        val chipGroup = fragment_detail_nearby_chip_group
+        val chip = Chip(context)
+        chip.setChipBackgroundColorResource(R.color.colorPrimary)
+        chip.setTextColor(resources.getColor(R.color.colorTextOnPrimary))
+        chip.iconStartPadding = 10f
+        chip.iconEndPadding = 10f
+
+        when(tag){
+            FiltersHelper.SCHOOL_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_school_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.HEALTH_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_health_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.RESTAURANT_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_restaurant_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.SPORT_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_fitness_center_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.STORE_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_store_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.SUPERMARKET_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_supermarket_24px)
+                chipGroup.addView(chip)
+            }
+            FiltersHelper.TRANSPORT_TAG -> {
+                chip.text = tag
+                chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_transport_24px)
+                chipGroup.addView(chip)
+            }
+        }
     }
 }

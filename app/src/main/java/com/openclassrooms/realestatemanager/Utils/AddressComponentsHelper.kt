@@ -6,6 +6,7 @@ class AddressComponentsHelper(private val place: Place) {
 
     private var postalCode: String? = null
     private var streetNumber: String? = null
+    private var route: String? = null
     private var city: String? = null
     private var country: String? = null
 
@@ -14,6 +15,13 @@ class AddressComponentsHelper(private val place: Place) {
             if (addressComponent.types.contains("street_number")) this.streetNumber = addressComponent.name
         }
         return this.streetNumber
+    }
+
+    fun parseRoute(): String?{
+        this.place.addressComponents?.asList()?.forEach { addressComponent ->
+            if (addressComponent.types.contains("route")) this.route = addressComponent.name
+        }
+        return this.route
     }
 
     fun parsePostalCode(): String?{

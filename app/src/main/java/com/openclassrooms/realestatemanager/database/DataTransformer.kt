@@ -43,7 +43,7 @@ class DataTransformer {
     // FOR URI ARRAYLIST
     @TypeConverter
     fun fromUriList(uriList: ArrayList<Uri>?): String? {
-        if (uriList == null) {
+        if (uriList == null || uriList.size == 0) {
             return null
         }
         else {
@@ -98,7 +98,7 @@ class DataTransformer {
     // FOR STRING ARRAYLIST
     @TypeConverter
     fun fromStringArrayList(stringList: ArrayList<String>?): String? {
-        if (stringList == null) {
+        if (stringList == null || stringList.size == 0) {
             return null
         }
         else {

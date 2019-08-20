@@ -17,7 +17,7 @@
         android:id="@+id/recyclerview_image_item_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/cicle_black_transparent_background_15"
+        android:background="@drawable/circle_black_transparent_background_15"
         android:padding="@dimen/small_app_padding"
         android:layout_margin="@dimen/default_app_margin"
         android:src="@drawable/ic_twotone_delete_24px"
@@ -25,6 +25,19 @@
         app:layout_anchorGravity="end|top"
         android:clickable="true"
         android:focusable="true" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/recyclerview_image_item_nb_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_app_margin"
+        app:chipIconEnabled="true"
+        android:textColor="@color/colorTextOnPrimary"
+        tools:text="1"
+        app:chipBackgroundColor="@color/transparentGrey"
+        app:chipIcon="@drawable/ic_twotone_photo_camera_white_24px"
+        app:layout_anchor="@+id/recyclerview_image_item_image_view"
+        app:layout_anchorGravity="start|bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

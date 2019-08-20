@@ -50,10 +50,8 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
 
     override fun onDeleteButtonClick(position: Int) {
         try {
-            Log.d("CLICK DELETE BTN", "-> Work")
             this.imagesUriList.remove(this.imageAdapter.getItem(position))
             this.imageAdapter.notifyItemRemoved(position)
-            Log.d("IMAGE LIST",  imagesUriList.toString())
         }
         catch (error: IndexOutOfBoundsException){
             Log.w("Delete image error : ", error.printStackTrace().toString())
@@ -332,7 +330,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
             fragment_new_estate_input_layout_type.error = resources.getString(R.string.form_error_type)
         }
 
-        if (fragment_new_estate_input_text_surface.text.isNullOrBlank() || fragment_new_estate_input_text_surface.text.toString().toInt() > 0) {
+        if (fragment_new_estate_input_text_surface.text.isNullOrBlank() || fragment_new_estate_input_text_surface.text.toString().toInt() <= 0) {
             fragment_new_estate_input_layout_surface.error = resources.getString(R.string.form_error_surface)
         }
 
@@ -340,7 +338,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
             fragment_new_estate_input_layout_price.error = resources.getString(R.string.form_error_price)
         }
 
-        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank() || fragment_new_estate_input_text_rooms.text.toString().toInt() > 0) {
+        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank() || fragment_new_estate_input_text_rooms.text.toString().toInt() <= 0) {
             fragment_new_estate_input_layout_rooms.error = resources.getString(R.string.form_error_rooms)
         }
 
@@ -435,7 +433,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
            val estate = Estate(0, // ID = 0 -> auto Increment
                    fragment_new_estate_input_text_type.text.toString(), // Category
                    fragment_new_estate_input_text_title.text.toString(), // Title
-                   fragment_new_estate_input_autocomplete_location.text.toString(), // Address
+                   addressParser.parseStreetNumber() +", ${addressParser.parseRoute()}",// Address
                    fragment_new_estate_input_text_description.text.toString(), // Description
                    fragment_new_estate_input_text_surface.text.toString().toInt(), // Surface
                    fragment_new_estate_input_text_rooms.text.toString().toInt(), // Nb of Rooms
