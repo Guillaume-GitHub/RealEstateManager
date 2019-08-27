@@ -2,11 +2,8 @@ package com.openclassrooms.realestatemanager.repositories
 
 import androidx.lifecycle.LiveData
 import com.openclassrooms.realestatemanager.database.dao.LocalityDao
-import com.openclassrooms.realestatemanager.model.Locality
-import io.reactivex.Completable
-import io.reactivex.Maybe
+import com.openclassrooms.realestatemanager.model.entity.Locality
 import io.reactivex.Observable
-import io.reactivex.Single
 
 class LocalityDataRepository(private val localityDao: LocalityDao){
 

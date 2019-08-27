@@ -2,23 +2,30 @@ package com.openclassrooms.realestatemanager.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 
 class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.recyclerview_list_item, parent,false)) {
 
-    var image = itemView.findViewById<ImageView>(R.id.recycler_list_item_image)
-    var title = itemView.findViewById<TextView>(R.id.recycler_list_item_title)
-    var category = itemView.findViewById<TextView>(R.id.recycler_list_item_category)
-    var location = itemView.findViewById<TextView>(R.id.recycler_list_item_location)
-    var price = itemView.findViewById<TextView>(R.id.recycler_list_item_price)
-    var date = itemView.findViewById<TextView>(R.id.recycler_list_item_category)
+    private var image: AppCompatImageView = itemView.findViewById(R.id.recycler_list_item_image)
+    private var title: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_title)
+    private var category: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_category)
+    private var location: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_location)
+    private var price: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_price)
+    private var date: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_date)
 
     fun displayItem(estate: Estate){
         //TODO : displayItem() method body
+        this.image.setImageURI(estate.images[0])
+        this.title.text = estate.title
+        this.category.text = estate.category
+        this.location.text = "${estate.locality.cities}, ${estate.locality.postalCode}"
+        this.price.text = estate.price.toString()
+        this.date.text = estate.publishedDate.toString()
+
     }
 }

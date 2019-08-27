@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.view.ItemHomeViewHolder
 
 class ItemHomeAdapter(private val dataset: ArrayList<Estate>, private val callback: OnRecyclerItemClick): RecyclerView.Adapter<ItemHomeViewHolder>() {

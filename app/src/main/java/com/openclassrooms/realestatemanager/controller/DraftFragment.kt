@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 
 class DraftFragment : Fragment(), OnRecyclerItemClick {
 

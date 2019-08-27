@@ -26,7 +26,7 @@
     <string name="activity_filter_type">Type</string>
     <string name="activity_filter_input_btn">Apply</string>
     <string name="activity_filter_location">Location</string>
-    <string name="activity_filter_location_hint">Where you going</string>
+    <string name="activity_filter_location_hint">Where you going ?</string>
 
     <!-- Type of Estate -->
     <string name="activity_filter_type_house_text">House</string>
@@ -96,5 +96,13 @@
 
     <!-- PERMISSIONS -->
     <string name="permission_denied">Permission Denied</string>
+
+    <!-- ACTIVITY FILTER -->
+    <string name="autocomplete_city_error">Impossible to load this city</string>
+    <string name="title_activity_maps_for_result">Map</string>
+
+    <!-- GENERAL MESSAGES -->
+    <string name="result_cancel">Canceled</string>
+    <string name="result_error">Error</string>
 
 </resources>

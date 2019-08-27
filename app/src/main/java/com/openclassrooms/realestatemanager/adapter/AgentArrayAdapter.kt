@@ -8,7 +8,7 @@ import android.widget.*
 import androidx.annotation.LayoutRes
 import com.openclassrooms.realestatemanager.R
 
-import com.openclassrooms.realestatemanager.model.Agent
+import com.openclassrooms.realestatemanager.model.entity.Agent
 import com.openclassrooms.realestatemanager.view.UserDropdownViewHolder
 
 class AgentArrayAdapter(context: Context, @LayoutRes var layoutRes:Int, private var agentArray: ArrayList<Agent>)

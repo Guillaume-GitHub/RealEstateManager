@@ -6,7 +6,7 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import androidx.test.InstrumentationRegistry
 import androidx.room.Room
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 import org.junit.After
 import org.junit.Rule
 import junit.framework.Assert.assertTrue
@@ -20,7 +20,7 @@ class TestDaoEstate {
     private var database: AppDatabase? = null
     // DATA SET FOR TEST
     private val ESTATE_ID: Long = 1
-    private val ESTATE_DEMO = Estate(ESTATE_ID, "House", "Awesome House","4746  SW 13th Place, Deerfield, Florida 33442",999999)
+    private val ESTATE_DEMO = Estate(ESTATE_ID, "House", "Awesome House", "4746  SW 13th Place, Deerfield, Florida 33442", 999999)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()

@@ -2,9 +2,9 @@ package com.openclassrooms.realestatemanager.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.openclassrooms.realestatemanager.model.Agent
-import com.openclassrooms.realestatemanager.model.Estate
-import com.openclassrooms.realestatemanager.model.Locality
+import com.openclassrooms.realestatemanager.model.entity.Agent
+import com.openclassrooms.realestatemanager.model.entity.Estate
+import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.repositories.AgentDataRepository
 import com.openclassrooms.realestatemanager.repositories.EstateDataRepository
 import com.openclassrooms.realestatemanager.repositories.LocalityDataRepository
