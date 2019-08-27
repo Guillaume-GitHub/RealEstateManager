@@ -2,9 +2,7 @@ package com.openclassrooms.realestatemanager.repositories
 
 import androidx.lifecycle.LiveData
 import com.openclassrooms.realestatemanager.database.dao.AgentDao
-import com.openclassrooms.realestatemanager.model.Agent
-import com.openclassrooms.realestatemanager.model.Locality
-import io.reactivex.Observable
+import com.openclassrooms.realestatemanager.model.entity.Agent
 
 class AgentDataRepository(private val agentDao: AgentDao) {
 

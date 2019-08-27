@@ -5,11 +5,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.openclassrooms.realestatemanager.model.Locality
-import io.reactivex.Completable
-import io.reactivex.Maybe
+import com.openclassrooms.realestatemanager.model.entity.Locality
 import io.reactivex.Observable
-import io.reactivex.Single
 
 @Dao
 interface LocalityDao {

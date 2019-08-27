@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.controller
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,36 +10,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
+import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.EstateCategory
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecyclerItemClick {
+class HomeFragment : Fragment(), OnRecyclerItemClick {
+
+    companion object {
+        const val RQ_FILTER_ACTIVITY = 5
+    }
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var estateAdapter: ItemHomeAdapter
-
     private lateinit var categoryRecycler: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var categoryAdapter: ItemCategoryAdapter
+    private lateinit var estateViewModel: EstateViewModel
 
-    //private var viewModel = estateViewModel
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
-    private val RQ_FILTER_ACTIVITY = 5
     private val callback: OnRecyclerItemClick = this
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -48,8 +53,10 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecycle
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
+
+        this.initViewModel()
+
         this.recyclerViewItemConfig()
         this.addEstate()
 
@@ -61,6 +68,17 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecycle
         this.onClickFloatingAddButton()
     }
 
+    // Get viewModel
+    private fun initViewModel(){
+        val activity = activity as MainActivity
+        if (activity.getViewModel() != null) {
+            this.estateViewModel = activity.getViewModel()!!
+        }
+        else {
+            val viewModelFactory = Injection.provideViewModelFactory(context!!)
+            this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+        }
+    }
 
     // Configure RecyclerView of estates items
     private fun recyclerViewItemConfig(){
@@ -78,7 +96,6 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecycle
         this.categoryAdapter = ItemCategoryAdapter(categories)
         this.categoryRecycler.layoutManager = this.linearLayoutManager
         this.categoryRecycler.adapter = this.categoryAdapter
-        LinearSnapHelper().attachToRecyclerView(this.categoryRecycler)
     }
 
     // Display ListFragment when "Latest Estate" ImageView clicked
@@ -100,8 +117,8 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecycle
     // Start FilterActivity when search bar clicked
     private fun onClickFilterBtn(){
         fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
-            val intent = Intent(context,FilterActivity::class.java)
-            startActivityForResult(intent,RQ_FILTER_ACTIVITY)
+            val intent = Intent(context, FilterActivity::class.java)
+            startActivityForResult(intent, RQ_FILTER_ACTIVITY)
         })
     }
 
@@ -138,4 +155,32 @@ class HomeFragment(var estateViewModel: EstateViewModel) : Fragment(), OnRecycle
             i++
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            RQ_FILTER_ACTIVITY ->
+                when (resultCode) {
+                    Activity.RESULT_OK -> {
+                        Log.d(this.javaClass.simpleName, "onActivityResult -> RESULT OK")
+                        if (data != null) {
+
+                            val arg = Bundle()
+                            arg.putString("query", QueryBuilder().getQuery(data))
+                            val frag = ListFragment()
+                            frag.arguments = arg
+
+                            activity?.supportFragmentManager?.beginTransaction()
+                                    ?.replace(R.id.activity_main_framelayout_list, frag)
+                                    ?.addToBackStack("showQueryResult")
+                                    ?.commit()
+                        }
+                    }
+
+                    Activity.RESULT_CANCELED -> {
+                        Log.d(this.javaClass.simpleName, "onActivityResult -> RESULT CANCELED")
+                    }
+                }
+            }
+    }
+
 }

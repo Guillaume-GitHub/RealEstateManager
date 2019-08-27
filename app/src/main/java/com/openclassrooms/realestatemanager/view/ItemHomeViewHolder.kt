@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
+import com.openclassrooms.realestatemanager.model.entity.Locality
 
 class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.recyclerview_home_list_item, parent,false)){
@@ -20,8 +21,9 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     private fun displayItem(estate: Estate){
         title.text = estate.title
-        price.text = estate.price.toInt().toString() + " $"
-        address.text = estate.locality.cities + ", ${estate.locality.postalCode}"
+        price.text = getPriceText(estate.price)
+        address.text = this.getAddressText(estate.locality)
+
         image.setImageURI(estate.images[0])
     }
 
@@ -33,5 +35,13 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(estate: Estate, callback: OnRecyclerItemClick){
         this.displayItem(estate)
         this.setOnclickListener(callback,estate)
+    }
+
+    private fun getPriceText(price: Long): String {
+        return "$ ${price.toInt()}"
+    }
+
+    private fun getAddressText(locality: Locality): String {
+       return if(locality.postalCode != null) "${locality.cities} , ${locality.postalCode}" else locality.cities
     }
 }

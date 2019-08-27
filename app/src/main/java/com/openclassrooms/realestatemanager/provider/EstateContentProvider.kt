@@ -6,7 +6,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import com.openclassrooms.realestatemanager.database.AppDatabase
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 
 
 class EstateContentProvider: ContentProvider() {

@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:textSize="@dimen/title_text_size"
+                android:textSize="@dimen/medium_text_size"
                 android:textStyle="bold"
                 tools:text="Big modern mansion"/>
 
@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Manhattan, USA"
+                android:singleLine="true"
                 android:layout_above="@id/recycler_list_item_date"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -70,6 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="12/06/2019 14:56"
+                    android:singleLine="true"
                     android:layout_above="@id/recycler_list_item_price"/>
 
         </RelativeLayout>

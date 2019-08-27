@@ -25,7 +25,7 @@
     <!--ITEM CARD VIEW-->
     <dimen name="cardview_title_text_size">16sp</dimen>
     <dimen name="custom_cardview_height">200dp</dimen>
-    <dimen name="item_top_part_height">140dp</dimen>
+    <dimen name="item_top_part_height">180dp</dimen>
     <dimen name="item_bottom_part_height">60dp</dimen>
 
     <!--NavigationView-->

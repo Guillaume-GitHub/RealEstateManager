@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -21,6 +23,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.api.GeocodingServiceBuilder
+import com.openclassrooms.realestatemanager.model.ReverseGeocodingResult
+import io.reactivex.SingleObserver
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_maps.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -87,7 +94,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             fusedLocationClient.lastLocation.addOnSuccessListener(this, OnSuccessListener { location ->
                 if(location != null){
                     val currentLatLng = LatLng(location.latitude, location.longitude)
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 20f))
                     lastLocation = location
                 }
             })
@@ -109,6 +116,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // Add marker on map
     private fun addMarker(position: LatLng, title: String?){
+        map.clear()
         map.addMarker(MarkerOptions().position(position)?.title(title))
     }
 

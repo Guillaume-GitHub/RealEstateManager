@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var estateViewModel: EstateViewModel
+    private var estateViewModel: EstateViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +24,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Log.d("ON CREATE ", "MAIN ACTIVITY")
 
         this.configureViewModel()
-        this.displayHomeFragment(HomeFragment(estateViewModel))
+        this.displayHomeFragment(HomeFragment())
         this.configToolbar()
         this.configureDrawerLayout()
     }
 
-    private fun configureViewModel(){
+     private fun configureViewModel(){
         val viewModelFactory = Injection.provideViewModelFactory(this)
         this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+    }
+
+    fun getViewModel(): EstateViewModel? {
+        return if (this.estateViewModel != null) this.estateViewModel else null
     }
 
     private fun displayHomeFragment(fragment: HomeFragment){
@@ -70,38 +74,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    override fun onStart() {
-        Log.d("ON START ", "MAIN ACTIVITY")
-        super.onStart()
-    }
-
-    override fun onPause() {
-        Log.d("ON PAUSE ", "MAIN ACTIVITY")
-        super.onPause()
-    }
-
-    override fun onStop() {
-        Log.d("ON STOP ", "MAIN ACTIVITY")
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Log.d("ON DESTROY ", "MAIN ACTIVITY")
-        super.onDestroy()
-    }
-
-    override fun onResume() {
-        Log.d("ON RESUME ", "MAIN ACTIVITY")
-        super.onResume()
-    }
-
     override fun onBackPressed() {
         if(supportFragmentManager.findFragmentByTag("detailFragment") != null) {
-            Log.d("FRAG NON NULL", "??????")
             val frag : DetailFragment = supportFragmentManager.findFragmentByTag("detailFragment") as DetailFragment
             if (frag.isVisible){
-                Log.d("FRAG VISISBLE", "??????")
-                displayHomeFragment(HomeFragment(estateViewModel))
+                displayHomeFragment(HomeFragment())
             }
         }
         else {

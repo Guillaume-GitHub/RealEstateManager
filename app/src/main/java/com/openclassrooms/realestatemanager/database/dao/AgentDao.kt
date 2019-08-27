@@ -1,11 +1,8 @@
 package com.openclassrooms.realestatemanager.database.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.openclassrooms.realestatemanager.model.Agent
+import androidx.room.*
+import com.openclassrooms.realestatemanager.model.entity.Agent
 
 @Dao
 interface AgentDao {
@@ -17,5 +14,4 @@ interface AgentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAgent(agent: Agent): Long
-
 }

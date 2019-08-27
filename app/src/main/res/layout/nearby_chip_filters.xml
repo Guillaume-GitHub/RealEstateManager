@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/nearby_chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:singleSelection="false"
+        app:chipSpacing="10dp"
+        android:layout_marginBottom="@dimen/large_app_margin">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_school"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_supermarket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_supermarket"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_transport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_transport"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_restaurant"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_health"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_store"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/nearby_chip_sport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="@string/chip_sport"
+            style="@style/AppTheme.Chip.Filter"
+            app:checkedIcon="@drawable/ic_twotone_done_24px"/>
+
+    </com.google.android.material.chip.ChipGroup>
+
+</LinearLayout>

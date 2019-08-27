@@ -2,12 +2,12 @@ package com.openclassrooms.realestatemanager.Utils
 
 class FiltersHelper {
     companion object{
-        val SCHOOL_TAG = "school"
-        val HEALTH_TAG = "health"
-        val STORE_TAG = "store"
-        val SUPERMARKET_TAG = "supermarket"
-        val SPORT_TAG = "sport"
-        val TRANSPORT_TAG = "transport"
-        val RESTAURANT_TAG = "restaurant"
+        const val SCHOOL_TAG = "school"
+        const val HEALTH_TAG = "health"
+        const val STORE_TAG = "store"
+        const val SUPERMARKET_TAG = "supermarket"
+        const val SPORT_TAG = "sport_gym"
+        const val TRANSPORT_TAG = "transport"
+        const val RESTAURANT_TAG = "restaurant"
     }
 }

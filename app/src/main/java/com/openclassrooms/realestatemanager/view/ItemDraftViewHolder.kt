@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 import java.util.*
 
 class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :

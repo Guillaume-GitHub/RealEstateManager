@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
     private var estateId : Long = 0
-    private lateinit var estateViewModel: EstateViewModel
+    private var estateViewModel: EstateViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,10 @@ class DetailActivity : AppCompatActivity() {
         this.estateViewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
     }
 
+    fun getViewModel(): EstateViewModel? {
+        return if (this.estateViewModel != null) this.estateViewModel else null
+    }
+
     //Configure toolbar and navigation
     private fun configToolbar() {
         // Set the toolbar as support action bar
@@ -42,6 +46,12 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun displayDraftFragment(){
-        supportFragmentManager.beginTransaction().add(R.id.activity_detail_frame_layout, DetailFragment(estateViewModel, estateId)).commit()
+        val bundle = Bundle()
+        bundle.putLong("estate_id",this.estateId)
+
+        val fragment = DetailFragment()
+        fragment.arguments = bundle
+
+        supportFragmentManager.beginTransaction().replace(R.id.activity_detail_frame_layout, fragment).commit()
     }
 }

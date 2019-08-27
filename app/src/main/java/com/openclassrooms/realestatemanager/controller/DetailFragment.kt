@@ -9,27 +9,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
+import com.openclassrooms.realestatemanager.Injections.Injection
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.FiltersHelper
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
-import com.openclassrooms.realestatemanager.model.Estate
+import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.fragment_new_estate.*
 
-class DetailFragment(private var viewModel: EstateViewModel, private var estateId: Long) : Fragment(){
+class DetailFragment : Fragment(){
 
     private var imagesList = ArrayList<Uri>()
     private lateinit var adapter: ItemImageAdapter
     private lateinit var recyclerView: RecyclerView
+    private var  estateId: Long = -1
+    private lateinit var viewModel: EstateViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val bundle: Bundle = this.arguments!!
+        this.estateId = bundle.getLong("estate_id")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
@@ -53,14 +59,27 @@ class DetailFragment(private var viewModel: EstateViewModel, private var estateI
         fragment_detail_room_text.text = this.getRoomText(estate)
         // Description section
         fragment_detail_description.text = estate.description
-        fragment_detail_address.text = estate.address
+        fragment_detail_address.text = estate.locality.formattedAddress
         // Nearby section
         this.showNearbyPOI(estate.filters)
         // Posted By section
         fragment_detail_agent_name.text = this.getAgentText(estate)
     }
 
-    private fun getEstate(id: Long){
+    private fun getEstate(id: Long) {
+        val activity = activity as DetailActivity
+        if (activity.getViewModel() != null) {
+            this.viewModel = activity.getViewModel()!!
+        }
+        else {
+            val viewModelFactory = Injection.provideViewModelFactory(context!!)
+            this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+        }
+
+        this.fetchEstate(id)
+    }
+
+    private fun fetchEstate(id: Long){
         this.viewModel.getEstate(id)!!.observe(this, Observer { estate ->
             if(estate != null) { this.bind(estate) }
             else { Log.w(this::class.java.simpleName, "Fail to get Estate")}
@@ -116,6 +135,7 @@ class DetailFragment(private var viewModel: EstateViewModel, private var estateI
         }
     }
 
+    // TODO : Correction display Text Name and not tag Name
     // Add new chip in chip group
     private fun addChip(tag: String){
         val chipGroup = fragment_detail_nearby_chip_group
