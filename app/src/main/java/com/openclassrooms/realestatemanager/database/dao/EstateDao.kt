@@ -20,6 +20,9 @@ interface EstateDao {
     @Query("SELECT * FROM estate WHERE estateUid = :estateUid")
     fun getEstate(estateUid: Long):LiveData<Estate>
 
+    @Query("SELECT * FROM estate")
+    fun getAllEstates():LiveData<List<Estate>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEstate(estate: Estate) :Long
 

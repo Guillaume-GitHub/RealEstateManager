@@ -17,7 +17,8 @@
     <string name="drawer_menu_settings">Settings</string>
 
     <!--ITEM LIST-->
-    <string name="item_list_sale_indicator">Sold</string>
+    <string name="badge_sold_text">Sold</string>
+    <string name="badge_for_sale_text">For Sale</string>
 
     <!--FILTER ACTIVITY TEXT-->
     <string name="activity_filter_price">Price</string>

@@ -7,8 +7,15 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -20,21 +27,42 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.adapter.BottomSheetImageAdapter
 import com.openclassrooms.realestatemanager.api.GeocodingServiceBuilder
 import com.openclassrooms.realestatemanager.model.ReverseGeocodingResult
+import com.openclassrooms.realestatemanager.model.entity.Estate
+import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.maps_bottom_sheet.*
+import kotlinx.android.synthetic.main.maps_bottom_sheet.view.*
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        if (marker?.zIndex != null){
+            val dialogView = layoutInflater.inflate(R.layout.maps_bottom_sheet, null)
+            this.bindEstate(dialogView, marker.zIndex.toInt())
+            val dialog = BottomSheetDialog(this)
+            dialog.setContentView(dialogView)
+            dialog.show()
+        }
+        return true
+    }
 
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
+    private lateinit var viewModel: EstateViewModel
+    private lateinit var estateList: List<Estate>
 
     // Create constant request code
     companion object {
@@ -46,6 +74,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        // Configure viewModel
+        this.configureViewModel()
         // Configure the toolbar
         this.configToolbar()
 
@@ -56,6 +86,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
+    private fun configureViewModel(){
+        val viewModelFactory = Injection.provideViewModelFactory(this)
+        this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -69,10 +103,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         map = googleMap
         map.uiSettings.isMyLocationButtonEnabled = true
         map.uiSettings.isZoomControlsEnabled = true
+        map.setOnMarkerClickListener(this)
 
         // Check and ask permission if they are denied
         this.setUpAccessLocationPermissions()
         this.setUpLocationService()
+        this.getEstates()
     }
 
     //Configure toolbar and navigation
@@ -115,9 +151,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     // Add marker on map
-    private fun addMarker(position: LatLng, title: String?){
-        map.clear()
-        map.addMarker(MarkerOptions().position(position)?.title(title))
+    private fun addMarker(position: LatLng, index: Int){
+        val marker = MarkerOptions().position(position)
+        marker.zIndex(index.toFloat())
+        map.addMarker(marker)
     }
 
 
@@ -145,6 +182,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+    }
+
+    private fun getEstates(){
+        this.viewModel.getAllEstates()?.observe(this, Observer { estateList ->
+            this.estateList = estateList
+            estateList.forEachIndexed { index, estate ->
+                this.addMarker(estate.locality.latLng, index)
+            }
+        })
+    }
+
+    private fun bindEstate(dialogView: View ,estatePosition: Int){
+        val estate = this.estateList[estatePosition]
+
+        val recycler = dialogView.maps_bottom_sheet_recycler
+        recycler.adapter = BottomSheetImageAdapter(estate.images)
+        recycler.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        LinearSnapHelper().attachToRecyclerView(recycler)
+
+        dialogView.maps_bottom_sheet_title.text = estate.title
+
+        if(estate.saleDate == null){
+            dialogView.maps_bottom_sheet_badge_for_sale.visibility = View.VISIBLE
+            dialogView.maps_bottom_sheet_date.text = estate.publishedDate.toString()
+        }
+        else{
+            dialogView.maps_bottom_sheet_badge_sale.visibility = View.VISIBLE
+            dialogView.maps_bottom_sheet_date.text = estate.saleDate.toString()
+        }
+
+        dialogView.maps_bottom_sheet_price.text = estate.price.toInt().toString()
+        dialogView.maps_bottom_sheet_address.text = estate.locality.formattedAddress
+        dialogView.maps_bottom_sheet_type.text = estate.category
+        dialogView.maps_bottom_sheet_surface.text = "${estate.surface} m²"
+        dialogView.maps_bottom_sheet_rooms.text = "${estate.nbRoom} rooms"
+        dialogView.maps_bottom_sheet_description.text = estate.description
+        dialogView.maps_bottom_sheet_agent.text = "${getString(R.string.fragment_detail_title_posted)} : ${estate.agent.name} ${estate.agent.surname}"
     }
 
 }

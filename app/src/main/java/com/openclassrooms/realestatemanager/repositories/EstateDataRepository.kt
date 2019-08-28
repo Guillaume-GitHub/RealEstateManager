@@ -14,6 +14,10 @@ class EstateDataRepository(private val estateDao:EstateDao) {
         return this.estateDao.getLatestEstates()
     }
 
+    fun getAllEstates(): LiveData<List<Estate>>?{
+        return this.estateDao.getAllEstates()
+    }
+
     fun insertEstate(estate: Estate): Long{
        return this.estateDao.insertEstate(estate)
     }

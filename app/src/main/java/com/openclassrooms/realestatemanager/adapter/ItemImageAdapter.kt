@@ -28,5 +28,4 @@ class ItemImageAdapter(private var dataset: ArrayList<Uri>, private var deleteBt
     override fun getItemCount(): Int {
         return this.dataset.size
     }
-
 }

@@ -159,7 +159,7 @@
                                         android:id="@+id/fragment_detail_room_image"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:src="@drawable/ic_twotone_meeting_room_24px"
+                                        android:src="@drawable/ic_twotone_meeting_room_36px"
                                         android:padding="@dimen/small_app_padding"
                                         android:background="@drawable/circle_background"
                                         android:layout_centerHorizontal="true" />
@@ -254,7 +254,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/default_app_margin"
-                                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                                android:drawableStart="@drawable/ic_location_red_24dp"
                                 android:padding="@dimen/default_app_padding"
                                 tools:text="11 rue de beauregard, 70190 Voray-sur-L'Ognon" />
                         </LinearLayout>

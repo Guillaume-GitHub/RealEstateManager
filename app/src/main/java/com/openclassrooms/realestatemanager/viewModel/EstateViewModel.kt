@@ -20,6 +20,7 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
     private var lastEstate:LiveData<Estate>? = null
     private var latestEstates: LiveData<List<Estate>>? = null
     private var localities: LiveData<List<Locality>>? = null
+    private var allEstates: LiveData<List<Estate>>? = null
 
     //***********************************************************
     // FOR LOCALITY
@@ -35,6 +36,13 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
             this.latestEstates = this.estateDataSource.getLatestEstates()
         }
         return this.latestEstates
+    }
+
+    fun getAllEstates():LiveData<List<Estate>>?{
+        if (this.allEstates == null){
+            this.allEstates = this.estateDataSource.getLatestEstates()
+        }
+        return this.allEstates
     }
 
     fun insertEstate(estate: Estate): Single<Long>{

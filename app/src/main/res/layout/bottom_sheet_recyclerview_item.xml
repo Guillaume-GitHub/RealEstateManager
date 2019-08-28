@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/recycler_bottom_sheet_item"
+    android:layout_marginStart="@dimen/default_app_margin"
+    android:layout_marginTop="@dimen/default_app_margin"
+    android:layout_marginBottom="@dimen/default_app_margin"
+    android:layout_width="150dp"
+    android:layout_height="100dp"
+    app:cardCornerRadius="@dimen/default_app_radius"
+    app:cardElevation="@dimen/default_app_elevation">
+
+    <ImageView
+        android:id="@+id/recycler_bottom_sheet_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+</androidx.cardview.widget.CardView>
+

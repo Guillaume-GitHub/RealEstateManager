@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/default_app_padding"
             android:layout_margin="@dimen/small_app_margin"
-            android:text="@string/item_list_sale_indicator"
+            android:text="@string/badge_sold_text"
             android:background="@drawable/sale_tag_background"
             android:textColor="@android:color/white"/>
 

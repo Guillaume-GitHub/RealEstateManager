@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/maps_bottom_sheet_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    app:cardCornerRadius="15dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="6dp"
+            android:layout_gravity="center"
+            android:background="@drawable/custom_rounded_btn"
+            android:layout_marginBottom="@dimen/large_app_margin" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/maps_bottom_sheet_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_app_margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maps_bottom_sheet_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Dandelion Chocolate"
+                android:textColor="#000000"
+                android:textSize="@dimen/title_text_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maps_bottom_sheet_badge_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_app_margin"
+                    android:padding="@dimen/small_app_padding"
+                    android:text="@string/badge_sold_text"
+                    android:background="@drawable/sale_tag_background"
+                    android:textColor="@color/colorTextOnPrimary"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maps_bottom_sheet_badge_for_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_app_margin"
+                    android:padding="@dimen/small_app_padding"
+                    android:text="@string/badge_for_sale_text"
+                    android:background="@drawable/for_sale_tag_background"
+                    android:textColor="@color/colorTextOnPrimary"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/maps_bottom_sheet_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/small_app_margin"
+                    android:padding="@dimen/small_app_padding"
+                    tools:text=" Tues, 20 April 2019" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="#5d5d5d" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maps_bottom_sheet_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text_size"
+                tools:text="$ 1.350.000"
+                android:textColor="@color/colorSecondary" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:background="#5d5d5d" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableStart="@drawable/ic_location_black_24dp"
+            app:drawableTint="@color/colorPrimaryDark"
+            android:drawablePadding="16dp"
+            android:gravity="center"
+            tools:text="740 Valencia St, San Fracisco, CA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableStart="@drawable/ic_twotone_home_black_24px"
+            app:drawableTint="@color/colorPrimaryDark"
+            android:drawablePadding="16dp"
+            android:gravity="center"
+            tools:text="Penthouse" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_surface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableStart="@drawable/ic_twotone_surface_black_24px"
+            app:drawableTint="@color/colorPrimaryDark"
+            android:drawablePadding="16dp"
+            android:gravity="center"
+            tools:text="750 m²" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_rooms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawableStart="@drawable/ic_twotone_meeting_room_black_24px"
+            app:drawableTint="@color/colorPrimaryDark"
+            android:drawablePadding="16dp"
+            android:gravity="center"
+            tools:text="17 rooms" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#5d5d5d" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawablePadding="16dp"
+            tools:text="Clerval sur l'Axe Besançon-Belfort Montbéliard Charmante Maison Individuel T7 de 200 m2 ( possible appartement indépendant ) avec Grandes Terrasses, Dépendances, Tonnelle, Barbecue sur un Terrain Paysagé et Arboré de 1781 m2." />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#5d5d5d" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/maps_bottom_sheet_agent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            tools:text="Published by : Guillaume BAGUE" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/maps_bottom_sheet_agent_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/circle_black_transparent_background_15"
+                android:src="@mipmap/ic_launcher_round" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.cardview.widget.CardView>
