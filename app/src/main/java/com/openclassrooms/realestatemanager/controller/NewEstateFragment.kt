@@ -442,7 +442,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
            // Insert in database and Observe result
            @Suppress
            this.estateViewModel.insertEstate(estate).subscribe(
-                   { this.activity?.finish() }, // OnSuccess
+                   { this.notifyUserAndQuit() }, // OnSuccess
                    { error -> Log.w(this.javaClass.simpleName,"OnError : ${error.printStackTrace()}") }
            )
        }
@@ -462,6 +462,11 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
         if (nearby_chip_sport.isChecked) filterList.add(FiltersHelper.SPORT_TAG)
 
         return if (filterList.size > 0) filterList else null
+    }
+
+    private fun notifyUserAndQuit(){
+        NotificationHelper.sendNotification(context!!)
+        this.activity?.finish()
     }
 }
 

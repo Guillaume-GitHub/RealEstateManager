@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity
+import android.app.NotificationManager
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.Utils.NotificationHelper
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
 import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter

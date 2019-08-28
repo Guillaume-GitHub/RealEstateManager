@@ -47,16 +47,6 @@ import kotlinx.android.synthetic.main.maps_bottom_sheet.*
 import kotlinx.android.synthetic.main.maps_bottom_sheet.view.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-    override fun onMarkerClick(marker: Marker?): Boolean {
-        if (marker?.zIndex != null){
-            val dialogView = layoutInflater.inflate(R.layout.maps_bottom_sheet, null)
-            this.bindEstate(dialogView, marker.zIndex.toInt())
-            val dialog = BottomSheetDialog(this)
-            dialog.setContentView(dialogView)
-            dialog.show()
-        }
-        return true
-    }
 
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -86,6 +76,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         this.fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
+    // Config view model
     private fun configureViewModel(){
         val viewModelFactory = Injection.provideViewModelFactory(this)
         this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
@@ -157,7 +148,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         map.addMarker(marker)
     }
 
+    // Trigger Marker click and show bottom sheet dialog
+    override fun onMarkerClick(marker: Marker?): Boolean {
+        if (marker?.zIndex != null){
+            val dialogView = layoutInflater.inflate(R.layout.maps_bottom_sheet, null)
+            this.bindEstate(dialogView, marker.zIndex.toInt())
+            val dialog = BottomSheetDialog(this)
+            dialog.setContentView(dialogView)
+            dialog.show()
+        }
+        return true
+    }
 
+    // Check service Location enable
     private fun setUpLocationService() {
         // Create location request
         val locationRequest = LocationRequest()
@@ -184,6 +187,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
+    // Fetch List of estate In database
     private fun getEstates(){
         this.viewModel.getAllEstates()?.observe(this, Observer { estateList ->
             this.estateList = estateList
@@ -193,6 +197,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         })
     }
 
+    // Bind Bottom sheet view with estate's details
     private fun bindEstate(dialogView: View ,estatePosition: Int){
         val estate = this.estateList[estatePosition]
 

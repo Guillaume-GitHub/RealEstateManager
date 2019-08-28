@@ -106,4 +106,10 @@
     <string name="result_cancel">Canceled</string>
     <string name="result_error">Error</string>
 
+    <!-- NOTIFICATIONS -->
+    <string name="notification_channel_name">@string/app_name</string>
+    <string name="notification_channel_description">Display notifications when an Estate was correctly adding</string>
+    <string name="notification_adding_success_title">New Estate Adding</string>
+    <string name="notification_adding_success_message">"Great ! You're estate was correctly adding"</string>
+
 </resources>
