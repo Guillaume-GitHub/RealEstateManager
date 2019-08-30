@@ -45,8 +45,12 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
         return this.allEstates
     }
 
-    fun insertEstate(estate: Estate): Single<Long>{
+    fun insertEstate(estate: Estate): Single<Long> {
        return Single.just(this.estateDataSource.insertEstate(estate))
+    }
+
+    fun updateEstate(estate: Estate): Single<Int> {
+        return Single.fromCallable{ this.estateDataSource.updateEstate(estate) }
     }
 
     fun deleteEstate(uid: Long){

@@ -2,10 +2,7 @@ package com.openclassrooms.realestatemanager.database.dao
 
 import android.database.Cursor
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.openclassrooms.realestatemanager.model.entity.Estate
 
 @Dao
@@ -28,4 +25,7 @@ interface EstateDao {
 
     @Query("DELETE FROM estate WHERE estateUid = :estateUid")
     fun deleteEstate(estateUid: Long)
+
+    @Update(entity = Estate::class)
+    fun updateEstate(estate: Estate): Int
 }

@@ -23,12 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.widget.Autocomplete
-import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.*
@@ -47,7 +41,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageButtonClick {
+class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
     companion object {
         private const val CAMERA_REQUEST_CODE = 20
@@ -59,16 +53,18 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
     private lateinit var recyclerView: RecyclerView
     private lateinit var imageAdapter: ItemImageAdapter
     private lateinit var layoutManager: LinearLayoutManager
-    private val imagesUriList = ArrayList<Uri>()
+    private var imagesUriList = ArrayList<Uri>()
     private val agentList = ArrayList<Agent>()
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var photoPatch: String
     private lateinit var agentAdapter: AgentArrayAdapter
     private var agentSelected: Agent? = null
     private var estateLocality: Locality? = null
+    private var currentEstate: Estate? = null
+    private var isModification = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        this.configureViewModel()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_new_estate, container, false)
     }
@@ -76,22 +72,45 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (this.estate != null) this.bind(estate)
-
-        this.configureViewModel()
+        this.retainInstance = true
         this.initView()
         this.configRecyclerView()
         // Control toolbar action menu in fragment
         this.setHasOptionsMenu(true)
+
+        if (arguments?.getLong("estate_id") != null) {
+            val id = arguments!!.getLong("estate_id")
+            this.estateViewModel.getEstate(id)?.observe(this, androidx.lifecycle.Observer { estate ->
+                this.currentEstate = estate
+                this.isModification = true
+                this.bindAll(estate)
+            })
+        }
     }
 
     //TODO : MANAGE NULL VALUES + FILL ALL VIEWS
     //fill views
-    private fun bind(estate: Estate) {
+    private fun bindAll(estate: Estate) {
+        //Images
+        this.imagesUriList.addAll(estate.images)
+        this.imageAdapter.notifyDataSetChanged()
+        // Text View
         fragment_new_estate_input_text_title.setText((estate.title))
+        fragment_new_estate_input_text_description.setText((estate.description))
         fragment_new_estate_input_text_type.setText((estate.category))
-        fragment_new_estate_input_text_price.setText((estate.price.toString()))
+        fragment_new_estate_input_text_surface.setText(("${estate.surface}"))
+        fragment_new_estate_input_text_rooms.setText(("${estate.nbRoom}"))
         fragment_new_estate_input_autocomplete_location.setText((estate.locality.formattedAddress))
+        fragment_new_estate_input_text_price.setText(("${estate.price}"))
+        fragment_new_estate_input_text_agent.setText(("${estate.agent.name} ${estate.agent.surname}"))
+        // Chip
+        this.checkChips(estate.filters)
+        //Locality
+        this.estateLocality = estate.locality
+        //Agent
+        this.agentSelected = estate.agent
+        // card_view_sale visibility
+        card_view_sale.visibility = View.VISIBLE
     }
 
     private fun configRecyclerView() {
@@ -107,7 +126,7 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
     override fun onDeleteButtonClick(position: Int) {
         try {
             this.imagesUriList.remove(this.imageAdapter.getItem(position))
-            this.imageAdapter.notifyItemRemoved(position)
+            this.imageAdapter.notifyDataSetChanged()
         }
         catch (error: IndexOutOfBoundsException){
             Log.w("Delete image error : ", error.printStackTrace().toString())
@@ -174,23 +193,28 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
 
     private fun initView() {
 
+        //********************** card_view_sale *****************************//
+        card_view_sale.visibility = View.GONE
+
         //********************** fragment_new_estate_input_autocomplete_location  *****************************//
         // Get focus on autocomplete location
         fragment_new_estate_input_autocomplete_location.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus -> if (hasFocus) startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
         fragment_new_estate_input_autocomplete_location.setOnClickListener(View.OnClickListener {startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE)})
 
         //********************** fragment_new_estate_floating_btn  *****************************//
-        fragment_new_estate_floating_btn.setOnClickListener(View.OnClickListener { v: View? ->
-            this.showAddingImageDialog()
-        })
+        fragment_new_estate_floating_btn.setOnClickListener(View.OnClickListener { v: View? -> this.showAddingImageDialog() })
 
         //********************** fragment_new_estate_input_text_type  *****************************//
         val autoCompleteTextView = view!!.findViewById<AutoCompleteTextView>(R.id.fragment_new_estate_input_text_type)
         val typeAdapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.categoryArray))
         autoCompleteTextView.setAdapter(typeAdapter)
 
-        autoCompleteTextView.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus -> if (hasFocus) autoCompleteTextView.showDropDown() }
-        autoCompleteTextView.setOnClickListener(View.OnClickListener { autoCompleteTextView.showDropDown() })
+        autoCompleteTextView.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus){ autoCompleteTextView.showDropDown() }
+        }
+        autoCompleteTextView.setOnClickListener(View.OnClickListener {
+            autoCompleteTextView.showDropDown()
+        })
 
         //********************** fragment_new_estate_input_text_agent  *****************************//
         val userAutoComplete = view!!.findViewById<AutoCompleteTextView>(R.id.fragment_new_estate_input_text_agent)
@@ -210,19 +234,15 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
 
     private fun showAddingImageDialog() {
         if (this.checkPermission()) {
-
             // Create a builder
             val builder = AlertDialog.Builder(context!!)
             // Inflate custom alert dialog view
             val dialogLayout = LayoutInflater.from(context).inflate(R.layout.alert_dialog_pick_image_choice, null)
-
             // Set dialog Title and custom view
             builder.setTitle(getString(R.string.alert_dialog_pick_image_title)).setView(dialogLayout)
-
             // Create and Show dialog
             val dialog = builder.create()
             dialog.show()
-
             // Set Click listener on button's custom view
             // Start camera intent
             dialogLayout.alert_dialog_image_choice_camera.setOnClickListener(View.OnClickListener { v: View? ->
@@ -388,7 +408,16 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
     }
 
     private fun saveForm() {
-        this.insertLocality()
+        when(true){
+            isModification -> {
+                if(this.estateLocality == currentEstate?.locality){
+                    this.updateEstate()
+                }
+            }
+            else -> {
+                this.insertLocality()
+            }
+        }
     }
 
     // Create new Locality
@@ -404,7 +433,6 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
         else {
             fragment_new_estate_input_layout_location.error = resources.getString(R.string.form_error_format_address)
         }
-
     }
 
     // Get Last Locality Inserted
@@ -449,6 +477,29 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
        catch (error: NullPointerException) { Log.w(this.javaClass.simpleName, error) }
     }
 
+    private fun updateEstate(){
+        try {
+            val estate = this.currentEstate!!
+            estate.category = fragment_new_estate_input_text_type.text.toString()
+            estate.title = fragment_new_estate_input_text_title.text.toString()
+            estate.description = fragment_new_estate_input_text_description.text.toString()
+            estate.surface = fragment_new_estate_input_text_surface.text.toString().toInt()
+            estate.nbRoom = fragment_new_estate_input_text_rooms.text.toString().toInt()
+            estate.price = fragment_new_estate_input_text_price.text.toString().toLong()
+            estate.filters = this.getFilters()
+            estate.images = this.imagesUriList
+            estate.agent = this.agentSelected!!
+
+            // Update Estate and Observe result
+            @Suppress
+            this.estateViewModel.updateEstate(estate).subscribeOn(Schedulers.newThread()).subscribe(
+                    { this.notifyUserAndQuit() }, // OnSuccess
+                    { error -> Log.w(this.javaClass.simpleName,"OnError : ${error.printStackTrace()}") }
+            )
+        }
+        catch (error: NullPointerException) { Log.w(this.javaClass.simpleName, error) }
+    }
+
     // Return an Array of Filters Tag
     // Get TAGS with FiltersHelper::class
     private fun getFilters(): ArrayList<String>? {
@@ -462,6 +513,21 @@ class NewEstateFragment(val estate: Estate? = null) : Fragment(), OnDeleteImageB
         if (nearby_chip_sport.isChecked) filterList.add(FiltersHelper.SPORT_TAG)
 
         return if (filterList.size > 0) filterList else null
+    }
+
+    private fun checkChips(filterList:ArrayList<String>?){
+        filterList?.forEach { filter ->
+            when(filter){
+                FiltersHelper.HEALTH_TAG -> nearby_chip_hospital.isChecked
+                FiltersHelper.RESTAURANT_TAG -> nearby_chip_restaurant.isChecked
+                FiltersHelper.SCHOOL_TAG -> nearby_chip_school.isChecked
+                FiltersHelper.SUPERMARKET_TAG -> nearby_chip_supermarket.isChecked
+                FiltersHelper.STORE_TAG -> nearby_chip_store.isChecked
+                FiltersHelper.TRANSPORT_TAG -> nearby_chip_transport.isChecked
+                FiltersHelper.SPORT_TAG -> nearby_chip_sport.isChecked
+                else -> {}
+            }
+        }
     }
 
     private fun notifyUserAndQuit(){

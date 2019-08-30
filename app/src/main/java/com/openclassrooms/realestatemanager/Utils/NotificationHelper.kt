@@ -35,7 +35,6 @@ class NotificationHelper {
             }
         }
 
-
         private fun createNotification(context: Context){
             val builder = NotificationCompat.Builder(context, APP_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_twotone_home_black_24px)

@@ -1,5 +1,6 @@
 package com.openclassrooms.realestatemanager.controller
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -44,6 +45,17 @@ class DetailFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         this.recyclerViewItemConfig()
         this.getEstate(estateId)
+        this.configureFloatingEditBtn()
+    }
+
+    private fun configureFloatingEditBtn(){
+        fragment_detail_floating_btn.setOnClickListener {
+            if (this.estateId > -1) {
+                val intent = Intent(context, NewEstateActivity::class.java)
+                intent.putExtra("estate_id", this.estateId)
+                startActivity(intent)
+            }
+        }
     }
 
     private fun bind(estate: Estate){
@@ -86,7 +98,8 @@ class DetailFragment : Fragment(){
         })
     }
 
-    private fun addImagesToRecycler(images: ArrayList<Uri>){
+    private fun addImagesToRecycler(images: ArrayList<Uri>) {
+        this.imagesList.clear()
         this.imagesList.addAll(images)
         this.adapter.notifyDataSetChanged()
     }
@@ -117,6 +130,7 @@ class DetailFragment : Fragment(){
 
     // Display Nearby section
     private fun showNearbyPOI(filtersList: ArrayList<String>?){
+        fragment_detail_nearby_chip_group.removeAllViews()
         if(filtersList != null) {
             filtersList.forEach { tag ->
                 when (tag) {
@@ -127,6 +141,7 @@ class DetailFragment : Fragment(){
                     FiltersHelper.STORE_TAG -> this.addChip(FiltersHelper.STORE_TAG)
                     FiltersHelper.SUPERMARKET_TAG -> this.addChip(FiltersHelper.SUPERMARKET_TAG)
                     FiltersHelper.TRANSPORT_TAG -> this.addChip(FiltersHelper.TRANSPORT_TAG)
+                    else -> { }
                 }
             }
         }
@@ -134,8 +149,7 @@ class DetailFragment : Fragment(){
             fragment_detail_nearby_container.visibility = View.GONE
         }
     }
-
-    // TODO : Correction display Text Name and not tag Name
+    
     // Add new chip in chip group
     private fun addChip(tag: String){
         val chipGroup = fragment_detail_nearby_chip_group
@@ -147,37 +161,37 @@ class DetailFragment : Fragment(){
 
         when(tag){
             FiltersHelper.SCHOOL_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_school)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_school_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.HEALTH_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_health)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_health_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.RESTAURANT_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_restaurant)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_restaurant_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.SPORT_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_sport)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_fitness_center_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.STORE_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_store)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_store_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.SUPERMARKET_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_supermarket)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_local_supermarket_24px)
                 chipGroup.addView(chip)
             }
             FiltersHelper.TRANSPORT_TAG -> {
-                chip.text = tag
+                chip.text = getString(R.string.chip_transport)
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_transport_24px)
                 chipGroup.addView(chip)
             }

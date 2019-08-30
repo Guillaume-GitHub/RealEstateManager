@@ -49,6 +49,7 @@ class HomeFragment : Fragment(), OnRecyclerItemClick {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         this.rootView = inflater.inflate(R.layout.fragment_main, container, false)
+        Log.d("HomeFrag $this ", "CREATE VIEW")
         return rootView
     }
 
@@ -181,5 +182,10 @@ class HomeFragment : Fragment(), OnRecyclerItemClick {
                     }
                 }
         }
+    }
+
+    override fun onDestroy() {
+        Log.d("HomeFrag $this ", "DESTROY")
+        super.onDestroy()
     }
 }

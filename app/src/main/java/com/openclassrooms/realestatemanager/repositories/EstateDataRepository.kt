@@ -18,6 +18,10 @@ class EstateDataRepository(private val estateDao:EstateDao) {
         return this.estateDao.getAllEstates()
     }
 
+    fun updateEstate(estate: Estate): Int{
+        return this.estateDao.updateEstate(estate)
+    }
+
     fun insertEstate(estate: Estate): Long{
        return this.estateDao.insertEstate(estate)
     }

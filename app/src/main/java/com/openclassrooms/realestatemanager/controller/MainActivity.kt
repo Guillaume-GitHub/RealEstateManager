@@ -75,14 +75,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onBackPressed() {
-        if(supportFragmentManager.findFragmentByTag("detailFragment") != null) {
+       /* if(supportFragmentManager.findFragmentByTag("detailFragment") != null) {
             val frag : DetailFragment = supportFragmentManager.findFragmentByTag("detailFragment") as DetailFragment
             if (frag.isVisible){
                 displayHomeFragment(HomeFragment())
             }
         }
-        else {
+        else { */
             super.onBackPressed()
-        }
+       // }
     }
 }
