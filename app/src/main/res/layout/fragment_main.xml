@@ -43,29 +43,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/default_app_margin"
-                    app:cardCornerRadius="@dimen/default_app_radius">
-
-                    <ImageView
-                        android:id="@+id/fragment_main_latest_estate_imageview"
-                        android:background="@color/colorPrimary"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/main_page_image_view" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/fragment_main_latest_estate_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/latest_estate_title_main_page_fragment"
-                        android:layout_gravity="center"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/title_text_size" />
-                </androidx.cardview.widget.CardView>
-
                 <TextView
                     android:id="@+id/fragment_main_category_title"
                     android:layout_width="match_parent"

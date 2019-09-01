@@ -3,9 +3,11 @@ package com.openclassrooms.realestatemanager.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.openclassrooms.realestatemanager.model.entity.Agent
+import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.repositories.AgentDataRepository
+import com.openclassrooms.realestatemanager.repositories.DraftDataRepository
 import com.openclassrooms.realestatemanager.repositories.EstateDataRepository
 import com.openclassrooms.realestatemanager.repositories.LocalityDataRepository
 import io.reactivex.*
@@ -14,6 +16,7 @@ import java.util.concurrent.Executor
 class EstateViewModel(private val estateDataSource: EstateDataRepository,
                       private val localityDataSource: LocalityDataRepository,
                       private val agentDataSource: AgentDataRepository,
+                      private val draftDataSource: DraftDataRepository,
                       private val executor: Executor): ViewModel(){
 
     // DATA
@@ -23,7 +26,7 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
     private var allEstates: LiveData<List<Estate>>? = null
 
     //***********************************************************
-    // FOR LOCALITY
+    // FOR ESTATE
     //***********************************************************
 
     fun getEstate(uid: Long): LiveData<Estate>?{
@@ -53,11 +56,6 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
         return Single.fromCallable{ this.estateDataSource.updateEstate(estate) }
     }
 
-    fun deleteEstate(uid: Long){
-        executor.execute {
-            this.estateDataSource.deleteEstate(uid)
-        }
-    }
 
     //***********************************************************
     // FOR LOCALITY
@@ -96,5 +94,33 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
         executor.execute {
             this.agentDataSource.insertAgent(agent)
         }
+    }
+
+    //***********************************************************
+    // FOR DRAFT
+    //***********************************************************
+
+    fun getDraft(dratUid: Long): LiveData<Draft>? {
+        return this.draftDataSource.getDraft(dratUid)
+    }
+
+    fun getAllDraft(): LiveData<List<Draft>>? {
+        return this.draftDataSource.getAllDraft()
+    }
+
+    fun updateDraft(draft: Draft): Single<Int> {
+        return Single.fromCallable{this.draftDataSource.updateDraft(draft) }
+    }
+
+    fun insertDraft(draft: Draft): Single<Long> {
+        return Single.fromCallable { this.draftDataSource.insertDraft(draft) }
+    }
+
+    fun deleteDraft(draft: Draft): Single<Int> {
+        return Single.fromCallable { this.draftDataSource.deleteDraft(draft) }
+    }
+
+    fun deleteAllDraft(): Single<Int> {
+        return Single.fromCallable { this.draftDataSource.deleteAllDraft() }
     }
 }

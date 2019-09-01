@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -9,10 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -31,7 +29,9 @@ import com.openclassrooms.realestatemanager.adapter.AgentArrayAdapter
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.model.entity.Agent
+import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
+import io.reactivex.functions.BiConsumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.alert_dialog_pick_image_choice.view.*
 import kotlinx.android.synthetic.main.fragment_new_estate.*
@@ -52,7 +52,6 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var imageAdapter: ItemImageAdapter
-    private lateinit var layoutManager: LinearLayoutManager
     private var imagesUriList = ArrayList<Uri>()
     private val agentList = ArrayList<Agent>()
     private lateinit var estateViewModel: EstateViewModel
@@ -61,7 +60,9 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
     private var agentSelected: Agent? = null
     private var estateLocality: Locality? = null
     private var currentEstate: Estate? = null
+    private lateinit var currentDraft: Draft
     private var isModification = false
+    private var isEditDraft = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.configureViewModel()
@@ -77,20 +78,47 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         this.configRecyclerView()
         // Control toolbar action menu in fragment
         this.setHasOptionsMenu(true)
+        this.getArgs(arguments)
+    }
 
-        if (arguments?.getLong("estate_id") != null) {
-            val id = arguments!!.getLong("estate_id")
-            this.estateViewModel.getEstate(id)?.observe(this, androidx.lifecycle.Observer { estate ->
-                this.currentEstate = estate
-                this.isModification = true
-                this.bindAll(estate)
-            })
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.activity_new_estate_toolbar_menu,menu)
+    }
+
+    private fun getArgs(arguments: Bundle?){
+
+        if (arguments != null) {
+            if (arguments.getLong("estate_id", -1) != -1L) {
+                val id = arguments.getLong("estate_id")
+                this.estateViewModel.getEstate(id)?.observe(this, androidx.lifecycle.Observer { estate ->
+                    if (estate != null) {
+                        this.currentEstate = estate
+                        this.isModification = true
+                        this.bindViewsFromEstate(estate)
+                        Log.d("IS EDIT DRAFT", isEditDraft.toString())
+                        Log.d("IS Modification", isModification.toString())
+                    }
+                })
+            }
+            else if (arguments.getLong("draft_id", -1) != -1L) {
+                val id = arguments.getLong("draft_id")
+                this.estateViewModel.getDraft(id)?.observe(this, androidx.lifecycle.Observer { draft ->
+                    if (draft != null) {
+                        this.isEditDraft = true
+                        this.currentDraft = draft
+                        this.bindViewsFromDraft(draft)
+                        Log.d("IS EDIT DRAFT", isEditDraft.toString())
+                        Log.d("IS Modification", isModification.toString())
+                    }
+                })
+            }
         }
     }
 
-    //TODO : MANAGE NULL VALUES + FILL ALL VIEWS
+
     //fill views
-    private fun bindAll(estate: Estate) {
+    private fun bindViewsFromEstate(estate: Estate) {
         //Images
         this.imagesUriList.addAll(estate.images)
         this.imageAdapter.notifyDataSetChanged()
@@ -113,10 +141,31 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         card_view_sale.visibility = View.VISIBLE
     }
 
+    private fun bindViewsFromDraft(draft: Draft) {
+        // Text View
+        fragment_new_estate_input_text_title.setText(draft.title)
+
+        imagesUriList.apply { if (draft.images != null ){
+                val images = draft.images!!
+                addAll(images)
+                imageAdapter.notifyDataSetChanged()
+            }
+        }
+
+        fragment_new_estate_input_autocomplete_location.apply { if (draft.address != null) setText(draft.address)  }
+        fragment_new_estate_input_text_price.apply { if (draft.price != null) setText(draft.price.toString()) }
+        fragment_new_estate_input_text_description.apply { if (draft.description != null) setText(draft.description) }
+        fragment_new_estate_input_text_surface.apply { if(draft.surface != null) setText(draft.surface.toString()) }
+        fragment_new_estate_input_text_rooms.apply { if (draft.rooms != null) setText(draft.rooms.toString()) }
+        fragment_new_estate_input_text_type.apply { if (draft.type != null) setText(draft.type) }
+
+        // Chip
+        this.checkChips(draft.filters)
+    }
+
     private fun configRecyclerView() {
         this.recyclerView = fragment_new_estate_recycler_view_image
-        this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.layoutManager = this.layoutManager
+        this.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         this.imageAdapter = ItemImageAdapter(imagesUriList, this)
         this.recyclerView.adapter = imageAdapter
         PagerSnapHelper().attachToRecyclerView(this.recyclerView)
@@ -331,6 +380,20 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
             this.validFrom()
 
             if (isFormValid()) { this.saveForm() }
+            else {
+                val builder = AlertDialog.Builder(context!!)
+                builder.setTitle("Impossible to create estate")
+                        .setMessage("This form contain errors, please check it and retry")
+                        .setPositiveButton("ok", DialogInterface.OnClickListener { dialog, _ ->
+                            dialog.dismiss()
+                        })
+                builder.create().show()
+            }
+            true
+        }
+       android.R.id.home -> {
+            Log.d("HOME CLIKC","")
+            this.onBackPressed()
             true
         }
         else -> { super.onOptionsItemSelected(item) }
@@ -338,40 +401,23 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
     //Display Error messages
     private fun validFrom() {
-        if (fragment_new_estate_input_text_title.text == null || fragment_new_estate_input_text_title.text!!.length < 3) {
-            fragment_new_estate_input_layout_title.error = resources.getString(R.string.form_error_characters_3)
-        }
+        if (fragment_new_estate_input_text_title.text == null || fragment_new_estate_input_text_title.text!!.length < 3) fragment_new_estate_input_layout_title.error = resources.getString(R.string.form_error_characters_3)
 
-        if (fragment_new_estate_input_text_type.text.isNullOrBlank()) {
-            fragment_new_estate_input_layout_type.error = resources.getString(R.string.form_error_type)
-        }
+        if (fragment_new_estate_input_text_type.text.isNullOrBlank()) fragment_new_estate_input_layout_type.error = resources.getString(R.string.form_error_type)
 
-        if (fragment_new_estate_input_text_surface.text.isNullOrBlank() || fragment_new_estate_input_text_surface.text.toString().toInt() <= 0) {
-            fragment_new_estate_input_layout_surface.error = resources.getString(R.string.form_error_surface)
-        }
+        if (fragment_new_estate_input_text_surface.text.isNullOrBlank() || fragment_new_estate_input_text_surface.text.toString().toInt() <= 0) fragment_new_estate_input_layout_surface.error = resources.getString(R.string.form_error_surface)
 
-        if (fragment_new_estate_input_text_price.text.isNullOrBlank()) {
-            fragment_new_estate_input_layout_price.error = resources.getString(R.string.form_error_price)
-        }
+        if (fragment_new_estate_input_text_price.text.isNullOrBlank()) fragment_new_estate_input_layout_price.error = resources.getString(R.string.form_error_price)
 
-        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank() || fragment_new_estate_input_text_rooms.text.toString().toInt() <= 0) {
-            fragment_new_estate_input_layout_rooms.error = resources.getString(R.string.form_error_rooms)
-        }
+        if (fragment_new_estate_input_text_rooms.text.isNullOrBlank() || fragment_new_estate_input_text_rooms.text.toString().toInt() <= 0) fragment_new_estate_input_layout_rooms.error = resources.getString(R.string.form_error_rooms)
 
-        if (fragment_new_estate_input_autocomplete_location.text.isNullOrBlank() || this.estateLocality == null){
-            fragment_new_estate_input_layout_location.error = resources.getString(R.string.form_error_not_geolocated)
-        }
+        if (fragment_new_estate_input_autocomplete_location.text.isNullOrBlank() || this.estateLocality == null) fragment_new_estate_input_layout_location.error = resources.getString(R.string.form_error_not_geolocated)
 
-        if (fragment_new_estate_input_text_description.text.isNullOrBlank() || fragment_new_estate_input_text_description.text!!.length < 20){
-            fragment_new_estate_input_layout_description.error = resources.getString(R.string.form_error_characters_20)
-        }
+        if (fragment_new_estate_input_text_description.text.isNullOrBlank() || fragment_new_estate_input_text_description.text!!.length < 20) fragment_new_estate_input_layout_description.error = resources.getString(R.string.form_error_characters_20)
 
-        if (fragment_new_estate_input_text_agent.text.isNullOrBlank() || this.agentSelected == null){
-            fragment_new_estate_input_layout_agent.error = resources.getString(R.string.form_error_agent)
-        }
+        if (fragment_new_estate_input_text_agent.text.isNullOrBlank() || this.agentSelected == null) fragment_new_estate_input_layout_agent.error = resources.getString(R.string.form_error_agent)
 
-        if (this.imagesUriList.size < 1){
-            fragment_new_estate_image_error.apply {
+        if (this.imagesUriList.size < 1){ fragment_new_estate_image_error.apply {
                 text = resources.getString(R.string.form_error_images)
                 visibility = View.VISIBLE
             }
@@ -414,6 +460,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                     this.updateEstate()
                 }
             }
+
             else -> {
                 this.insertLocality()
             }
@@ -469,12 +516,23 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
            // Insert in database and Observe result
            @Suppress
-           this.estateViewModel.insertEstate(estate).subscribe(
-                   { this.notifyUserAndQuit() }, // OnSuccess
+           this.estateViewModel.insertEstate(estate).subscribeOn(Schedulers.newThread()).subscribe(
+                   { if(isEditDraft) { this.suppressDraft() } //Suppress Draft if estate is valid
+                       this.notifyUserAndQuit() }, // OnSuccess
                    { error -> Log.w(this.javaClass.simpleName,"OnError : ${error.printStackTrace()}") }
            )
        }
        catch (error: NullPointerException) { Log.w(this.javaClass.simpleName, error) }
+    }
+
+    // Create new draft and insert it in database
+    private fun insertDraft(draft: Draft) {
+        // Insert in database and Observe result
+        @Suppress
+        this.estateViewModel.insertDraft(draft).subscribeOn(Schedulers.newThread()).subscribe(
+                { activity?.finish() }, // OnSuccess
+                { error -> Log.w(this.javaClass.simpleName, "OnError : ${error.printStackTrace()}") }
+        )
     }
 
     private fun updateEstate(){
@@ -500,6 +558,31 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         catch (error: NullPointerException) { Log.w(this.javaClass.simpleName, error) }
     }
 
+    private fun updateDraft(){
+        try {
+            val draft = this.getDraft()
+            if(draft != null){
+                draft.draftUid = this.currentDraft.draftUid
+                draft.lastModification = Calendar.getInstance().time
+                // Update Estate and Observe result
+                @Suppress
+                this.estateViewModel.updateDraft(draft).subscribeOn(Schedulers.newThread()).subscribe(
+                        { activity?.supportFragmentManager?.popBackStack() }, // OnSuccess
+                        { error -> Log.w(this.javaClass.simpleName,"OnError : ${error.printStackTrace()}") }
+                )
+            }
+        }
+        catch (error: NullPointerException) { Log.w(this.javaClass.simpleName, error) }
+    }
+
+    private fun suppressDraft(){
+        @Suppress
+        this.estateViewModel.deleteDraft(this.currentDraft).subscribeOn(Schedulers.newThread()).subscribe(
+                {  }, // OnSuccess
+                { error -> Log.w(this.javaClass.simpleName,"OnError : ${error.printStackTrace()}") }
+        )
+    }
+
     // Return an Array of Filters Tag
     // Get TAGS with FiltersHelper::class
     private fun getFilters(): ArrayList<String>? {
@@ -515,24 +598,110 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         return if (filterList.size > 0) filterList else null
     }
 
-    private fun checkChips(filterList:ArrayList<String>?){
+    private fun checkChips(filterList: ArrayList<String>?){
         filterList?.forEach { filter ->
             when(filter){
-                FiltersHelper.HEALTH_TAG -> nearby_chip_hospital.isChecked
-                FiltersHelper.RESTAURANT_TAG -> nearby_chip_restaurant.isChecked
-                FiltersHelper.SCHOOL_TAG -> nearby_chip_school.isChecked
-                FiltersHelper.SUPERMARKET_TAG -> nearby_chip_supermarket.isChecked
-                FiltersHelper.STORE_TAG -> nearby_chip_store.isChecked
-                FiltersHelper.TRANSPORT_TAG -> nearby_chip_transport.isChecked
-                FiltersHelper.SPORT_TAG -> nearby_chip_sport.isChecked
-                else -> {}
+                FiltersHelper.HEALTH_TAG -> nearby_chip_hospital.isChecked = true
+                FiltersHelper.RESTAURANT_TAG -> nearby_chip_restaurant.isChecked = true
+                FiltersHelper.SCHOOL_TAG -> nearby_chip_school.isChecked = true
+                FiltersHelper.SUPERMARKET_TAG -> nearby_chip_supermarket.isChecked = true
+                FiltersHelper.STORE_TAG -> nearby_chip_store.isChecked = true
+                FiltersHelper.TRANSPORT_TAG -> nearby_chip_transport.isChecked = true
+                FiltersHelper.SPORT_TAG -> nearby_chip_sport.isChecked = true
             }
         }
     }
 
     private fun notifyUserAndQuit(){
         NotificationHelper.sendNotification(context!!)
-        this.activity?.finish()
+        activity?.finish()
     }
+
+    private fun isDraftChanged(): Boolean {
+        val rooms = if(fragment_new_estate_input_text_rooms.text.isNullOrBlank()) null else fragment_new_estate_input_text_rooms.text.toString().toInt()
+        val surface = if(fragment_new_estate_input_text_surface.text.isNullOrBlank()) null else fragment_new_estate_input_text_surface.text.toString().toInt()
+        val description = if(fragment_new_estate_input_text_description.text.isNullOrBlank()) null else fragment_new_estate_input_text_description.text.toString()
+        val address = if(fragment_new_estate_input_autocomplete_location.text.isNullOrBlank()) null else fragment_new_estate_input_autocomplete_location.text.toString()
+        val price = if(fragment_new_estate_input_text_price.text.isNullOrBlank()) null else fragment_new_estate_input_text_price.text.toString().toLong()
+        val type = if(fragment_new_estate_input_text_type.text.isNullOrBlank()) null else fragment_new_estate_input_text_type.text.toString()
+        val images = if (this.imagesUriList.size < 1) null else this.imagesUriList
+
+        return this.currentDraft.images != images ||
+                this.currentDraft.type != type ||
+                this.currentDraft.filters != this.getFilters() ||
+                this.currentDraft.rooms != rooms ||
+                this.currentDraft.surface != surface ||
+                this.currentDraft.description != description ||
+                this.currentDraft.address != address ||
+                this.currentDraft.price != price ||
+                this.currentDraft.title != fragment_new_estate_input_text_title.text.toString()
+    }
+
+    private fun getDraft(): Draft? {
+        var newDraft: Draft? = null
+
+        if(!fragment_new_estate_input_text_title.text.isNullOrBlank()) {
+            val id = 0L
+            val title = fragment_new_estate_input_text_title.text.toString()
+            val description = if (!fragment_new_estate_input_text_description.text.isNullOrBlank()) fragment_new_estate_input_text_description.text.toString() else null
+            val type = if (!fragment_new_estate_input_text_type.text.isNullOrBlank()) fragment_new_estate_input_text_type.text.toString() else null
+            val address = if (!fragment_new_estate_input_autocomplete_location.text.isNullOrBlank()) fragment_new_estate_input_autocomplete_location.text.toString() else null
+            val surface = if (!fragment_new_estate_input_text_surface.text.isNullOrBlank()) fragment_new_estate_input_text_surface.text.toString().toInt() else null
+            val rooms = if (!fragment_new_estate_input_text_rooms.text.isNullOrBlank()) fragment_new_estate_input_text_rooms.text.toString().toInt() else null
+            val price = fragment_new_estate_input_text_price.text.toString().toLongOrNull()
+            val images = if (this.imagesUriList.size > 0) this.imagesUriList else null
+            val filters = this.getFilters()
+            val lastModification = Calendar.getInstance().time
+
+            newDraft = Draft(id,title,description,type,address,surface,rooms,price,images,filters,lastModification)
+        }
+        return newDraft
+    }
+
+    fun onBackPressed() {
+        when(true){
+            this.isEditDraft -> {
+                if(isDraftChanged() && this.getDraft() != null){
+                    val builder = AlertDialog.Builder(context!!)
+                    builder.setTitle("Save modifications ?")
+                            .setMessage("You can save modifications or exit without saving")
+                            .setPositiveButton("Save", DialogInterface.OnClickListener { dialog, _ ->
+                                updateDraft()
+                                dialog.dismiss()
+                            })
+                            .setNegativeButton("Exit", DialogInterface.OnClickListener { dialog, _ ->
+                                dialog.dismiss()
+                                activity?.supportFragmentManager?.popBackStack()
+                            })
+                    builder.create().show()
+                }
+                else {
+                    activity?.supportFragmentManager?.popBackStack()
+                }
+            }
+
+            else -> {
+                val draft = this.getDraft()
+                if (draft != null) {
+                    val builder = AlertDialog.Builder(context!!)
+                    builder.setTitle("Save modifications ?")
+                            .setMessage("Modifications can be saved in your drafts and can be edit later")
+                            .setPositiveButton("Save", DialogInterface.OnClickListener { dialog, _ ->
+                                insertDraft(draft)
+                                dialog.dismiss()
+                            })
+                            .setNegativeButton("Exit", DialogInterface.OnClickListener { dialog, _ ->
+                                dialog.dismiss()
+                                activity?.finish()
+                            })
+                    builder.create().show()
+                }
+                else {
+                    activity?.finish()
+                }
+            }
+        }
+    }
+
 }
 

@@ -16,7 +16,7 @@ import java.util.zip.Inflater
 class NewEstateActivity : AppCompatActivity(){
 
     companion object{
-        private const val FRAGMENT_TAG = "new_estate_frag"
+        const val FRAGMENT_TAG = "new_estate_frag"
     }
 
     private lateinit var newEstateFragment: NewEstateFragment
@@ -56,8 +56,9 @@ class NewEstateActivity : AppCompatActivity(){
         supportFragmentManager.beginTransaction().replace(R.id.activity_new_estate_frame_layout, newEstateFragment, FRAGMENT_TAG).commit()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-       menuInflater.inflate(R.menu.activity_new_estate_toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onBackPressed() {
+        val frag = supportFragmentManager.findFragmentByTag(FRAGMENT_TAG) as NewEstateFragment?
+        if (frag != null) frag.onBackPressed()
+        else super.onBackPressed()
     }
 }

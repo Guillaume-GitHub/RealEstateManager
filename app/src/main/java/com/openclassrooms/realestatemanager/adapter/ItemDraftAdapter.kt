@@ -3,11 +3,11 @@ package com.openclassrooms.realestatemanager.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.entity.Estate
+import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.view.ItemDraftViewHolder
 
-class ItemDraftAdapter(private var dataset: ArrayList<Estate>, private val callback: OnRecyclerItemClick):
+class ItemDraftAdapter(private var dataset: ArrayList<Draft>, private val callback: RecyclerClickListener.onDraftClick):
         RecyclerView.Adapter<ItemDraftViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDraftViewHolder {

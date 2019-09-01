@@ -3,10 +3,10 @@ package com.openclassrooms.realestatemanager.Injections
 import android.content.Context
 import com.openclassrooms.realestatemanager.database.AppDatabase
 import com.openclassrooms.realestatemanager.repositories.AgentDataRepository
+import com.openclassrooms.realestatemanager.repositories.DraftDataRepository
 import com.openclassrooms.realestatemanager.repositories.EstateDataRepository
 import com.openclassrooms.realestatemanager.repositories.LocalityDataRepository
 import com.openclassrooms.realestatemanager.viewModel.ViewModelFactory
-import io.reactivex.Observable
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -29,6 +29,11 @@ class Injection {
             return AgentDataRepository(db!!.agentDao())
         }
 
+        private fun provideDraftDataSource(context: Context):DraftDataRepository{
+            val db = AppDatabase.getInstance(context)
+            return DraftDataRepository(db!!.draftDao())
+        }
+
         private fun provideExecutor():Executor{
             return Executors.newSingleThreadExecutor()
         }
@@ -37,6 +42,7 @@ class Injection {
             return ViewModelFactory(provideEstateDataSource(context),
                     provideLocalityDataSource(context),
                     provideAgentDataSource(context),
+                    provideDraftDataSource(context),
                     provideExecutor())
         }
     }

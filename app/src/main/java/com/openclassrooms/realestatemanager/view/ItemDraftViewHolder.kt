@@ -3,34 +3,42 @@ package com.openclassrooms.realestatemanager.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.OnRecyclerItemClick
-import com.openclassrooms.realestatemanager.model.entity.Estate
-import java.util.*
+import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.model.entity.Draft
 
 class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.recyclerview_draft_item, parent,false)) {
 
-    private val title: TextView = itemView.findViewById(R.id.recyclerview_draft_item_title_textview)
-    private val price: TextView = itemView.findViewById(R.id.recyclerview_draft_item_price_textview)
-    private val date: TextView = itemView.findViewById(R.id.recyclerview_draft_item_date_textview)
+    private val title: AppCompatTextView = itemView.findViewById(R.id.recyclerview_draft_item_title_textview)
+    private val price: AppCompatTextView = itemView.findViewById(R.id.recyclerview_draft_item_price_textview)
+    private val date: AppCompatTextView = itemView.findViewById(R.id.recyclerview_draft_item_date_textview)
+    private val image: AppCompatImageView = itemView.findViewById(R.id.recyclerview_draft_item_image)
 
-    fun bind(estate: Estate, callback: OnRecyclerItemClick){
-        this.fillView(estate)
-       // this.setClickListener(estate, callback)
+
+    fun bind(mDraft: Draft, callback: RecyclerClickListener.onDraftClick){
+
+        this.title.text = mDraft.title
+
+        val priceText = mDraft.price?.toInt().toString()
+        if (mDraft.price != null ) this.price.text = "$ $priceText"
+
+        this.date.text = "${this.date.text} ${mDraft.lastModification}"
+
+        this.image.apply {
+            val img = mDraft.images
+            if(!img.isNullOrEmpty()) setImageURI(img[0])
+        }
+
+        this.setClickListener(mDraft, callback)
     }
 
-    private fun fillView(estate: Estate){
-        title.text = estate.title
-        price.text = estate.price.toString()
-        date.text = Calendar.getInstance().time.toString()
-    }
-/*
-    private fun setClickListener(estate: Estate, callback: OnRecyclerItemClick){
+    private fun setClickListener(draft: Draft, callback: RecyclerClickListener.onDraftClick){
         itemView.setOnClickListener {
-            v:View? ->  callback.onRecyclerViewItemClick(estate)
+           callback.onDraftItemClick(draft)
         }
     }
-*/
 }

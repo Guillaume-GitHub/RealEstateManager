@@ -18,7 +18,7 @@ class DraftActivity : AppCompatActivity(){
 
     private fun displayDraftFragment(){
         val draftFragment = DraftFragment()
-        supportFragmentManager.beginTransaction().add(R.id.activity_draft_frame_layout,draftFragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.activity_draft_frame_layout,draftFragment).commit()
     }
 
     //Configure toolbar and navigation
@@ -29,8 +29,14 @@ class DraftActivity : AppCompatActivity(){
         supportActionBar?.elevation = 5.0f
 
         //for navigation
-        activity_draft_toolbar.setNavigationOnClickListener(View.OnClickListener { v: View? ->
+        activity_draft_toolbar.setNavigationOnClickListener {
             this.onBackPressed()
-        })
+        }
+    }
+
+    override fun onBackPressed() {
+        val frag = supportFragmentManager.findFragmentByTag(NewEstateActivity.FRAGMENT_TAG) as NewEstateFragment?
+        if (frag != null) frag.onBackPressed()
+        else super.onBackPressed()
     }
 }

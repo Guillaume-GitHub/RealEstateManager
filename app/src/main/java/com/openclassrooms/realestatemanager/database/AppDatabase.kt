@@ -2,19 +2,17 @@ package com.openclassrooms.realestatemanager.database
 
 import android.content.Context
 import androidx.room.*
-import com.openclassrooms.realestatemanager.database.dao.EstateDao
 import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.openclassrooms.realestatemanager.database.dao.AgentDao
-import com.openclassrooms.realestatemanager.database.dao.LocalityDao
-import com.openclassrooms.realestatemanager.database.dao.RawDao
+import com.openclassrooms.realestatemanager.database.dao.*
 import com.openclassrooms.realestatemanager.model.entity.Agent
+import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.entity.Locality
 import java.util.concurrent.Executors
 
 
-@Database(entities = arrayOf(Estate::class, Locality::class, Agent::class), version = 1)
+@Database(entities = arrayOf(Estate::class, Locality::class, Agent::class, Draft::class), version = 1)
 @TypeConverters(DataTransformer::class)
 abstract class AppDatabase: RoomDatabase() {
 
@@ -22,6 +20,7 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun estateDao(): EstateDao
     abstract fun localityDao(): LocalityDao
     abstract fun agentDao(): AgentDao
+    abstract fun draftDao(): DraftDao
     abstract fun rawDao(): RawDao
 
     companion object {

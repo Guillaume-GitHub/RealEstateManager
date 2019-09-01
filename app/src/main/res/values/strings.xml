@@ -53,6 +53,9 @@
     <string name="fragment_new_estate_edit_text_description">Description*</string>
     <string name="fragment_new_estate_edit_text_price">Price*</string>
     <string name="fragment_new_estate_edit_text_agent">Agent*</string>
+    <string name="fragment_new_estate_edit_text_sale_section">Sale</string>
+    <string name="fragment_new_estate_edit_text_sale_text">This estate is sold</string>
+
 
     <!--DETAIL FRAGMENT-->
     <string name="fragment_detail_title_toolbar">Details</string>
@@ -110,6 +113,11 @@
     <string name="notification_channel_name">@string/app_name</string>
     <string name="notification_channel_description">Display notifications when an Estate was correctly adding</string>
     <string name="notification_adding_success_title">New Estate Adding</string>
-    <string name="notification_adding_success_message">"Great ! You're estate was correctly adding"</string>
+    <string name="notification_adding_success_message">Great ! You\'re estate was correctly adding</string>
+
+
+    <!-- DRAFT ITEM-->
+    <string name="draft_item_date_placeholder">Modified : </string>
+
 
 </resources>
