@@ -14,15 +14,20 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.Injections.Injection
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.FiltersHelper
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
+import com.openclassrooms.realestatemanager.api.ApiServicesBuilder
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
+import java.lang.Exception
 
 class DetailFragment : Fragment(){
 
@@ -93,7 +98,10 @@ class DetailFragment : Fragment(){
 
     private fun fetchEstate(id: Long){
         this.viewModel.getEstate(id)!!.observe(this, Observer { estate ->
-            if(estate != null) { this.bind(estate) }
+            if(estate != null) {
+                this.bind(estate)
+                this.getStaticMap(estate.locality.latLng)
+            }
             else { Log.w(this::class.java.simpleName, "Fail to get Estate")}
         })
     }
@@ -111,6 +119,20 @@ class DetailFragment : Fragment(){
         this.recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         this.recyclerView.adapter = this.adapter
         PagerSnapHelper().attachToRecyclerView(this.recyclerView)
+    }
+
+    private fun getStaticMap(latLng: LatLng){
+        val url = ApiServicesBuilder.getStaticMapUrl(latLng)
+        Picasso.get().load(url).into(fragment_detail_static_map_image, object : Callback {
+
+                    override fun onSuccess() {
+                        fragment_detail_static_map_image.visibility = View.VISIBLE
+                    }
+
+                    override fun onError(e: Exception?) {
+                        e?.printStackTrace()
+                    }
+                })
     }
 
     // Return Number of rooms text

@@ -6,16 +6,12 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -30,20 +26,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.adapter.BottomSheetImageAdapter
-import com.openclassrooms.realestatemanager.api.GeocodingServiceBuilder
-import com.openclassrooms.realestatemanager.model.ReverseGeocodingResult
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
-import io.reactivex.SingleObserver
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.maps_bottom_sheet.*
 import kotlinx.android.synthetic.main.maps_bottom_sheet.view.*
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {

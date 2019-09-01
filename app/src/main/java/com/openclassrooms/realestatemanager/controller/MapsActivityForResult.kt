@@ -28,11 +28,10 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.ComponentsHelper
-import com.openclassrooms.realestatemanager.api.GeocodingServiceBuilder
+import com.openclassrooms.realestatemanager.api.ApiServicesBuilder
 import com.openclassrooms.realestatemanager.model.Component
 import com.openclassrooms.realestatemanager.model.ReverseGeocodingAddress
 import com.openclassrooms.realestatemanager.model.ReverseGeocodingResult
-import com.openclassrooms.realestatemanager.model.entity.Locality
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_maps.*
@@ -134,7 +133,7 @@ class MapsActivityForResult : AppCompatActivity(), OnMapReadyCallback, GoogleMap
     // Fetch address from LatLng
     private fun getAddress(position: LatLng){
         this.estatePosition = position
-        GeocodingServiceBuilder.getAddressFromLatLng(position).subscribe(this)
+        ApiServicesBuilder.getAddressFromLatLng(position).subscribe(this)
     }
 
     // Check Location service enable
