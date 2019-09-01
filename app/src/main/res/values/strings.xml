@@ -9,6 +9,7 @@
 
 
     <!--DRAWER MENU-->
+    <string name="drawer_menu_home">Home</string>
     <string name="drawer_menu_new">New</string>
     <string name="drawer_menu_map">Map</string>
     <string name="drawer_menu_simulation">Simulation</string>

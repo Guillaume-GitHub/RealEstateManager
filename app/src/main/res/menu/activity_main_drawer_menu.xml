@@ -7,6 +7,10 @@
         android:id="@+id/main_activity_menu_first_group"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/activity_main_drawer_home"
+            android:icon="@drawable/ic_twotone_home_black_24px"
+            android:title="@string/drawer_menu_home" />
+        <item
             android:id="@+id/activity_main_drawer_new"
             android:icon="@drawable/ic_twotone_add_circle_24px"
             android:title="@string/drawer_menu_new" />

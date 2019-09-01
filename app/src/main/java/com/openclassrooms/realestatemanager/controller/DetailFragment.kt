@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -51,6 +52,7 @@ class DetailFragment : Fragment(){
         this.recyclerViewItemConfig()
         this.getEstate(estateId)
         this.configureFloatingEditBtn()
+        fragment_detail_toolbar.setNavigationOnClickListener(View.OnClickListener { activity?.onBackPressed() })
     }
 
     private fun configureFloatingEditBtn(){

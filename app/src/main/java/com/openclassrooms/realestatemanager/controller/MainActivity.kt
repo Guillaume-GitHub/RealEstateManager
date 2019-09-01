@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private var estateViewModel: EstateViewModel? = null
+    private lateinit var homeFragment: HomeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Log.d("ON CREATE ", "MAIN ACTIVITY")
 
         this.configureViewModel()
-        this.displayHomeFragment(HomeFragment())
+        this.displayHomeFragment()
         this.configToolbar()
         this.configureDrawerLayout()
     }
@@ -38,8 +39,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return if (this.estateViewModel != null) this.estateViewModel else null
     }
 
-    private fun displayHomeFragment(fragment: HomeFragment){
-        supportFragmentManager.beginTransaction().replace(R.id.activity_main_framelayout_list,fragment,"estateFragment").commit()
+    private fun displayHomeFragment(){
+        if(supportFragmentManager.findFragmentByTag("homeFragment") != null){
+            this.homeFragment = supportFragmentManager.findFragmentByTag("homeFragment") as HomeFragment
+        }
+        else {
+            this.homeFragment = HomeFragment()
+        }
+        supportFragmentManager.beginTransaction().replace(R.id.activity_main_framelayout_list,this.homeFragment,"homeFragment").commit()
     }
 
     private fun configToolbar(){
@@ -66,6 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
        when(item.itemId){
+           R.id.activity_main_drawer_home -> if (!this.homeFragment.isVisible) this.displayHomeFragment()
            R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
            R.id.activity_main_drawer_draft -> startActivity(Intent(this, DraftActivity::class.java))
            R.id.activity_main_drawer_map -> startActivity(Intent(this, MapsActivity::class.java))
