@@ -3,10 +3,11 @@ package com.openclassrooms.realestatemanager.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.view.ItemListViewHolder
 
-class ItemListAdapter(private val dataset: ArrayList<Estate>): RecyclerView.Adapter<ItemListViewHolder>() {
+class ItemListAdapter(private val dataset: ArrayList<Estate>, val callback: RecyclerClickListener.onEstateClick): RecyclerView.Adapter<ItemListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -14,7 +15,7 @@ class ItemListAdapter(private val dataset: ArrayList<Estate>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
-        holder.displayItem(dataset[position])
+        holder.displayItem(dataset[position], callback)
     }
 
     override fun getItemCount(): Int {

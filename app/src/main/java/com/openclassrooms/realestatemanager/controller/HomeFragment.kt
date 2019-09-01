@@ -18,7 +18,6 @@ import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
 
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.OnRecyclerEstateClick
 import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.Utils.Utils
@@ -63,7 +62,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
         this.recyclerViewCategoryConfig()
         this.addCategory()
 
-        this.onClickFilterBtn()
+        this.onClickSearchView()
         this.onClickFloatingAddButton()
     }
 
@@ -103,7 +102,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
     }
 
     // Start FilterActivity when search bar clicked
-    private fun onClickFilterBtn(){
+    private fun onClickSearchView(){
         fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
             val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent,RQ_FILTER_ACTIVITY)
@@ -113,8 +112,6 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
     // Start NewEstateActivity when floating btn clicked
     private fun onClickFloatingAddButton(){
         activity_main_floating_btn.setOnClickListener {
-            Log.d("sqfuh", "hgfjezlifhazlejfezl")
-            Log.d("Today date ", Utils.getTodayDate())
             startActivity(Intent(context, NewEstateActivity::class.java))
         }
     }
@@ -172,8 +169,4 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
         }
     }
 
-    override fun onDestroy() {
-        Log.d("HomeFrag $this ", "DESTROY")
-        super.onDestroy()
-    }
 }
