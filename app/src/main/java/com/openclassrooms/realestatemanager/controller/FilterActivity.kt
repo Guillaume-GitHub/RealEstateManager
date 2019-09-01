@@ -95,10 +95,15 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
 
     private fun setUpCheckBoxesListener() {
         activity_filter_checkbox_house.setOnCheckedChangeListener(this)
+        activity_filter_checkbox_house.isChecked = true
         activity_filter_checkbox_duplex.setOnCheckedChangeListener(this)
+        activity_filter_checkbox_duplex.isChecked = true
         activity_filter_checkbox_flat.setOnCheckedChangeListener(this)
+        activity_filter_checkbox_flat.isChecked = true
         activity_filter_checkbox_mansion.setOnCheckedChangeListener(this)
+        activity_filter_checkbox_mansion.isChecked = true
         activity_filter_checkbox_penthouse.setOnCheckedChangeListener(this)
+        activity_filter_checkbox_penthouse.isChecked = true
     }
 
     private fun setUpAddLocation(){
@@ -169,6 +174,8 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
             activity_filter_checkbox_mansion.id -> if(isChecked) this.checkedBoxes.add(getString(R.string.mansion)) else this.checkedBoxes.remove(getString(R.string.mansion))
             activity_filter_checkbox_penthouse.id -> if(isChecked) this.checkedBoxes.add(getString(R.string.penthouse)) else this.checkedBoxes.remove(getString(R.string.penthouse))
         }
+
+        Log.d("FILTERS = ", checkedBoxes.toString())
     }
 
     private fun getFilters(): ArrayList<String> {
@@ -232,23 +239,17 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
 
             if(this.isSurfaceRangeBarChanged()) {
                intent.putExtra("min_surface", activity_filter_surface_rangebar.leftIndex * INTERVAL_SURFACE)
-               Log.d("min_surface ", (activity_filter_surface_rangebar.leftIndex * INTERVAL_SURFACE).toString())
                intent.putExtra("max_surface", activity_filter_surface_rangebar.rightIndex * INTERVAL_SURFACE)
-               Log.d("min_surface", (activity_filter_surface_rangebar.rightIndex * INTERVAL_SURFACE).toString())
             }
 
             if(this.isPriceRangeBarChanged()) {
                 intent.putExtra("min_price", activity_filter_price_rangebar.leftIndex * INTERVAL_PRICE)
-                Log.d("min_price ", (activity_filter_price_rangebar.leftIndex * INTERVAL_PRICE).toString())
                 intent.putExtra("max_price", activity_filter_price_rangebar.rightIndex * INTERVAL_PRICE)
-                Log.d("max_price", (activity_filter_price_rangebar.rightIndex * INTERVAL_PRICE).toString())
             }
 
             if(this.isRoomRangeBarChanged()) {
                 intent.putExtra("min_room", activity_filter_room_rangebar.leftIndex * INTERVAL_ROOM)
-                Log.d("min_room ", (activity_filter_room_rangebar.leftIndex * INTERVAL_ROOM).toString())
                 intent.putExtra("max_room", activity_filter_room_rangebar.rightIndex * INTERVAL_ROOM)
-                Log.d("max_room", (activity_filter_room_rangebar.rightIndex * INTERVAL_ROOM).toString())
             }
 
             if(this.isCheckBoxesChanged()) {

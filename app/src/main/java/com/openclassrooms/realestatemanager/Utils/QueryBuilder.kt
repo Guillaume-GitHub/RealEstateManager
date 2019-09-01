@@ -9,76 +9,63 @@ class QueryBuilder {
         private const val BASE_SQL_QUERY = "SELECT * FROM ESTATE"
         private const val ORDER_BY_QUERY = "ORDER BY publishedDate DESC"
     }
-    private lateinit var keyList: ArrayList<String>
+    private var keyList: ArrayList<String> = ArrayList()
 
     private var containWhereCondition = false
     private var stringQuery = BASE_SQL_QUERY
 
     fun getQuery(data: Intent): String {
 
-        val extras = data.extras
+        if (data.extras != null){
 
-        if(extras != null) {
-
-            val keys = extras.keySet()
-            val iterator: Iterator<String> = keys.iterator()
-            keyList = ArrayList()
-
-            while (iterator.hasNext()) {
-                val key = iterator.next()
-                Log.d("KEY -> ", "[$key = ${extras.get(key)}]")
-                keyList.add(key)
-            }
-        }
-
-        if (keyList.size > 0){
+            val extras = data.extras
 
             // "query" filter (text in searchview)
-            if (keyList.contains("query")) {
+            if (extras?.get("query") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
                     stringQuery += " WHERE"
                     this.containWhereCondition = true
                 }
-                this.stringQuery += " title LIKE '%${extras?.get("query")}%' OR description LIKE '%${extras?.get("query")}%'"
+                this.stringQuery += " title LIKE '%${extras.get("query")}%' OR description LIKE '%${extras.get("query")}%'"
             }
 
             // Price VALUES (range bar values)
-            if (keyList.contains("min_price") || keyList.contains("max_price")) {
+            if (extras?.get("min_price") != null || extras?.get("max_price") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
                     stringQuery += " WHERE"
                     this.containWhereCondition = true
                 }
-                this.stringQuery += " price BETWEEN ${extras?.get("min_price")} AND ${extras?.get("max_price")}"
+                this.stringQuery += " price BETWEEN ${extras.get("min_price")} AND ${extras.get("max_price")}"
             }
 
             // Surface VALUES (range bar values)
-            if (keyList.contains("min_surface") || keyList.contains("max_surface")) {
+            if (extras?.get("min_surface") != null || extras?.get("max_surface") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
                     stringQuery += " WHERE"
                     this.containWhereCondition = true
                 }
-                this.stringQuery += " surface BETWEEN ${extras?.get("min_surface")} AND ${extras?.get("max_surface")}"
+                this.stringQuery += " surface BETWEEN ${extras.get("min_surface")} AND ${extras.get("max_surface")}"
             }
 
             // Room VALUES (range bar values)
-            if (keyList.contains("min_room") || keyList.contains("max_room")) {
+            if (extras?.get("min_room") != null || extras?.get("max_room") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
                     stringQuery += " WHERE"
                     this.containWhereCondition = true
                 }
-                this.stringQuery += " nbRoom BETWEEN ${extras?.get("min_room")} AND ${extras?.get("max_room")}"
+                this.stringQuery += " nbRoom BETWEEN ${extras.get("min_room")} AND ${extras.get("max_room")}"
             }
 
             // filters nearby chip tags
-            if (keyList.contains("filter_array")) {
+            if (extras?.get("filter_array") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
@@ -86,18 +73,18 @@ class QueryBuilder {
                     this.containWhereCondition = true
                 }
 
-                val tagList = extras?.getStringArrayList("filter_array")
+                val tagList = extras.getStringArrayList("filter_array")
                 var stringFilters = String()
 
                 tagList?.forEachIndexed { index, string ->
-                    if (index != tagList.size -1) stringFilters += "'%$string%' OR"
-                    else stringFilters += "'%$string%'"
+                    if (index != tagList.size -1) stringFilters += " filters LIKE '%$string%' OR "
+                    else stringFilters += "filters LIKE '%$string%'"
                 }
-                this.stringQuery += " filters LIKE $stringFilters"
+                this.stringQuery += " $stringFilters"
             }
 
             // Category filters
-            if (keyList.contains("category_array")) {
+            if (extras?.get("category_array") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
@@ -105,18 +92,18 @@ class QueryBuilder {
                     this.containWhereCondition = true
                 }
 
-                val catList = extras?.getStringArrayList("category_array")
+                val catList = extras.getStringArrayList("category_array")
                 var stringCat = String()
 
                 catList?.forEachIndexed { index, string ->
-                    if (index != catList.size -1) stringCat += "'%$string%' OR"
-                    else stringCat += "'%$string%'"
+                    if (index != catList.size -1) stringCat += "category LIKE '%$string%' OR "
+                    else stringCat += "category LIKE '%$string%'"
                 }
-                this.stringQuery += " category LIKE $stringCat"
+                this.stringQuery += " $stringCat"
             }
 
             // Location filters
-            if (keyList.contains("location_array")) {
+            if (extras?.get("location_array") != null) {
                 if (containWhereCondition) {
                     stringQuery += " AND"
                 } else {
@@ -124,14 +111,14 @@ class QueryBuilder {
                     this.containWhereCondition = true
                 }
 
-                val locationList = extras?.getStringArrayList("location_array")
+                val locationList = extras.getStringArrayList("location_array")
                 var stringLocation = String()
 
                 locationList?.forEachIndexed { index, locationString ->
                     if (index != locationList.size -1) stringLocation += " cities LIKE '%$locationString%' OR"
                     else stringLocation += " cities LIKE '%$locationString%'"
                 }
-                    this.stringQuery += stringLocation
+                    this.stringQuery += " $stringLocation"
             }
         }
 

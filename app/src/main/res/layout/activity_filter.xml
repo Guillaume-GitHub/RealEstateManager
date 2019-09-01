@@ -259,28 +259,23 @@
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/activity_filter_checkbox_house"
-                            android:text="@string/activity_filter_type_house_text"
-                            android:checked="true"/>
+                            android:text="@string/activity_filter_type_house_text" />
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/activity_filter_checkbox_penthouse"
-                            android:text="@string/activity_filter_type_penthouse_text"
-                            android:checked="true"/>
+                            android:text="@string/activity_filter_type_penthouse_text" />
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/activity_filter_checkbox_mansion"
-                            android:text="@string/activity_filter_type_mansion_text"
-                            android:checked="true"/>
+                            android:text="@string/activity_filter_type_mansion_text" />
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/activity_filter_checkbox_flat"
-                            android:text="@string/activity_filter_type_flat_text"
-                            android:checked="true"/>
+                            android:text="@string/activity_filter_type_flat_text" />
 
                         <androidx.appcompat.widget.AppCompatCheckBox
                             android:id="@+id/activity_filter_checkbox_duplex"
-                            android:text="@string/activity_filter_type_duplex_text"
-                            android:checked="true"/>
+                            android:text="@string/activity_filter_type_duplex_text" />
 
                     </GridLayout>
 
