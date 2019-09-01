@@ -12,7 +12,9 @@ import androidx.room.TypeConverter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Philippe on 21/02/2018.
@@ -35,10 +37,10 @@ public class Utils {
      * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
      * @return
      */
-    @TypeConverter
     public static String getTodayDate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        return dateFormat.format(new Date());
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return dateFormat.format(Calendar.getInstance().getTime());
     }
 
     /**
@@ -62,7 +64,12 @@ public class Utils {
         return isConnected;
     }
 
-
+    /**
+     * Retourne Le chemin complet d'une Uri
+     * @param context
+     * @param contentUri
+     * @return
+     */
     public static String getRealPathFromURI(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {

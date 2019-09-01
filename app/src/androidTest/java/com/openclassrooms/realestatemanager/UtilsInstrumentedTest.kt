@@ -6,7 +6,7 @@ import com.openclassrooms.realestatemanager.Utils.Utils
 import org.junit.Assert.*
 import org.junit.Test
 
-class UtilsTest {
+class UtilsInstrumentedTest {
 
     private val context = InstrumentationRegistry.getContext()
 

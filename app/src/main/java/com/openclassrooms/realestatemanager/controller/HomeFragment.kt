@@ -21,6 +21,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerEstateClick
 import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.EstateCategory
 import com.openclassrooms.realestatemanager.model.entity.Estate
@@ -111,9 +112,11 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
 
     // Start NewEstateActivity when floating btn clicked
     private fun onClickFloatingAddButton(){
-        activity_main_floating_btn.setOnClickListener(View.OnClickListener { v: View? ->
+        activity_main_floating_btn.setOnClickListener {
+            Log.d("sqfuh", "hgfjezlifhazlejfezl")
+            Log.d("Today date ", Utils.getTodayDate())
             startActivity(Intent(context, NewEstateActivity::class.java))
-        })
+        }
     }
 
     override fun onEsateItemClick(estate: Estate) {
