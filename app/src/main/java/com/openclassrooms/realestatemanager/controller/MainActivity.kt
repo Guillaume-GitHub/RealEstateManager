@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
            R.id.activity_main_drawer_new -> startActivity(Intent(this, NewEstateActivity::class.java))
            R.id.activity_main_drawer_draft -> startActivity(Intent(this, DraftActivity::class.java))
            R.id.activity_main_drawer_map -> startActivity(Intent(this, MapsActivity::class.java))
+           R.id.activity_main_drawer_simulation -> startActivity(Intent(this, SimulationActivity::class.java))
        }
         activity_main_drawer_layout.closeDrawers()
         return true
