@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.OnRecyclerEstateClick
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
@@ -19,23 +20,25 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private val price: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_price)
     private val address: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_location)
     private val image: ImageView = itemView.findViewById(R.id.recyclerview_home_list_item_card_view_image)
-
-    private fun displayItem(estate: Estate){
-        title.text = estate.title
-        price.text = getPriceText(estate.price)
-        address.text = this.getAddressText(estate.locality)
-
-        image.setImageURI(estate.images[0])
-    }
-
-    private fun setOnclickListener(callback: RecyclerClickListener.onEstateClick, estate: Estate){
-        this.itemView.setOnClickListener(View.OnClickListener {
-            callback.onEsateItemClick(estate) })
-    }
+    private val imageIndicator: Chip = itemView.findViewById(R.id.recyclerview_home_list_item_nb_photo)
 
     fun bind(estate: Estate, callback: RecyclerClickListener.onEstateClick ){
         this.displayItem(estate)
         this.setOnclickListener(callback,estate)
+    }
+
+    private fun displayItem(estate: Estate){
+        this.title.text = estate.title
+        this.price.text = getPriceText(estate.price)
+        this.address.text = this.getAddressText(estate.locality)
+        this.image.setImageURI(estate.images[0])
+        this.imageIndicator.text = "${estate.images.count()}"
+    }
+
+    private fun setOnclickListener(callback: RecyclerClickListener.onEstateClick, estate: Estate){
+        this.itemView.setOnClickListener{
+            callback.onEsateItemClick(estate)
+        }
     }
 
     private fun getPriceText(price: Long): String {
