@@ -22,4 +22,12 @@ class ItemDraftAdapter(private var dataset: ArrayList<Draft>, private val callba
     override fun getItemCount(): Int {
        return dataset.size
     }
+
+    fun deleteItem(position: Int) {
+        this.dataset.removeAt(position)
+    }
+
+    fun getItem(position: Int): Draft {
+        return this.dataset[position]
+    }
 }

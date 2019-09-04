@@ -135,4 +135,10 @@
     <string name="simulation_error_long_duration">This duration are too long</string>
     <string name="simulation_error_high_rate">This rate are too high</string>
 
+    <!-- SNACK BAR TEXT -->
+    <string name="draft_snackbar_item_remove_text">1 item removed</string>
+    <string name="draft_snackbar_undo_text">Undo</string>
+
+
+
 </resources>

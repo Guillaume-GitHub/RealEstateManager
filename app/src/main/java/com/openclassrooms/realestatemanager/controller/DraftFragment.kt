@@ -1,6 +1,7 @@
 package com.openclassrooms.realestatemanager.controller
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,26 +9,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.Injections.Injection
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.Utils.SwipeToDeleteHelper
 import com.openclassrooms.realestatemanager.adapter.ItemDraftAdapter
 import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_draft.*
-import java.util.*
 import kotlin.collections.ArrayList
 
-class DraftFragment : Fragment(), RecyclerClickListener.onDraftClick {
+class DraftFragment : Fragment(), RecyclerClickListener.onDraftClick, SwipeToDeleteHelper.OnSwipeListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ItemDraftAdapter
     private var draftList = ArrayList<Draft>()
     private val callback:RecyclerClickListener.onDraftClick = this
     private lateinit var estateViewModel: EstateViewModel
+    private lateinit var tempDeletedDraft: Draft
+    private  var tempDeletedDraftPosition: Int = -1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -47,6 +54,8 @@ class DraftFragment : Fragment(), RecyclerClickListener.onDraftClick {
         this.recyclerView.layoutManager = LinearLayoutManager(context)
         this.adapter = ItemDraftAdapter(draftList, callback)
         this.recyclerView.adapter = this.adapter
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteHelper(this))
+        itemTouchHelper.attachToRecyclerView(this.recyclerView)
     }
 
     override fun onDraftItemClick(draft: Draft) {
@@ -73,4 +82,40 @@ class DraftFragment : Fragment(), RecyclerClickListener.onDraftClick {
             this.adapter.notifyDataSetChanged()
         })
     }
+
+    override fun onItemSwiped(position: Int) {
+        this.tempDeletedDraft = this.adapter.getItem(position)
+        this.tempDeletedDraftPosition = position
+        this.adapter.deleteItem(position)
+        this.notifyItemDeleted()
+    }
+
+    private fun notifyItemDeleted() {
+        val view = fragment_draft_root_view
+        val snackBar = Snackbar.make(view, R.string.draft_snackbar_item_remove_text,Snackbar.LENGTH_LONG)
+        snackBar.setActionTextColor(resources.getColor(R.color.colorSecondary))
+                .setAction(R.string.draft_snackbar_undo_text, View.OnClickListener {
+                    this.draftList.add(this.tempDeletedDraftPosition, tempDeletedDraft)
+                    this.adapter.notifyDataSetChanged()
+        })
+
+        snackBar.addCallback(object: Snackbar.Callback(){
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+               when(event){
+                   DISMISS_EVENT_ACTION -> { }
+                   else -> deleteDraft(tempDeletedDraft)
+               }
+            }
+        })
+
+        snackBar.show()
+    }
+
+    @SuppressLint("CheckResult")
+    private fun deleteDraft(draft: Draft){
+        this.estateViewModel.deleteDraft(draft).subscribeOn(Schedulers.newThread()).subscribe { _, error ->
+            error?.printStackTrace()
+        }
+    }
+
 }
