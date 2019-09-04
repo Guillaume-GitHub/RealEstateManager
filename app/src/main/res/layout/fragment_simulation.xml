@@ -1,14 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.SimulationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.SimulationFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_agent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/default_app_radius"
+        app:cardElevation="@dimen/default_app_elevation"
+        android:layout_margin="@dimen/default_app_margin">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/default_app_padding">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_simulation_loan_amount"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/small_app_margin"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fragment_simulation_loan_amount_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberSigned"
+                    android:hint="$ 8000000"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_simulation_contribution_amount"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/small_app_margin"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fragment_simulation_loan_contribution_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="numberSigned"
+                    android:hint="$ 50000"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_simulation_loan_rate"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginEnd="@dimen/default_app_margin"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_simulation_loan_duration"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginBottom="@dimen/small_app_margin"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/large_app_margin">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fragment_simulation_loan_rate_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:hint="1,52%"/>
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fragment_simulation_loan_duration_text"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberSigned"
+                    android:hint="15 Years"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fragment_simulation_submit_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="20dp"
+                android:textAllCaps="false"
+                android:text="@string/fragment_simulation_submit"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/default_app_radius"
+        app:cardElevation="@dimen/default_app_elevation"
+        android:layout_margin="@dimen/default_app_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/default_app_padding">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_simulation_monthly_payment"
+                android:layout_gravity="center"
+                android:textSize="@dimen/medium_text_size"
+                android:layout_marginBottom="@dimen/small_app_margin"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_simulation_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 0"
+                android:layout_gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/colorSecondary"
+                android:layout_marginBottom="@dimen/large_app_margin"/>
+
+            <RelativeLayout
+                android:id="@+id/fragment_simulation_loan_details_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/loan_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_app_margin"
+                        android:text="@string/fragment_simulation_amount_borrowed" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fragment_simulation_amount_borrowed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/default_app_margin" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/simulation_cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/loan_details">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_simulation_loan_cost" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fragment_simulation_cost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

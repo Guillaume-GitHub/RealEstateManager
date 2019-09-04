@@ -120,8 +120,19 @@
     <!-- DRAFT ITEM-->
     <string name="draft_item_date_placeholder">Modified : </string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- SIMULATION FRAGMENT -->
+    <string name="fragment_simulation_loan_amount">Loan Amount</string>
+    <string name="fragment_simulation_contribution_amount">Contribution Amount</string>
+    <string name="fragment_simulation_loan_rate">Loan Rate</string>
+    <string name="fragment_simulation_loan_duration">Loan Duration</string>
+    <string name="fragment_simulation_submit">Estimate</string>
+    <string name="fragment_simulation_loan_cost">Cost : </string>
+    <string name="fragment_simulation_amount_borrowed">Amount borrowed : </string>
+    <string name="fragment_simulation_monthly_payment">Monthly Payment</string>
 
+    <!-- SIMULATION FRAGMENT ERROR -->
+    <string name="simulation_error_empty_value">This value cannot be empty</string>
+    <string name="simulation_error_long_duration">This duration are too long</string>
+    <string name="simulation_error_high_rate">This rate are too high</string>
 
 </resources>

@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.room.TypeConverter;
 
@@ -87,6 +88,13 @@ public class Utils {
                 cursor.close();
             }
         }
+    }
+
+    public static Double getMonthlyPayment(int amountBorrowed, double loanRate, int loanDuration) {
+        double monthlyRate = (loanRate / 100) /12;
+        double duration = (loanDuration * - 1);
+        double result = (amountBorrowed * monthlyRate) / (1 - (Math.pow((1 + monthlyRate), duration)));
+        return Double.valueOf(String.format("%.2f", result));
     }
 
 }
