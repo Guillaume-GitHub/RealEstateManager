@@ -17,8 +17,6 @@ class ItemImageViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     private var imageView: AppCompatImageView = itemView.findViewById(R.id.recyclerview_image_item_image_view)
     private var deleteBtn: AppCompatImageButton = itemView.findViewById(R.id.recyclerview_image_item_delete_button)
-    private var nbPhotoChip: Chip = itemView.findViewById(R.id.recyclerview_image_item_nb_photo)
-
 
     fun bind(imageUri: Uri) {
         this.deleteBtn.visibility = View.INVISIBLE
@@ -30,9 +28,5 @@ class ItemImageViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         deleteBtn.setOnClickListener {
             deleteBtnCallback?.onDeleteButtonClick(position)
         }
-    }
-
-    fun setNbImagesIndicator(nbImages: Int){
-        this.nbPhotoChip.text = nbImages.toString()
     }
 }

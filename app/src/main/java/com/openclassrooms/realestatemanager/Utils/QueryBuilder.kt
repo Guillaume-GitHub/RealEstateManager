@@ -9,7 +9,6 @@ class QueryBuilder {
         private const val BASE_SQL_QUERY = "SELECT * FROM ESTATE"
         private const val ORDER_BY_QUERY = "ORDER BY publishedDate DESC"
     }
-    private var keyList: ArrayList<String> = ArrayList()
 
     private var containWhereCondition = false
     private var stringQuery = BASE_SQL_QUERY

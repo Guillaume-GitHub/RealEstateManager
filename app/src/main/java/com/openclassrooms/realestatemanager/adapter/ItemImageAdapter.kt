@@ -18,7 +18,6 @@ class ItemImageAdapter(private var dataset: ArrayList<Uri>, private var deleteBt
     override fun onBindViewHolder(holder: ItemImageViewHolder, position: Int) {
         holder.bind(dataset[position])
         if (this.deleteBtnCallback != null) holder.addDeleteBtnClickListener(deleteBtnCallback,position)
-        holder.setNbImagesIndicator(this.dataset.size)
     }
 
     fun getItem(position: Int): Uri{

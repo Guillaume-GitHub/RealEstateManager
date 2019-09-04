@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.controller
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -22,6 +24,7 @@ import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.FiltersHelper
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
+import com.openclassrooms.realestatemanager.adapter.RecyclerIndicatorDecoration
 import com.openclassrooms.realestatemanager.api.ApiServicesBuilder
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
@@ -121,6 +124,7 @@ class DetailFragment : Fragment(){
         this.recyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         this.recyclerView.adapter = this.adapter
         PagerSnapHelper().attachToRecyclerView(this.recyclerView)
+        this.recyclerView.addItemDecoration(RecyclerIndicatorDecoration())
     }
 
     private fun getStaticMap(latLng: LatLng){

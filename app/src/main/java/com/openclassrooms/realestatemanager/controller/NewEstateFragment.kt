@@ -26,6 +26,7 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.*
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.adapter.AgentArrayAdapter
+import com.openclassrooms.realestatemanager.adapter.RecyclerIndicatorDecoration
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.model.entity.Agent
@@ -169,6 +170,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         this.imageAdapter = ItemImageAdapter(imagesUriList, this)
         this.recyclerView.adapter = imageAdapter
         PagerSnapHelper().attachToRecyclerView(this.recyclerView)
+        this.recyclerView.addItemDecoration(RecyclerIndicatorDecoration())
     }
 
     // Delete image in recycler
