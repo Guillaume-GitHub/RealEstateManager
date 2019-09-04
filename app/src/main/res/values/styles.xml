@@ -13,4 +13,9 @@
         <item name="android:textColor">@color/colored_chip_filter_text</item>
     </style>
 
+    <style name="AppTheme.SearchView.Light" parent="AppTheme">
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="actionBarDivider">@android:color/white</item>
+    </style>
 </resources>

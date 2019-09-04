@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.appyvet.materialrangebar.RangeBar
 import com.google.android.libraries.places.api.Places
@@ -192,7 +195,8 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
     }
 
     private fun isCheckBoxesChanged(): Boolean {
-        return this.checkedBoxes.size > 0
+        val category = resources.getStringArray(R.array.categoryArray).asList()
+        return this.checkedBoxes.size > 0 && !this.checkedBoxes.containsAll(category)
     }
 
     private fun isChipsChanged(): Boolean {
@@ -232,9 +236,9 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
 
             val intent = Intent()
 
-            if (!this.activity_filter_search_view.query.isNullOrBlank()){
-                intent.putExtra("query", this.activity_filter_search_view.query.toString())
-                Log.d("query", this.activity_filter_search_view.query.toString())
+            if (!this.activity_filter_search_view.text.isNullOrBlank()){
+                intent.putExtra("query", this.activity_filter_search_view.text.toString())
+                Log.d("query", this.activity_filter_search_view.text.toString())
             }
 
             if(this.isSurfaceRangeBarChanged()) {

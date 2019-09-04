@@ -5,6 +5,5 @@
         android:id="@+id/activity_filter_valid_btn"
         android:icon="@drawable/ic_twotone_done_24px"
         app:showAsAction="always"
-        android:title="save_btn">
-    </item>
+        android:title="save_btn"/>
 </menu>

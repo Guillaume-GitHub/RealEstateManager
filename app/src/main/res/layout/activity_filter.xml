@@ -15,14 +15,15 @@
         app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
         app:menu="@menu/activity_filter_toolbar_menu">
 
-        <androidx.appcompat.widget.SearchView
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/activity_filter_search_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:iconifiedByDefault="false"
-            app:searchIcon="@drawable/ic_search_black_24dp"
-            app:queryHint="Search" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_search_withe_24dp"
+            android:drawablePadding="@dimen/default_app_padding"
+            android:maxLines="1"
+            android:textSize="@dimen/medium_text_size"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
     </androidx.appcompat.widget.Toolbar>
 
