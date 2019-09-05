@@ -97,8 +97,6 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                         this.currentEstate = estate
                         this.isModification = true
                         this.bindViewsFromEstate(estate)
-                        Log.d("IS EDIT DRAFT", isEditDraft.toString())
-                        Log.d("IS Modification", isModification.toString())
                     }
                 })
             }
@@ -109,8 +107,6 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                         this.isEditDraft = true
                         this.currentDraft = draft
                         this.bindViewsFromDraft(draft)
-                        Log.d("IS EDIT DRAFT", isEditDraft.toString())
-                        Log.d("IS Modification", isModification.toString())
                     }
                 })
             }
@@ -139,7 +135,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         //Agent
         this.agentSelected = estate.agent
         // card_view_sale visibility
-        card_view_sale.visibility = View.VISIBLE
+        if (estate.saleDate == null) card_view_sale.visibility = View.VISIBLE
     }
 
     private fun bindViewsFromDraft(draft: Draft) {
@@ -249,23 +245,26 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
         //********************** fragment_new_estate_input_autocomplete_location  *****************************//
         // Get focus on autocomplete location
-        fragment_new_estate_input_autocomplete_location.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus -> if (hasFocus) startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
-        fragment_new_estate_input_autocomplete_location.setOnClickListener(View.OnClickListener {startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE)})
+        fragment_new_estate_input_autocomplete_location.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
+        }
+
+        fragment_new_estate_input_autocomplete_location.setOnClickListener { startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
 
         //********************** fragment_new_estate_floating_btn  *****************************//
-        fragment_new_estate_floating_btn.setOnClickListener(View.OnClickListener { v: View? -> this.showAddingImageDialog() })
+        fragment_new_estate_floating_btn.setOnClickListener { this.showAddingImageDialog() }
 
         //********************** fragment_new_estate_input_text_type  *****************************//
         val autoCompleteTextView = view!!.findViewById<AutoCompleteTextView>(R.id.fragment_new_estate_input_text_type)
         val typeAdapter = ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.categoryArray))
         autoCompleteTextView.setAdapter(typeAdapter)
 
-        autoCompleteTextView.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        autoCompleteTextView.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus){ autoCompleteTextView.showDropDown() }
         }
-        autoCompleteTextView.setOnClickListener(View.OnClickListener {
+        autoCompleteTextView.setOnClickListener {
             autoCompleteTextView.showDropDown()
-        })
+        }
 
         //********************** fragment_new_estate_input_text_agent  *****************************//
         val userAutoComplete = view!!.findViewById<AutoCompleteTextView>(R.id.fragment_new_estate_input_text_agent)
@@ -273,10 +272,10 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         this.getAgents()
         userAutoComplete.setAdapter(agentAdapter)
             /*Focus change Listener*/
-        userAutoComplete.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->  if(hasFocus) userAutoComplete.showDropDown() }
+        userAutoComplete.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->  if(hasFocus) userAutoComplete.showDropDown() }
             /*Click Listener*/
-        userAutoComplete.setOnClickListener(View.OnClickListener { userAutoComplete.showDropDown() })
-        userAutoComplete.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        userAutoComplete.setOnClickListener { userAutoComplete.showDropDown() }
+        userAutoComplete.onItemClickListener = AdapterView.OnItemClickListener { parent, _, position, _ ->
             val agent = parent.adapter.getItem(position) as Agent
             this.agentSelected = agent
             userAutoComplete.setText("${agent.name} ${agent.surname}")
@@ -296,15 +295,15 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
             dialog.show()
             // Set Click listener on button's custom view
             // Start camera intent
-            dialogLayout.alert_dialog_image_choice_camera.setOnClickListener(View.OnClickListener { v: View? ->
+            dialogLayout.alert_dialog_image_choice_camera.setOnClickListener {
                 this.captureWithCamera()
                 dialog.dismiss()
-            })
+            }
             // Start Image Gallery intent
-            dialogLayout.alert_dialog_image_choice_gallery.setOnClickListener(View.OnClickListener { v: View? ->
+            dialogLayout.alert_dialog_image_choice_gallery.setOnClickListener {
                 this.pickImageGallery()
                 dialog.dismiss()
-            })
+            }
         }
         else {
             this.requestPermission()
@@ -386,9 +385,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                 val builder = AlertDialog.Builder(context!!)
                 builder.setTitle("Impossible to create estate")
                         .setMessage("This form contain errors, please check it and retry")
-                        .setPositiveButton("ok", DialogInterface.OnClickListener { dialog, _ ->
-                            dialog.dismiss()
-                        })
+                        .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
                 builder.create().show()
             }
             true
@@ -549,6 +546,8 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
             estate.filters = this.getFilters()
             estate.images = this.imagesUriList
             estate.agent = this.agentSelected!!
+            // Update sale Date if sold switch is checked
+            if (fragment_new_estate_sold_switch.isChecked) estate.saleDate = Calendar.getInstance().time
 
             // Update Estate and Observe result
             @Suppress
@@ -667,14 +666,14 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                     val builder = AlertDialog.Builder(context!!)
                     builder.setTitle("Save modifications ?")
                             .setMessage("You can save modifications or exit without saving")
-                            .setPositiveButton("Save", DialogInterface.OnClickListener { dialog, _ ->
+                            .setPositiveButton("Save") { dialog, _ ->
                                 updateDraft()
                                 dialog.dismiss()
-                            })
-                            .setNegativeButton("Exit", DialogInterface.OnClickListener { dialog, _ ->
+                            }
+                            .setNegativeButton("Exit") { dialog, _ ->
                                 dialog.dismiss()
                                 activity?.supportFragmentManager?.popBackStack()
-                            })
+                            }
                     builder.create().show()
                 }
                 else {
@@ -682,20 +681,22 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
                 }
             }
 
+            this.isModification ->  activity?.finish()
+
             else -> {
                 val draft = this.getDraft()
                 if (draft != null) {
                     val builder = AlertDialog.Builder(context!!)
                     builder.setTitle("Save modifications ?")
                             .setMessage("Modifications can be saved in your drafts and can be edit later")
-                            .setPositiveButton("Save", DialogInterface.OnClickListener { dialog, _ ->
+                            .setPositiveButton("Save") { dialog, _ ->
                                 insertDraft(draft)
                                 dialog.dismiss()
-                            })
-                            .setNegativeButton("Exit", DialogInterface.OnClickListener { dialog, _ ->
+                            }
+                            .setNegativeButton("Exit") { dialog, _ ->
                                 dialog.dismiss()
                                 activity?.finish()
-                            })
+                            }
                     builder.create().show()
                 }
                 else {
