@@ -8,7 +8,7 @@ import com.openclassrooms.realestatemanager.model.entity.Estate
 @Dao
 interface EstateDao {
 
-    @Query("SELECT * FROM estate WHERE saleDate IS NULL ORDER BY publishedDate DESC LIMIT 10")
+    @Query("SELECT * FROM estate ORDER BY publishedDate DESC LIMIT 20")
     fun getLatestEstates():LiveData<List<Estate>>
 
     @Query("SELECT * FROM estate ORDER BY estateUid DESC LIMIT :nbOfEstates")

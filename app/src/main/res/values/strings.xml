@@ -3,9 +3,8 @@
 
     <!--MAIN FRAGMENT-->
     <string name="search_bar_hint">What are you looking for ?</string>
-    <string name="latest_estate_title_main_page_fragment">Latest Estate</string>
     <string name="categories_title_main_page_fragment">Categories</string>
-    <string name="sold_title_main_page_fragment">Recently Sold</string>
+    <string name="home_fragment_recently_added_title">Recently Added</string>
 
 
     <!--DRAWER MENU-->
