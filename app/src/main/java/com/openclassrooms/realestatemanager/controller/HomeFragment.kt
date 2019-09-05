@@ -28,7 +28,12 @@ import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
-class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
+class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerClickListener.OnItemClick {
+
+    companion object{
+        private const val RQ_FILTER_ACTIVITY = 5
+        private const val LIST_FRAGMENT_TAG = "list_fragment_tag"
+    }
 
     private lateinit var rootView: View
     private lateinit var itemRecycler: RecyclerView
@@ -38,12 +43,16 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var categoryAdapter: ItemCategoryAdapter
     private lateinit var  viewModel: EstateViewModel
+    private lateinit var listFragment: ListFragment
 
     //private var viewModel = estateViewModel
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
-    private val RQ_FILTER_ACTIVITY = 5
-    private val callback: RecyclerClickListener.onEstateClick  = this
+
+
+    // Callback
+    private val callback: RecyclerClickListener.OnEstateClick  = this
+    private val categoryCallback: RecyclerClickListener.OnItemClick = this
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -91,10 +100,9 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
     private fun recyclerViewCategoryConfig(){
         this.categoryRecycler = fragment_main_recyclerview_categories
         this.linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        this.categoryAdapter = ItemCategoryAdapter(categories)
+        this.categoryAdapter = ItemCategoryAdapter(categories, categoryCallback)
         this.categoryRecycler.layoutManager = this.linearLayoutManager
         this.categoryRecycler.adapter = this.categoryAdapter
-        LinearSnapHelper().attachToRecyclerView(this.categoryRecycler)
     }
 
     private fun showDetailFragment(estate: Estate){
@@ -103,10 +111,10 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
 
     // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
-        fragment_main_search_view.setOnClickListener(View.OnClickListener { v: View? ->
+        fragment_main_search_view.setOnClickListener {
             val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent,RQ_FILTER_ACTIVITY)
-        })
+        }
     }
 
     // Start NewEstateActivity when floating btn clicked
@@ -116,9 +124,15 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
         }
     }
 
-    override fun onEsateItemClick(estate: Estate) {
+    override fun onEstateItemClick(estate: Estate) {
         this.showDetailFragment(estate)
         for (i in 0 until estate.images.size) { Log.d("URI ", estate.images[i].path) }
+    }
+
+    override fun onItemClick(position: Int) {
+        val estateCategory = this.categoryAdapter.getItem(position)
+        val queryString = QueryBuilder.getCategoryQuery(estateCategory.name)
+        this.displayListFragment(queryString)
     }
 
     private fun addEstate(){
@@ -134,6 +148,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
     }
 
     private fun addCategory(){
+        this.categories.clear()
         val cat = resources.getStringArray(R.array.categoryArray)
         var i = 0
         cat.forEach { str ->
@@ -142,24 +157,31 @@ class HomeFragment : Fragment(), RecyclerClickListener.onEstateClick {
         }
     }
 
+    private fun displayListFragment(query: String){
+        Log.d(this.javaClass.simpleName, "Query = $query")
+
+        if (activity?.supportFragmentManager?.findFragmentByTag(LIST_FRAGMENT_TAG) != null)
+           this.listFragment = activity?.supportFragmentManager?.findFragmentByTag(LIST_FRAGMENT_TAG) as ListFragment
+        else
+            this.listFragment = ListFragment()
+
+        val arg = Bundle()
+        arg.putString("query", query)
+        this.listFragment.arguments = arg
+
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.activity_main_framelayout_list, this.listFragment, LIST_FRAGMENT_TAG)
+                ?.addToBackStack(null)
+                ?.commit()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             RQ_FILTER_ACTIVITY ->
                 when (resultCode) {
                     Activity.RESULT_OK -> {
                         Log.d(this.javaClass.simpleName, "onActivityResult -> RESULT OK")
-                        if (data != null) {
-
-                            val arg = Bundle()
-                            arg.putString("query", QueryBuilder().getQuery(data))
-                            val frag = ListFragment()
-                            frag.arguments = arg
-
-                            activity?.supportFragmentManager?.beginTransaction()
-                                    ?.replace(R.id.activity_main_framelayout_list, frag)
-                                    ?.addToBackStack("showQueryResult")
-                                    ?.commit()
-                        }
+                        if (data != null) displayListFragment(QueryBuilder().getQuery(data))
                     }
 
                     Activity.RESULT_CANCELED -> {

@@ -8,6 +8,10 @@ class QueryBuilder {
     companion object{
         private const val BASE_SQL_QUERY = "SELECT * FROM ESTATE"
         private const val ORDER_BY_QUERY = "ORDER BY publishedDate DESC"
+
+        fun getCategoryQuery(categoryName: String): String{
+            return "$BASE_SQL_QUERY WHERE category LIKE '$categoryName' $ORDER_BY_QUERY"
+        }
     }
 
     private var containWhereCondition = false

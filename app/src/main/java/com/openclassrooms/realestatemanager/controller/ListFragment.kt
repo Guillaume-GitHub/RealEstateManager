@@ -21,9 +21,8 @@ import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
 import com.openclassrooms.realestatemanager.database.AppDatabase
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import kotlinx.android.synthetic.main.fragment_list.*
-import kotlinx.android.synthetic.main.fragment_main.*
 
-class ListFragment : Fragment(), RecyclerClickListener.onEstateClick {
+class ListFragment : Fragment(), RecyclerClickListener.OnEstateClick {
 
     companion object {
         private const val REQUEST_FILTER_RESULT = 10
@@ -32,7 +31,7 @@ class ListFragment : Fragment(), RecyclerClickListener.onEstateClick {
     private lateinit var recyclerView: RecyclerView
     private var estates = ArrayList<Estate>()
     private lateinit var query: SimpleSQLiteQuery
-    private val callback: RecyclerClickListener.onEstateClick  = this
+    private val callback: RecyclerClickListener.OnEstateClick  = this
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,10 +65,10 @@ class ListFragment : Fragment(), RecyclerClickListener.onEstateClick {
 
     // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
-        fragment_list_search_view.setOnClickListener(View.OnClickListener { v: View? ->
+        fragment_list_search_view.setOnClickListener {
             val intent = Intent(context,FilterActivity::class.java)
             startActivityForResult(intent, REQUEST_FILTER_RESULT)
-        })
+        }
     }
 
     // Perform Sql request and notify dataset to show items
@@ -84,7 +83,7 @@ class ListFragment : Fragment(), RecyclerClickListener.onEstateClick {
         catch (error: NullPointerException) { error.printStackTrace() }
     }
 
-    override fun onEsateItemClick(estate: Estate) {
+    override fun onEstateItemClick(estate: Estate) {
         startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
     }
 

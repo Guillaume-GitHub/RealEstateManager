@@ -7,7 +7,7 @@ import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.view.ItemDraftViewHolder
 
-class ItemDraftAdapter(private var dataset: ArrayList<Draft>, private val callback: RecyclerClickListener.onDraftClick):
+class ItemDraftAdapter(private var dataset: ArrayList<Draft>, private val callback: RecyclerClickListener.OnDraftClick):
         RecyclerView.Adapter<ItemDraftViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemDraftViewHolder {

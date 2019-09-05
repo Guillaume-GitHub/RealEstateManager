@@ -10,5 +10,7 @@
 
     <color name="colorTextOnPrimary">#ffffff</color>
     <color name="transparentGrey">#25000000</color>
+    <color name="shadowOnImage">#59000000</color>
+
 </resources>
 

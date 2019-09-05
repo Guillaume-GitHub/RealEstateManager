@@ -21,7 +21,8 @@
             android:id="@+id/recycler_category_item_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorSecondary"/>
+            android:background="@color/colorSecondary"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/recycler_category_item_text_view"
@@ -32,7 +33,8 @@
             android:textStyle="bold"
             android:textAppearance="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:textSize="@dimen/medium_text_size"
-            tools:text="Apartment" />
+            tools:text="Apartment"
+            android:background="@color/shadowOnImage"/>
 
     </androidx.cardview.widget.CardView>
 

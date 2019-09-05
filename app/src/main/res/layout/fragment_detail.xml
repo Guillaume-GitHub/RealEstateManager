@@ -246,7 +246,6 @@
                                 android:layout_height="@dimen/fragment_item_detail_image_map_height"
                                 android:background="@color/colorSecondary"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/map"
                                 android:paddingStart="-10dp"
                                 android:paddingEnd="-10dp"
                                 android:layout_margin="-10dp"

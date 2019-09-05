@@ -24,7 +24,7 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private val imageIndicator: Chip = itemView.findViewById(R.id.recyclerview_home_list_item_nb_photo)
     private val badge: AppCompatTextView = itemView.findViewById(R.id.recyclerview_home_list_item_card_view_sold)
 
-    fun bind(estate: Estate, callback: RecyclerClickListener.onEstateClick ){
+    fun bind(estate: Estate, callback: RecyclerClickListener.OnEstateClick ){
         this.displayItem(estate)
         this.setOnclickListener(callback,estate)
     }
@@ -38,9 +38,9 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         this.showStatus(estate.saleDate)
     }
 
-    private fun setOnclickListener(callback: RecyclerClickListener.onEstateClick, estate: Estate){
+    private fun setOnclickListener(callback: RecyclerClickListener.OnEstateClick, estate: Estate){
         this.itemView.setOnClickListener{
-            callback.onEsateItemClick(estate)
+            callback.onEstateItemClick(estate)
         }
     }
 

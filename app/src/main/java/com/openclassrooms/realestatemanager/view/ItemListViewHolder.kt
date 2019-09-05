@@ -20,7 +20,7 @@ class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var price: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_price)
     private var date: AppCompatTextView = itemView.findViewById(R.id.recycler_list_item_date)
 
-    fun displayItem(estate: Estate , callback: RecyclerClickListener.onEstateClick){
+    fun displayItem(estate: Estate , callback: RecyclerClickListener.OnEstateClick){
         this.image.setImageURI(estate.images[0])
         this.title.text = estate.title
         this.category.text = estate.category
@@ -31,9 +31,9 @@ class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         this.setOnclickListener(callback, estate)
     }
 
-    private fun setOnclickListener(callback: RecyclerClickListener.onEstateClick, estate: Estate){
+    private fun setOnclickListener(callback: RecyclerClickListener.OnEstateClick, estate: Estate){
         this.itemView.setOnClickListener(View.OnClickListener {
-            callback.onEsateItemClick(estate)
+            callback.onEstateItemClick(estate)
         })
     }
 }

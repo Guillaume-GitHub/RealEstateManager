@@ -3,14 +3,18 @@ package com.openclassrooms.realestatemanager.Utils
 import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.model.entity.Estate
 
-abstract class RecyclerClickListener: OnRecyclerEstateClick{
+abstract class RecyclerClickListener{
 
 
-    interface onDraftClick {
+    interface OnDraftClick {
         fun onDraftItemClick(draft: Draft) {}
     }
 
-    interface onEstateClick {
-        fun onEsateItemClick(estate: Estate) {}
+    interface OnEstateClick {
+        fun onEstateItemClick(estate: Estate) {}
+    }
+
+    interface OnItemClick {
+        fun onItemClick(position: Int)
     }
 }

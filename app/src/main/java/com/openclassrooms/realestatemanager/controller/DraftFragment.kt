@@ -3,7 +3,6 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.openclassrooms.realestatemanager.Injections.Injection
 
@@ -26,12 +24,12 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_draft.*
 import kotlin.collections.ArrayList
 
-class DraftFragment : Fragment(), RecyclerClickListener.onDraftClick, SwipeToDeleteHelper.OnSwipeListener {
+class DraftFragment : Fragment(), RecyclerClickListener.OnDraftClick, SwipeToDeleteHelper.OnSwipeListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ItemDraftAdapter
     private var draftList = ArrayList<Draft>()
-    private val callback:RecyclerClickListener.onDraftClick = this
+    private val callback:RecyclerClickListener.OnDraftClick = this
     private lateinit var estateViewModel: EstateViewModel
     private lateinit var tempDeletedDraft: Draft
     private  var tempDeletedDraftPosition: Int = -1

@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,7 @@ class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private val image: AppCompatImageView = itemView.findViewById(R.id.recyclerview_draft_item_image)
 
 
-    fun bind(mDraft: Draft, callback: RecyclerClickListener.onDraftClick){
+    fun bind(mDraft: Draft, callback: RecyclerClickListener.OnDraftClick){
 
         this.title.text = mDraft.title
 
@@ -36,7 +35,7 @@ class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         this.setClickListener(mDraft, callback)
     }
 
-    private fun setClickListener(draft: Draft, callback: RecyclerClickListener.onDraftClick){
+    private fun setClickListener(draft: Draft, callback: RecyclerClickListener.OnDraftClick){
         itemView.setOnClickListener {
            callback.onDraftItemClick(draft)
         }
