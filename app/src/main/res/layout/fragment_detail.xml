@@ -305,7 +305,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/small_app_margin"
                         android:layout_marginEnd="@dimen/small_app_margin"
-                        android:layout_marginBottom="@dimen/default_app_margin"
+                        android:layout_marginBottom="@dimen/large_app_margin"
                         app:cardCornerRadius="@dimen/default_app_radius"
                         app:cardElevation="@dimen/default_app_elevation">
 
@@ -349,12 +349,12 @@
 
                                 </LinearLayout>
 
-                                <ImageView
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/fragment_detail_agent_image"
                                     android:layout_width="@dimen/fragment_item_detail_profile_image_width"
                                     android:layout_height="@dimen/fragment_item_detail_profile_image_height"
                                     android:layout_alignParentEnd="true"
-                                    android:background="@drawable/circle_background"
-                                    android:src="@color/colorPrimary" />
+                                    android:background="@drawable/circle_background" />
 
                             </RelativeLayout>
 

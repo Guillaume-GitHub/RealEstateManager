@@ -68,7 +68,7 @@ class DetailFragment : Fragment(){
         }
     }
 
-    private fun bind(estate: Estate){
+    private fun bind(estate: Estate) {
         // Images section
         this.addImagesToRecycler(estate.images)
         // Title section
@@ -77,7 +77,7 @@ class DetailFragment : Fragment(){
         fragment_detail_date.text = estate.publishedDate.toString()
         // Criteria section
         fragment_detail_type_text.text = estate.category
-        fragment_detail_surface_text.text =  this.getSurfaceText(estate)
+        fragment_detail_surface_text.text = this.getSurfaceText(estate)
         fragment_detail_room_text.text = this.getRoomText(estate)
         // Description section
         fragment_detail_description.text = estate.description
@@ -86,6 +86,11 @@ class DetailFragment : Fragment(){
         this.showNearbyPOI(estate.filters)
         // Posted By section
         fragment_detail_agent_name.text = this.getAgentText(estate)
+
+        fragment_detail_agent_image.apply {
+            if (estate.agent.image != null) setImageURI(estate.agent.image)
+            else background = resources.getDrawable(R.mipmap.ic_launcher_round)
+        }
     }
 
     private fun getEstate(id: Long) {
