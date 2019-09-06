@@ -130,23 +130,16 @@
                                     android:layout_weight="1"
                                     android:gravity="center">
 
-                                 <ImageView
-                                     android:id="@+id/fragment_detail_type_image"
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
-                                     android:src="@drawable/ic_twotone_home_36px"
-                                     android:padding="@dimen/small_app_padding"
-                                     android:background="@drawable/circle_background"
-                                     android:layout_centerHorizontal="true"/>
-
                                     <androidx.appcompat.widget.AppCompatTextView
+                                        app:drawableTopCompat="@drawable/ic_twotone_home_36px"
+                                        app:drawableTint="@color/colorPrimary"
                                         android:id="@+id/fragment_detail_type_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_below="@id/fragment_detail_type_image"
                                         android:layout_centerHorizontal="true"
                                         android:padding="@dimen/default_app_padding"
-                                        tools:text="House" />
+                                        tools:text="House"
+                                        android:textStyle="bold"/>
 
                                 </RelativeLayout>
 
@@ -156,23 +149,16 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1">
 
-                                    <ImageView
-                                        android:id="@+id/fragment_detail_room_image"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/ic_twotone_meeting_room_36px"
-                                        android:padding="@dimen/small_app_padding"
-                                        android:background="@drawable/circle_background"
-                                        android:layout_centerHorizontal="true" />
-
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/fragment_detail_room_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_below="@id/fragment_detail_room_image"
                                         android:layout_centerHorizontal="true"
+                                        app:drawableTopCompat="@drawable/ic_twotone_meeting_room_36px"
+                                        app:drawableTint="@color/colorPrimary"
                                         android:padding="@dimen/default_app_padding"
-                                        tools:text="8 Rooms"/>
+                                        tools:text="8 Rooms"
+                                        android:textStyle="bold"/>
 
                                 </RelativeLayout>
 
@@ -182,23 +168,16 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1">
 
-                                    <ImageView
-                                        android:id="@+id/fragment_detail_surface_image"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/ic_twotone_surface_36px"
-                                        android:padding="@dimen/small_app_padding"
-                                        android:background="@drawable/circle_background"
-                                        android:layout_centerHorizontal="true" />
-
                                     <androidx.appcompat.widget.AppCompatTextView
                                         android:id="@+id/fragment_detail_surface_text"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_below="@id/fragment_detail_surface_image"
                                         android:layout_centerHorizontal="true"
+                                        app:drawableTopCompat="@drawable/ic_twotone_surface_36px"
+                                        app:drawableTint="@color/colorPrimary"
                                         android:padding="@dimen/default_app_padding"
-                                        tools:text="750 m2"/>
+                                        tools:text="750 m2"
+                                        android:textStyle="bold"/>
 
                                 </RelativeLayout>
 
@@ -259,6 +238,7 @@
                                 android:drawableStart="@drawable/ic_location_red_24dp"
                                 android:padding="@dimen/default_app_padding"
                                 tools:text="11 rue de beauregard, 70190 Voray-sur-L'Ognon" />
+
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>

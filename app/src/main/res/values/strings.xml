@@ -138,6 +138,7 @@
     <string name="draft_snackbar_item_remove_text">1 item removed</string>
     <string name="draft_snackbar_undo_text">Undo</string>
 
-
+    <!-- DIALOG BOTTOM SHEET -->
+    <string name="bottom_sheet_published">Published by : </string>
 
 </resources>

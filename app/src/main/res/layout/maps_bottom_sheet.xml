@@ -194,21 +194,27 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/maps_bottom_sheet_agent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            tools:text="Published by : Guillaume BAGUE" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                tools:text="@string/bottom_sheet_published" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/maps_bottom_sheet_agent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                tools:text=" Guillaume BAGUE" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/maps_bottom_sheet_agent_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/circle_black_transparent_background_15"
-                android:src="@mipmap/ic_launcher_round" />
+                tools:src="@mipmap/ic_launcher_round" />
 
         </LinearLayout>
 

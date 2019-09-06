@@ -212,7 +212,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         dialogView.maps_bottom_sheet_surface.text = "${estate.surface} m²"
         dialogView.maps_bottom_sheet_rooms.text = "${estate.nbRoom} rooms"
         dialogView.maps_bottom_sheet_description.text = estate.description
-        dialogView.maps_bottom_sheet_agent.text = "${getString(R.string.fragment_detail_title_posted)} : ${estate.agent.name} ${estate.agent.surname}"
+        dialogView.maps_bottom_sheet_agent.text = " ${estate.agent.name} ${estate.agent.surname}"
+
+        dialogView.maps_bottom_sheet_agent.apply {
+
+        }
+
+        dialogView.maps_bottom_sheet_agent_image.apply {
+            if (estate.agent.image != null) setImageURI(estate.agent.image)
+            else background = resources.getDrawable(R.mipmap.ic_launcher_round)
+        }
     }
 
 }
