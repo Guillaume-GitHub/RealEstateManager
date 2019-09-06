@@ -78,20 +78,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
            R.id.activity_main_drawer_draft -> startActivity(Intent(this, DraftActivity::class.java))
            R.id.activity_main_drawer_map -> startActivity(Intent(this, MapsActivity::class.java))
            R.id.activity_main_drawer_simulation -> startActivity(Intent(this, SimulationActivity::class.java))
+           R.id.activity_main_drawer_profile -> startActivity(Intent(this, ProfileActivity::class.java))
        }
         activity_main_drawer_layout.closeDrawers()
         return true
     }
 
-    override fun onBackPressed() {
-       /* if(supportFragmentManager.findFragmentByTag("detailFragment") != null) {
-            val frag : DetailFragment = supportFragmentManager.findFragmentByTag("detailFragment") as DetailFragment
-            if (frag.isVisible){
-                displayHomeFragment(HomeFragment())
-            }
-        }
-        else { */
-            super.onBackPressed()
-       // }
-    }
 }

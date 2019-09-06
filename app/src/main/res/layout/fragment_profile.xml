@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.ProfileFragment">
+
+    <include layout="@layout/profile_toolbar"
+        android:id="@+id/profile_toolbar" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fragment_profile_card_view_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_toolbar"
+        app:cardElevation="@dimen/default_app_elevation"
+        android:layout_marginBottom="@dimen/large_app_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/default_app_padding">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fragment_profile_image"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                android:background="@drawable/circle_black_transparent_background_15"
+                android:scaleType="centerCrop"
+                android:layout_margin="@dimen/large_app_margin"
+                tools:src="@mipmap/ic_launcher_round" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/fragment_profile_image"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@id/fragment_profile_image"
+                android:paddingStart="@dimen/default_app_padding"
+                android:paddingEnd="@dimen/default_app_padding"
+                tools:text="John Wick"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fragment_profile_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fragment_profile_name"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@id/fragment_profile_image"
+                android:paddingStart="@dimen/default_app_padding"
+                android:paddingEnd="@dimen/default_app_padding"
+                android:text="@string/fragment_profile_view_profile" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_profile_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_profile_card_view_profile">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

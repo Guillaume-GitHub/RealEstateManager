@@ -141,4 +141,15 @@
     <!-- DIALOG BOTTOM SHEET -->
     <string name="bottom_sheet_published">Published by : </string>
 
+    <!-- PROFILE FRAGMENT -->
+    <string name="fragment_profile_name">Profile</string>
+    <string name="fragment_profile_view_profile">View Profile</string>
+
+    <!-- EDIT PROFILE FRAGMENT -->
+    <string name="fragment_edit_profile_change_image">Change Image</string>
+    <string name="fragment_edit_profile_first_name">First Name</string>
+    <string name="fragment_edit_profile_last_name">Last Name</string>
+    <string name="fragment_edit_profile_first_name_hint">John</string>
+    <string name="fragment_edit_profile_last_name_hint">Doe</string>
+
 </resources>

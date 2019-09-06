@@ -50,5 +50,8 @@
     <dimen name="fragment_new_estate_recycler_height">200dp</dimen>
     <dimen name="fragment_new_estate_input_text_width">120dp</dimen>
 
+    <!--FRAGMENT PROFILE-->
+    <dimen name="profile_image_size">100dp</dimen>
+
 
 </resources>
