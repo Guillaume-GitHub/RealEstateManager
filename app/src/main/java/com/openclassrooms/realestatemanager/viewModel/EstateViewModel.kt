@@ -93,6 +93,13 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
     fun getAgent(id: Long): LiveData<Agent>?{
         return this.agentDataSource.getAgent(id)
     }
+
+    fun updateAgent(agent: Agent){
+        executor.execute {
+            this.agentDataSource.updateAgent(agent)
+        }
+    }
+
     fun insertAgent(agent: Agent){
         executor.execute {
             this.agentDataSource.insertAgent(agent)

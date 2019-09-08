@@ -88,6 +88,13 @@
     <string name="form_error_rooms">I need room</string>
     <string name="form_error_agent">I need an Estate Agent</string>
     <string name="form_error_format_address">Incorrect Address Format</string>
+    <string name="form_error_first_name">I need a first name</string>
+    <string name="form_error_last_name">I need a last name</string>
+
+    <!-- DIALOG FROM ERROR MESSAGES -->
+    <string name="dialog_invalid_form_estate_title">Impossible to Create Estate</string>
+    <string name="dialog_invalid_form_agent_title">Impossible to Create Estate</string>
+    <string name="dialog_invalid_form_message">This form contain errors, please check it and retry</string>
 
     <!-- CHIPs TEXT -->
     <string name="chip_transport">Transport</string>

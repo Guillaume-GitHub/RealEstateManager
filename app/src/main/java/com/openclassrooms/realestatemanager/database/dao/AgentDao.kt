@@ -15,6 +15,9 @@ interface AgentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAgent(agent: Agent): Long
 
+    @Update
+    fun updateAgent(agent: Agent)
+
     @Delete
     fun deleteAgent(agent: Agent)
 

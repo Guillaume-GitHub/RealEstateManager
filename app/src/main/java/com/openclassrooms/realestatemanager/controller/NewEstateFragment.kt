@@ -179,7 +179,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
     }
 
     //************************************ ACTIVITY RESULT *************************************//
-    // Get PlacesAutocomplete Result
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
 
@@ -381,8 +381,8 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
             if (isFormValid()) { this.saveForm() }
             else {
                 val builder = AlertDialog.Builder(context!!)
-                builder.setTitle("Impossible to create estate")
-                        .setMessage("This form contain errors, please check it and retry")
+                builder.setTitle(getString(R.string.dialog_invalid_form_estate_title))
+                        .setMessage(getString(R.string.dialog_invalid_form_message))
                         .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
                 builder.create().show()
             }

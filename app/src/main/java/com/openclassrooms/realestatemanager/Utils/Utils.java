@@ -6,11 +6,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
 import androidx.room.TypeConverter;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -95,6 +98,14 @@ public class Utils {
         double duration = (loanDuration * - 1);
         double result = (amountBorrowed * monthlyRate) / (1 - (Math.pow((1 + monthlyRate), duration)));
         return Double.valueOf(String.format("%.2f", result));
+    }
+
+
+   public static File createFilePath(Context context) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.US).format(new Date());
+        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
     }
 
 }

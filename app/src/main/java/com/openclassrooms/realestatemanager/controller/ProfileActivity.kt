@@ -53,10 +53,6 @@ class ProfileActivity : AppCompatActivity() {
     private fun getBundleArgs(): Bundle {
         val args = Bundle()
         args.putLong(ProfileFragment.ARG_UID, this.currentAgent!!.uid)
-        args.putString(ProfileFragment.ARG_FIRST_NAME, this.currentAgent!!.name)
-        args.putString(ProfileFragment.ARG_LAST_NAME, this.currentAgent!!.surname)
-        if (this.currentAgent!!.image != null) args.putString(ProfileFragment.ARG_IMAGE_URI, Utils.getRealPathFromURI(this,this.currentAgent!!.image))
-
         return args
     }
 

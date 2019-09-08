@@ -18,6 +18,10 @@ class AgentDataRepository(private val agentDao: AgentDao) {
         return this.agentDao.insertAgent(agent)
     }
 
+    fun updateAgent(agent: Agent) {
+        return this.agentDao.updateAgent(agent)
+    }
+
     fun deleteAgent(agent: Agent){
         return this.agentDao.deleteAgent(agent)
     }

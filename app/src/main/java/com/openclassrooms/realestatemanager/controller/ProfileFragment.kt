@@ -26,9 +26,6 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
 
     companion object {
         const val ARG_UID = "uid"
-        const val ARG_FIRST_NAME = "first_name"
-        const val ARG_LAST_NAME = "last_name"
-        const val ARG_IMAGE_URI = "image_uri"
         const val FRAGMENT_TAG = "profile_frag_tag"
     }
 
@@ -36,7 +33,7 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ItemListAdapter
     private lateinit var estateList: ArrayList<Estate>
-    private var agent: Agent? = null
+    private lateinit var currentAgent: Agent
     private lateinit var viewModel: EstateViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +46,6 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
         this.configureViewModel()
         this.getAgentFromArgs(arguments)
         this.configRecyclerView()
-        this.bindAgent(this.agent)
         fragment_profile_profile_container.setOnClickListener(this)
         fragment_profile_add_btn.setOnClickListener(this)
     }
@@ -81,7 +77,7 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
             this.editProfileFrag = EditProfileFragment()
 
         val args = Bundle()
-        args.putLong(EditProfileFragment.ARG_UID, agent!!.uid)
+        args.putLong(EditProfileFragment.ARG_UID, this.currentAgent.uid)
 
         this.editProfileFrag.arguments = args
 
@@ -144,25 +140,31 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
 
     // Get Estates posted by this agent
     private fun getEstates(){
-        this.viewModel.getEstatesPostedBy(agent!!.uid)?.observe(this, Observer { estatesList ->
+        this.viewModel.getEstatesPostedBy(this.currentAgent.uid)?.observe(this, Observer { estatesList ->
             this.estateList.clear()
             this.estateList.addAll(estatesList)
             this.adapter.notifyDataSetChanged()
             this.showHideRecycler()
         })
     }
+
+    // Get Agent From database
+    private fun fetchAgent(id: Long){
+        if (id != -1L) {
+            this.viewModel.getAgent(id)?.observe(this, Observer { agent ->
+                this.currentAgent = agent
+                this.bindAgent(this.currentAgent)
+            })
+        }
+    }
+
     //*********************************************************
 
     // Get arguments from bundle (to create Agent)
     private fun getAgentFromArgs(args: Bundle?){
        if (args != null) {
-           val uid = args.get(ARG_UID) as Long?
-           val firstName = args.getString(ARG_FIRST_NAME)
-           val lastName = args.getString(ARG_LAST_NAME)
-           val imageStr = args.getString(ARG_IMAGE_URI)
-           val imageUri = if (imageStr != null) Uri.parse(imageStr) else null
-
-           if (uid != null && firstName != null && lastName != null) this.agent = Agent(uid, firstName, lastName, imageUri)
+           val uid = args.getLong(ARG_UID, -1L)
+           this.fetchAgent(uid)
        }
     }
 
