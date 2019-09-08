@@ -4,17 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.EditProfileFragment">
-
-    <include layout="@layout/profile_toolbar"
-        android:id="@+id/profile_toolbar" />
+    tools:context=".controller.EditProfileFragment"
+    android:background="@android:color/white">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fragment_edit_profile_image_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/default_app_elevation"
-        android:layout_below="@id/profile_toolbar"
         android:layout_marginBottom="@dimen/large_app_margin">
 
         <LinearLayout
@@ -34,7 +31,7 @@
                 android:background="@drawable/circle_black_transparent_background_15"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="@dimen/small_app_margin"
-                tools:src="@mipmap/ic_launcher_round" />
+                tools:src="@drawable/ic_account_circle_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -44,7 +41,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fragment_edit_profile_card_view"

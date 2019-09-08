@@ -20,6 +20,9 @@ interface EstateDao {
     @Query("SELECT * FROM estate")
     fun getAllEstates():LiveData<List<Estate>>
 
+    @Query("SELECT * FROM estate WHERE uid=:agentId ORDER BY publishedDate DESC")
+    fun getEstatesPostedBy(agentId: Long): LiveData<List<Estate>>?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertEstate(estate: Estate) :Long
 

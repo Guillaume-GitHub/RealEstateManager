@@ -18,6 +18,10 @@ class EstateDataRepository(private val estateDao:EstateDao) {
         return this.estateDao.getAllEstates()
     }
 
+    fun getEstatesPostedBy(agentId: Long): LiveData<List<Estate>>?{
+        return  this.estateDao.getEstatesPostedBy(agentId)
+    }
+
     fun updateEstate(estate: Estate): Int{
         return this.estateDao.updateEstate(estate)
     }

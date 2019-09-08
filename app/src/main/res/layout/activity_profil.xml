@@ -1,10 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/activity_profile_frame_layout"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.ProfileActivity">
-</FrameLayout>
+    tools:context=".controller.ProfileActivity"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_profile_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
+        app:title="@string/fragment_profile_name"
+        app:titleTextColor="@color/colorTextOnPrimary"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/creation_profile_card_view"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center|fill_vertical"
+        android:layout_margin="50dp"
+        app:cardElevation="@dimen/default_app_elevation"
+        app:cardCornerRadius="@dimen/default_app_radius">
+
+        <LinearLayout
+            android:id="@+id/activity_profile_card_view_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_twotone_add_circle_24px"
+                android:layout_marginBottom="@dimen/default_app_margin"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_new_profile"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/activity_profile_frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+</LinearLayout>

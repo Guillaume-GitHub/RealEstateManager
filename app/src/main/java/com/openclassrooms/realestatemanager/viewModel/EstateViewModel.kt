@@ -48,6 +48,10 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
         return this.allEstates
     }
 
+    fun getEstatesPostedBy(agentId: Long): LiveData<List<Estate>>? {
+        return this.estateDataSource.getEstatesPostedBy(agentId)
+    }
+
     fun insertEstate(estate: Estate): Single<Long> {
        return Single.just(this.estateDataSource.insertEstate(estate))
     }
@@ -86,13 +90,18 @@ class EstateViewModel(private val estateDataSource: EstateDataRepository,
        return this.agentDataSource.getAgents()
     }
 
-    fun getAgent(agentUid: Long): LiveData<Agent>?{
-        return this.agentDataSource.getAgent(agentUid)
+    fun getAgent(id: Long): LiveData<Agent>?{
+        return this.agentDataSource.getAgent(id)
     }
-
     fun insertAgent(agent: Agent){
         executor.execute {
             this.agentDataSource.insertAgent(agent)
+        }
+    }
+
+    fun deleteAgent(agent: Agent){
+        executor.execute {
+            this.agentDataSource.deleteAgent(agent)
         }
     }
 

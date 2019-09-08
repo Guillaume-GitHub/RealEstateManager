@@ -13,7 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
-        app:menu="@menu/activity_filter_toolbar_menu">
+        app:menu="@menu/valid_toolbar_menu">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/activity_filter_search_view"

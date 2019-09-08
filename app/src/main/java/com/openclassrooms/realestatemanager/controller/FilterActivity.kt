@@ -226,13 +226,13 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
 
     // Inflate menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.activity_filter_toolbar_menu, menu)
+        menuInflater.inflate(R.menu.valid_toolbar_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     // Action on Toolbar button click
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.activity_filter_valid_btn -> {
+        R.id.toolbar_valid_btn -> {
 
             val intent = Intent()
 

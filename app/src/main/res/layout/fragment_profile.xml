@@ -4,23 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.ProfileFragment">
-
-    <include layout="@layout/profile_toolbar"
-        android:id="@+id/profile_toolbar" />
+    tools:context=".controller.ProfileFragment"
+    android:background="@android:color/white">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/fragment_profile_card_view_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_toolbar"
         app:cardElevation="@dimen/default_app_elevation"
         android:layout_marginBottom="@dimen/large_app_margin">
 
         <RelativeLayout
+            android:id="@+id/fragment_profile_profile_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/default_app_padding">
+            android:padding="@dimen/default_app_padding"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/fragment_profile_image"
@@ -29,7 +30,7 @@
                 android:background="@drawable/circle_black_transparent_background_15"
                 android:scaleType="centerCrop"
                 android:layout_margin="@dimen/large_app_margin"
-                tools:src="@mipmap/ic_launcher_round" />
+                tools:src="@drawable/ic_account_circle_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fragment_profile_name"
@@ -40,9 +41,10 @@
                 android:layout_toEndOf="@id/fragment_profile_image"
                 android:paddingStart="@dimen/default_app_padding"
                 android:paddingEnd="@dimen/default_app_padding"
-                tools:text="John Wick"
+                tools:text="John DOE"
                 android:textSize="@dimen/title_text_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fragment_profile_link"
@@ -62,9 +64,40 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_profile_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/fragment_profile_card_view_profile">
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_profile_card_view_profile" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/fragment_profile_empty_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_profile_card_view_profile"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/medium_text_size"
+            android:text="@string/fragment_profile_empty_list_message"
+            android:layout_margin="@dimen/default_app_margin"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fragment_profile_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_app_margin"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="25dp"
+            android:text="@string/fragment_profile_empty_list_button"
+            android:textAllCaps="false"
+            app:icon="@drawable/ic_twotone_add_24px" />
+
+    </LinearLayout>
 
 </RelativeLayout>

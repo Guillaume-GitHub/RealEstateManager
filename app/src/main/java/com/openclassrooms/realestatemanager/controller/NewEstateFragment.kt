@@ -2,7 +2,6 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -32,7 +31,6 @@ import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.model.entity.Agent
 import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
-import io.reactivex.functions.BiConsumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.alert_dialog_pick_image_choice.view.*
 import kotlinx.android.synthetic.main.fragment_new_estate.*
@@ -84,7 +82,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.activity_new_estate_toolbar_menu,menu)
+        inflater.inflate(R.menu.valid_toolbar_menu,menu)
     }
 
     private fun getArgs(arguments: Bundle?){
@@ -376,7 +374,7 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
 
     // Action on Toolbar button click
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.activity_new_estate_valid_btn -> {
+        R.id.toolbar_valid_btn -> {
             this.cleanError()
             this.validFrom()
 
