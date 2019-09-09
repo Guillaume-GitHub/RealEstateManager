@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="">
+    android:fitsSystemWindows="true">
 
 
                 <!-- MAIN CONTAINER -->
@@ -21,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:titleTextColor="@color/colorTextOnPrimary">
+            app:titleTextColor="@color/colorTextOnPrimary"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
         </androidx.appcompat.widget.Toolbar>
 
             <FrameLayout

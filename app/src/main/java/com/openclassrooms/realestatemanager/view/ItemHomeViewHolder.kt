@@ -18,15 +18,17 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.recyclerview_home_list_item, parent,false)){
 
     private val title: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_title)
+    private val currencyText: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_currency)
     private val price: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_price)
     private val address: TextView =  itemView.findViewById(R.id.recyclerview_home_list_item_text_container_location)
     private val image: ImageView = itemView.findViewById(R.id.recyclerview_home_list_item_card_view_image)
     private val imageIndicator: Chip = itemView.findViewById(R.id.recyclerview_home_list_item_nb_photo)
     private val badge: AppCompatTextView = itemView.findViewById(R.id.recyclerview_home_list_item_card_view_sold)
 
-    fun bind(estate: Estate, callback: RecyclerClickListener.OnEstateClick ){
+    fun bind(estate: Estate, callback: RecyclerClickListener.OnEstateClick, currency: String ){
         this.displayItem(estate)
         this.setOnclickListener(callback,estate)
+        this.currencyText.text = currency
     }
 
     private fun displayItem(estate: Estate){
@@ -45,7 +47,7 @@ class ItemHomeViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     private fun getPriceText(price: Long): String {
-        return "$ ${price.toInt()}"
+        return "${price.toInt()}"
     }
 
     private fun getAddressText(locality: Locality): String {

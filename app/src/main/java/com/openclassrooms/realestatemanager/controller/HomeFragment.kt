@@ -4,15 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.adapter.ItemHomeAdapter
@@ -48,11 +45,16 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     //private var viewModel = estateViewModel
     private var estates = ArrayList<Estate>()
     private var categories = ArrayList<EstateCategory>()
-
+    private var isDollar = true
 
     // Callback
     private val callback: RecyclerClickListener.OnEstateClick  = this
     private val categoryCallback: RecyclerClickListener.OnItemClick = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -191,4 +193,40 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
         }
     }
 
+    //***************************** MENU + ACTIONS ****************************
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.conversion_toolbar_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.conversion_dollars_euros -> this.convertIntoEuros()
+            R.id.conversion_euros_dollars -> this.convertIntoDollars()
+        }
+        return false
+    }
+
+    private fun convertIntoDollars(){
+        if (!isDollar) {
+            this.isDollar = true
+            this.estates.forEach {estate ->
+                estate.price = Utils.convertEuroToDollar((estate.price.toInt())).toLong()
+                this.estateAdapter.setDollarCurrency()
+                this.estateAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun convertIntoEuros(){
+       if (isDollar) {
+           this.isDollar = false
+           this.estates.forEach {estate ->
+               estate.price = Utils.convertDollarToEuro((estate.price.toInt())).toLong()
+               this.estateAdapter.setEuroCurrency()
+               this.estateAdapter.notifyDataSetChanged()
+           }
+       }
+    }
 }
