@@ -6,11 +6,9 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +21,7 @@ import com.openclassrooms.realestatemanager.Injections.Injection
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.FiltersHelper
+import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.adapter.RecyclerIndicatorDecoration
 import com.openclassrooms.realestatemanager.api.ApiServicesBuilder
@@ -38,8 +37,15 @@ class DetailFragment : Fragment(){
     private var imagesList = ArrayList<Uri>()
     private lateinit var adapter: ItemImageAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var currentEstate: Estate
     private var  estateId: Long = -1
     private lateinit var viewModel: EstateViewModel
+    private var isDollar = true
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+       this.setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -55,7 +61,12 @@ class DetailFragment : Fragment(){
         this.recyclerViewItemConfig()
         this.getEstate(estateId)
         this.configureFloatingEditBtn()
-        fragment_detail_toolbar.setNavigationOnClickListener(View.OnClickListener { activity?.onBackPressed() })
+        fragment_detail_toolbar.setNavigationOnClickListener{ activity?.onBackPressed() }
+
+        val activity = activity as AppCompatActivity
+        activity.setSupportActionBar(fragment_detail_toolbar)
+        activity.supportActionBar?.title = ""
+
     }
 
     private fun configureFloatingEditBtn(){
@@ -73,6 +84,7 @@ class DetailFragment : Fragment(){
         this.addImagesToRecycler(estate.images)
         // Title section
         fragment_detail_title.text = estate.title
+        fragment_detail_currency.text = "$"
         fragment_detail_price.text = estate.price.toString()
         fragment_detail_date.text = estate.publishedDate.toString()
         // Criteria section
@@ -109,7 +121,8 @@ class DetailFragment : Fragment(){
     private fun fetchEstate(id: Long){
         this.viewModel.getEstate(id)!!.observe(this, Observer { estate ->
             if(estate != null) {
-                this.bind(estate)
+                this.currentEstate = estate
+                this.bind( this.currentEstate)
                 this.getStaticMap(estate.locality.latLng)
             }
             else { Log.w(this::class.java.simpleName, "Fail to get Estate")}
@@ -228,6 +241,38 @@ class DetailFragment : Fragment(){
                 chip.chipIcon = ContextCompat.getDrawable(context!!, R.drawable.ic_twotone_transport_24px)
                 chipGroup.addView(chip)
             }
+        }
+    }
+
+
+    //***************************** MENU + ACTIONS ****************************
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.conversion_toolbar_menu, fragment_detail_toolbar.menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.conversion_dollars_euros -> this.convertIntoEuros()
+            R.id.conversion_euros_dollars -> this.convertIntoDollars()
+        }
+        return false
+    }
+
+    private fun convertIntoDollars(){
+        if (!isDollar) {
+            this.isDollar = true
+            fragment_detail_price.text = Utils.convertEuroToDollar(( this.currentEstate.price.toInt())).toString()
+            fragment_detail_currency.text = "$"
+        }
+    }
+
+
+    private fun convertIntoEuros(){
+        if (isDollar) {
+            this.isDollar = false
+            fragment_detail_price.text = Utils.convertDollarToEuro(( this.currentEstate.price.toInt())).toString()
+            fragment_detail_currency.text = "€"
         }
     }
 }

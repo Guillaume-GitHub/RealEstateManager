@@ -30,7 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"/>
+                app:navigationIcon="@drawable/ic_twotone_arrow_back_white_24px"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -82,14 +83,32 @@
                                 android:paddingEnd="@dimen/default_app_padding"
                                 tools:text="12/05/2019 13:56" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/fragment_detail_price"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="@dimen/default_app_padding"
-                                tools:text="215000 $"
-                                android:textColor="@color/colorSecondary"
-                                android:textSize="18sp" />
+                                android:layout_height="wrap_content">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/fragment_detail_currency"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    tools:text="$"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/colorSecondary"
+                                    android:layout_marginStart="@dimen/default_app_margin"
+                                    android:paddingTop="@dimen/default_app_padding"
+                                    android:paddingBottom="@dimen/default_app_padding"/>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/fragment_detail_price"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:padding="@dimen/default_app_padding"
+                                    tools:text="215000"
+                                    android:textColor="@color/colorSecondary"
+                                    android:textSize="18sp" />
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
