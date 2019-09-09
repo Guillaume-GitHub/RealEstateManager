@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.BottomSheetImageAdapter
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
@@ -199,14 +200,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
         if(estate.saleDate == null){
             dialogView.maps_bottom_sheet_badge_for_sale.visibility = View.VISIBLE
-            dialogView.maps_bottom_sheet_date.text = estate.publishedDate.toString()
+            dialogView.maps_bottom_sheet_date.text = Utils.getFormattedDate(estate.publishedDate)
         }
         else{
             dialogView.maps_bottom_sheet_badge_sale.visibility = View.VISIBLE
-            dialogView.maps_bottom_sheet_date.text = estate.saleDate.toString()
+            dialogView.maps_bottom_sheet_date.text = Utils.getFormattedDate(estate.saleDate)
         }
 
-        dialogView.maps_bottom_sheet_price.text = estate.price.toInt().toString()
+        dialogView.maps_bottom_sheet_price.text = "$ ${estate.price.toInt()}"
         dialogView.maps_bottom_sheet_address.text = estate.locality.formattedAddress
         dialogView.maps_bottom_sheet_type.text = estate.category
         dialogView.maps_bottom_sheet_surface.text = "${estate.surface} m²"

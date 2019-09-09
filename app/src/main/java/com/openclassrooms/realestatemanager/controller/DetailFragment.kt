@@ -86,7 +86,19 @@ class DetailFragment : Fragment(){
         fragment_detail_title.text = estate.title
         fragment_detail_currency.text = "$"
         fragment_detail_price.text = estate.price.toString()
-        fragment_detail_date.text = estate.publishedDate.toString()
+
+        fragment_detail_date.apply {
+            if(estate.saleDate == null) {
+                text = Utils.getFormattedDate(estate.publishedDate)
+                fragment_detail_badge_for_sale.visibility = View.VISIBLE
+                fragment_detail_badge_sale.visibility = View.GONE
+            }
+            else {
+                text = Utils.getFormattedDate(estate.saleDate)
+                fragment_detail_badge_for_sale.visibility = View.GONE
+                fragment_detail_badge_sale.visibility = View.VISIBLE
+            }
+        }
         // Criteria section
         fragment_detail_type_text.text = estate.category
         fragment_detail_surface_text.text = this.getSurfaceText(estate)

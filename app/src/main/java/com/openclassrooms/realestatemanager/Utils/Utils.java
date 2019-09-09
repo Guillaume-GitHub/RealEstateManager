@@ -93,6 +93,13 @@ public class Utils {
         }
     }
 
+    /**
+     * Retourne la mensualité en fonction du montant du crédit et sa durée
+     * @param amountBorrowed
+     * @param loanRate
+     * @param loanDuration
+     * @return
+     */
     public static Double getMonthlyPayment(int amountBorrowed, double loanRate, int loanDuration) {
         double monthlyRate = (loanRate / 100) /12;
         double duration = (loanDuration * - 1);
@@ -100,12 +107,26 @@ public class Utils {
         return Double.valueOf(String.format("%.2f", result));
     }
 
-
+    /**
+     * Retourne le chemin du ficher
+     * @param context
+     * @return
+     * @throws IOException
+     */
    public static File createFilePath(Context context) throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",Locale.US).format(new Date());
         File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         return File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
+    }
+
+    /**
+     * Retourne la date au format "d MMM yyyy HH:mm" ex: 8 Sep 2019 11:54
+     * @param date
+     * @return
+     */
+    public static String getFormattedDate(Date date){
+       return new SimpleDateFormat("d MMM yyyy HH:mm", Locale.getDefault()).format(date);
     }
 
 }
