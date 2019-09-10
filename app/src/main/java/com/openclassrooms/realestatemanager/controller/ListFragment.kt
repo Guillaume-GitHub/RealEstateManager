@@ -20,15 +20,18 @@ import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
 import com.openclassrooms.realestatemanager.database.AppDatabase
 import com.openclassrooms.realestatemanager.model.entity.Estate
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list.*
 
 class ListFragment : Fragment(), RecyclerClickListener.OnEstateClick {
 
     companion object {
         private const val REQUEST_FILTER_RESULT = 10
+        private const val DETAIL_FRAGMENT_TAG = "detail_fragment_tag"
     }
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var detailFragment: DetailFragment
     private var estates = ArrayList<Estate>()
     private lateinit var query: SimpleSQLiteQuery
     private val callback: RecyclerClickListener.OnEstateClick  = this
@@ -84,7 +87,28 @@ class ListFragment : Fragment(), RecyclerClickListener.OnEstateClick {
     }
 
     override fun onEstateItemClick(estate: Estate) {
-        startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
+
+        if (resources.getBoolean(R.bool.isTabletMode) || resources.getBoolean(R.bool.isTabletLandMode)){
+            val bundle = Bundle()
+            bundle.putLong("estate_id", estate.estateUid)
+
+            val fragment = activity?.supportFragmentManager?.findFragmentByTag(DETAIL_FRAGMENT_TAG)
+
+            if (fragment != null) this.detailFragment = fragment as DetailFragment
+            else this.detailFragment = DetailFragment()
+
+            this.detailFragment.arguments = bundle
+
+            // // Hide no selection message
+            val view = activity_main_framelayout_list_2_no_selection
+            view?.visibility = View.GONE
+
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.activity_main_framelayout_list_2, this.detailFragment)?.commit()
+
+        }
+        else {
+            startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -130,9 +130,13 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
             else this.detailFragment = DetailFragment()
 
             this.detailFragment.arguments = bundle
+
+            // // Hide no selection message
+            val view = activity_main_framelayout_list_2_no_selection
+            view?.visibility = View.GONE
+
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.activity_main_framelayout_list_2, this.detailFragment)?.commit()
 
-            activity_main_framelayout_list_2_no_selection.visibility = View.GONE // Hide no selection message
         }
         else {
             startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
