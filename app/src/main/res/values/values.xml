@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="isTabletMode">false</bool>
+    <bool name="isTabletLandMode">false</bool>
 
     <string name="house">House</string>
     <string name="penthouse">Penthouse</string>

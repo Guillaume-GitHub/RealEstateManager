@@ -2,6 +2,7 @@ package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -22,6 +23,7 @@ import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
 import com.openclassrooms.realestatemanager.model.EstateCategory
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
@@ -30,6 +32,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     companion object{
         private const val RQ_FILTER_ACTIVITY = 5
         private const val LIST_FRAGMENT_TAG = "list_fragment_tag"
+        private const val DETAIL_FRAGMENT_TAG = "detail_fragment_tag"
     }
 
     private lateinit var rootView: View
@@ -39,8 +42,9 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     private lateinit var categoryRecycler: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var categoryAdapter: ItemCategoryAdapter
-    private lateinit var  viewModel: EstateViewModel
+    private lateinit var viewModel: EstateViewModel
     private lateinit var listFragment: ListFragment
+    private lateinit var detailFragment: DetailFragment
 
     //private var viewModel = estateViewModel
     private var estates = ArrayList<Estate>()
@@ -59,7 +63,6 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         this.rootView = inflater.inflate(R.layout.fragment_main, container, false)
-        Log.d("HomeFrag $this ", "CREATE VIEW")
         return rootView
     }
 
@@ -93,9 +96,18 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     private fun recyclerViewItemConfig(){
         this.itemRecycler = fragment_main_recyclerview_sold
         this.estateAdapter = ItemHomeAdapter(estates,callback)
-        this.gridLayoutManager = GridLayoutManager(context,2)
-        this.itemRecycler.layoutManager = this.gridLayoutManager
+        this.itemRecycler.layoutManager = this.getGridLayoutManager()
         this.itemRecycler.adapter = this.estateAdapter
+    }
+
+    private fun getGridLayoutManager(): GridLayoutManager{
+       if (resources.getBoolean(R.bool.isTabletMode)){
+           this.gridLayoutManager = GridLayoutManager(context, 1)
+        }
+        else{
+           this.gridLayoutManager = GridLayoutManager(context, 2)
+       }
+        return this.gridLayoutManager
     }
 
     // Configure RecyclerView of categories
@@ -108,7 +120,23 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     }
 
     private fun showDetailFragment(estate: Estate){
-       startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
+        if (resources.getBoolean(R.bool.isTabletMode) || resources.getBoolean(R.bool.isTabletLandMode)){
+            val bundle = Bundle()
+            bundle.putLong("estate_id", estate.estateUid)
+
+            val fragment = activity?.supportFragmentManager?.findFragmentByTag(DETAIL_FRAGMENT_TAG)
+
+            if (fragment != null) this.detailFragment = fragment as DetailFragment
+            else this.detailFragment = DetailFragment()
+
+            this.detailFragment.arguments = bundle
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.activity_main_framelayout_list_2, this.detailFragment)?.commit()
+
+            activity_main_framelayout_list_2_no_selection.visibility = View.GONE // Hide no selection message
+        }
+        else {
+            startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
+        }
     }
 
     // Start FilterActivity when search bar clicked

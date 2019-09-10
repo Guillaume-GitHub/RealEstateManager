@@ -38,7 +38,7 @@ class DetailFragment : Fragment(){
     private lateinit var adapter: ItemImageAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var currentEstate: Estate
-    private var  estateId: Long = -1
+    private var estateId: Long = -1
     private lateinit var viewModel: EstateViewModel
     private var isDollar = true
 
@@ -58,15 +58,24 @@ class DetailFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        this.configureViewModel()
         this.recyclerViewItemConfig()
-        this.getEstate(estateId)
+        this.configureToolbar()
+        this.fetchEstate(estateId)
         this.configureFloatingEditBtn()
-        fragment_detail_toolbar.setNavigationOnClickListener{ activity?.onBackPressed() }
+    }
 
-        val activity = activity as AppCompatActivity
-        activity.setSupportActionBar(fragment_detail_toolbar)
-        activity.supportActionBar?.title = ""
-
+    private fun configureToolbar(){
+        when(true){
+            resources.getBoolean(R.bool.isTabletMode),
+            resources.getBoolean(R.bool.isTabletLandMode)-> {}
+            else -> {
+                fragment_detail_toolbar.setNavigationOnClickListener{ activity?.onBackPressed() }
+                val activity = activity as AppCompatActivity
+                activity.setSupportActionBar(fragment_detail_toolbar)
+                activity.supportActionBar?.title = ""
+            }
+        }
     }
 
     private fun configureFloatingEditBtn(){
@@ -117,17 +126,9 @@ class DetailFragment : Fragment(){
         }
     }
 
-    private fun getEstate(id: Long) {
-        val activity = activity as DetailActivity
-        if (activity.getViewModel() != null) {
-            this.viewModel = activity.getViewModel()!!
-        }
-        else {
-            val viewModelFactory = Injection.provideViewModelFactory(context!!)
-            this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
-        }
-
-        this.fetchEstate(id)
+    private fun configureViewModel(){
+        val viewModelFactory = Injection.provideViewModelFactory(context!!)
+        this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
     }
 
     private fun fetchEstate(id: Long){
@@ -260,7 +261,12 @@ class DetailFragment : Fragment(){
     //***************************** MENU + ACTIONS ****************************
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.conversion_toolbar_menu, fragment_detail_toolbar.menu)
+        if(resources.getBoolean(R.bool.isTabletMode) || resources.getBoolean(R.bool.isTabletLandMode)){
+            super.onCreateOptionsMenu(menu, inflater)
+        }
+        else {
+            inflater.inflate(R.menu.conversion_toolbar_menu, fragment_detail_toolbar.menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -278,7 +284,6 @@ class DetailFragment : Fragment(){
             fragment_detail_currency.text = "$"
         }
     }
-
 
     private fun convertIntoEuros(){
         if (isDollar) {

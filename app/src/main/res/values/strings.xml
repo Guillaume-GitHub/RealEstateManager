@@ -5,6 +5,7 @@
     <string name="search_bar_hint">What are you looking for ?</string>
     <string name="categories_title_main_page_fragment">Categories</string>
     <string name="home_fragment_recently_added_title">Recently Added</string>
+    <string name="no_items_selected">No Items Selected</string>
 
 
     <!--DRAWER MENU-->
