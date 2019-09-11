@@ -13,8 +13,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recycler_category_item_card_view"
-        android:layout_width="140dp"
-        android:layout_height="90dp"
+        android:layout_width="@dimen/category_width"
+        android:layout_height="@dimen/category_height"
         app:cardCornerRadius="@dimen/default_app_radius">
 
         <ImageView

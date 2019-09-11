@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.model.entity.Estate
 
 class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -25,8 +26,8 @@ class ItemListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         this.title.text = estate.title
         this.category.text = estate.category
         this.location.text = "${estate.locality.cities}, ${estate.locality.postalCode}"
-        this.price.text = estate.price.toString()
-        this.date.text = estate.publishedDate.toString()
+        this.price.text = "$ ${estate.price}"
+        this.date.text = Utils.getFormattedDate(estate.publishedDate)
 
         this.setOnclickListener(callback, estate)
     }
