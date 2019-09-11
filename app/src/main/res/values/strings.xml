@@ -6,6 +6,13 @@
     <string name="categories_title_main_page_fragment">Categories</string>
     <string name="home_fragment_recently_added_title">Recently Added</string>
     <string name="no_items_selected">No Items Selected</string>
+    <string name="new_user_dialog_title">Create User ?</string>
+    <string name="new_user_dialog_message">I don\'t know who you are yet. \n
+        Your profile will allow you to create new real estate. \n
+        You can create your profile later in <b>Menu > Profile</b></string>
+    <string name="new_user_dialog_positive_btn">Create Now</string>
+    <string name="new_user_dialog_negative_btn">Later</string>
+
 
 
     <!--DRAWER MENU-->
