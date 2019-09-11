@@ -32,30 +32,33 @@
                 android:layout_margin="@dimen/large_app_margin"
                 tools:src="@drawable/ic_account_circle_black_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_profile_name"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/fragment_profile_image"
-                android:layout_marginTop="25dp"
-                android:layout_toEndOf="@id/fragment_profile_image"
-                android:paddingStart="@dimen/default_app_padding"
-                android:paddingEnd="@dimen/default_app_padding"
-                tools:text="John DOE"
-                android:textSize="@dimen/title_text_size"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/fragment_profile_link"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fragment_profile_name"
                 android:layout_centerInParent="true"
                 android:layout_toEndOf="@id/fragment_profile_image"
-                android:paddingStart="@dimen/default_app_padding"
-                android:paddingEnd="@dimen/default_app_padding"
-                android:text="@string/fragment_profile_view_profile" />
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragment_profile_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/default_app_padding"
+                    android:paddingEnd="@dimen/default_app_padding"
+                    tools:text="John DOE"
+                    android:textSize="@dimen/title_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/fragment_profile_link"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/default_app_padding"
+                    android:paddingEnd="@dimen/default_app_padding"
+                    android:text="@string/fragment_profile_view_profile" />
+
+            </LinearLayout>
 
         </RelativeLayout>
 

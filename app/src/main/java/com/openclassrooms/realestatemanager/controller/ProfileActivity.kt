@@ -89,11 +89,8 @@ class ProfileActivity : AppCompatActivity() {
     private fun getCurrentAgent(){
         this.viewModel.getAgents()?.observe(this, Observer { agents ->
             if (agents != null && agents.size > 1){
-                this.currentAgent = agents[0]
+                this.currentAgent = agents[1]
                 this.showProfile()
-            }
-            else {
-                this.showEditProfile()
             }
         })
     }
