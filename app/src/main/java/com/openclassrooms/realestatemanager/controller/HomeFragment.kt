@@ -1,6 +1,8 @@
 package com.openclassrooms.realestatemanager.controller
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.opengl.Visibility
 import android.os.Bundle
@@ -71,14 +73,19 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
 
         this.initViewModel()
         this.recyclerViewItemConfig()
-        this.addEstate()
+        this.getAllEstate()
 
         this.recyclerViewCategoryConfig()
         this.addCategory()
 
+        this.getCurrentAgent()
+
         this.onClickSearchView()
         this.onClickFloatingAddButton()
     }
+
+
+    //***************************** VIEW MODEL INIT ****************************
 
     // Get the View Model
     private fun initViewModel(){
@@ -91,6 +98,9 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
             this.viewModel = ViewModelProviders.of(this, viewModelFactory).get(EstateViewModel::class.java)
         }
     }
+
+
+    //***************************** RECYCLER VIEW CONFIG ****************************
 
     // Configure RecyclerView of estates items
     private fun recyclerViewItemConfig(){
@@ -119,29 +129,8 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
         this.categoryRecycler.adapter = this.categoryAdapter
     }
 
-    private fun showDetailFragment(estate: Estate){
-        if (resources.getBoolean(R.bool.isTabletMode) || resources.getBoolean(R.bool.isTabletLandMode)){
-            val bundle = Bundle()
-            bundle.putLong("estate_id", estate.estateUid)
+    //*****************************  CLICK EVENTS  ****************************
 
-            val fragment = activity?.supportFragmentManager?.findFragmentByTag(DETAIL_FRAGMENT_TAG)
-
-            if (fragment != null) this.detailFragment = fragment as DetailFragment
-            else this.detailFragment = DetailFragment()
-
-            this.detailFragment.arguments = bundle
-
-            // // Hide no selection message
-            val view = activity_main_framelayout_list_2_no_selection
-            view?.visibility = View.GONE
-
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.activity_main_framelayout_list_2, this.detailFragment)?.commit()
-
-        }
-        else {
-            startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
-        }
-    }
 
     // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
@@ -169,15 +158,22 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
         this.displayListFragment(queryString)
     }
 
-    private fun addEstate(){
-        this.getAllEstate()
-    }
+    //*****************************  DATABASE  ****************************
 
     private fun getAllEstate(){
         this.viewModel.getLatestEstate()?.observe(this, Observer { list->
             estates.clear()
             estates.addAll(list)
             estateAdapter.notifyDataSetChanged()
+        })
+    }
+
+    // Fetch Agents from database
+    private fun getCurrentAgent(){
+        this.viewModel.getAgents()?.observe(this, Observer { agents ->
+            if (agents == null || agents.size < 2) {
+                this.notifyNoUserExist()
+            }
         })
     }
 
@@ -190,6 +186,33 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
             i++
         }
     }
+
+    //***************************** UI / FRAGMENTS / ALERT  ****************************
+
+    private fun showDetailFragment(estate: Estate){
+        if (resources.getBoolean(R.bool.isTabletMode) || resources.getBoolean(R.bool.isTabletLandMode)){
+            val bundle = Bundle()
+            bundle.putLong("estate_id", estate.estateUid)
+
+            val fragment = activity?.supportFragmentManager?.findFragmentByTag(DETAIL_FRAGMENT_TAG)
+
+            if (fragment != null) this.detailFragment = fragment as DetailFragment
+            else this.detailFragment = DetailFragment()
+
+            this.detailFragment.arguments = bundle
+
+            // // Hide no selection message
+            val view = activity_main_framelayout_list_2_no_selection
+            view?.visibility = View.GONE
+
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.activity_main_framelayout_list_2, this.detailFragment)?.commit()
+
+        }
+        else {
+            startActivity(Intent(context, DetailActivity::class.java).putExtra("ESTATE_ID",estate.estateUid))
+        }
+    }
+
 
     private fun displayListFragment(query: String){
         Log.d(this.javaClass.simpleName, "Query = $query")
@@ -209,6 +232,20 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
                 ?.commit()
     }
 
+    private fun notifyNoUserExist(){
+        val builder = androidx.appcompat.app.AlertDialog.Builder(context!!)
+        builder.setTitle(getString(R.string.new_user_dialog_title))
+                .setMessage(getString(R.string.new_user_dialog_message))
+                .setNegativeButton(getString(R.string.new_user_dialog_negative_btn)) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(getString(R.string.new_user_dialog_positive_btn)) {dialog, _ ->
+                    dialog.dismiss()
+                    startActivity(Intent(context, ProfileActivity::class.java)) }
+
+        builder.create().show()
+    }
+
+    //***************************** ACTIVITY RESULT ****************************
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             RQ_FILTER_ACTIVITY ->
@@ -225,7 +262,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
         }
     }
 
-    //***************************** MENU + ACTIONS ****************************
+    //***************************** MENU + ACTIONS MENU ****************************
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.conversion_toolbar_menu, menu)
