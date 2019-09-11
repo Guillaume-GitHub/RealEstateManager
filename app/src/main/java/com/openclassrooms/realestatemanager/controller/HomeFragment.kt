@@ -235,7 +235,11 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     private fun notifyNoUserExist(){
         val builder = androidx.appcompat.app.AlertDialog.Builder(context!!)
         builder.setTitle(getString(R.string.new_user_dialog_title))
+<<<<<<< HEAD
                 .setMessage(getString(R.string.new_user_dialog_message))
+=======
+                .setMessage(getString(R.string.new_user_dialog_title))
+>>>>>>> master
                 .setNegativeButton(getString(R.string.new_user_dialog_negative_btn)) { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton(getString(R.string.new_user_dialog_positive_btn)) {dialog, _ ->
                     dialog.dismiss()
