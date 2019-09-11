@@ -32,39 +32,39 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".controller.ProfileActivity"
+            android:name=".controller.profile.ProfileActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity"/>
+            android:parentActivityName=".controller.main.MainActivity"/>
         <activity
-            android:name=".controller.SimulationActivity"
+            android:name=".controller.simulation.SimulationActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.MapsActivityForResult"
+            android:name=".controller.maps.MapsActivityForResult"
             android:label="@string/title_activity_maps_for_result" />
         <activity
-            android:name=".controller.MapsActivity"
+            android:name=".controller.maps.MapsActivity"
             android:label="@string/title_activity_maps"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.DraftActivity"
+            android:name=".controller.draft.DraftActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.NewEstateActivity"
+            android:name=".controller.estate.NewEstateActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.FilterActivity"
+            android:name=".controller.filter.FilterActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.DetailActivity"
+            android:name=".controller.detail.DetailActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".controller.MainActivity" />
+            android:parentActivityName=".controller.main.MainActivity" />
         <activity
-            android:name=".controller.MainActivity"
+            android:name=".controller.main.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

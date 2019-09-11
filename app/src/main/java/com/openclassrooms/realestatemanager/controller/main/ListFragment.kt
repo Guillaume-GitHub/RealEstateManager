@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.main
 
 
 import android.app.Activity
@@ -18,6 +18,9 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
+import com.openclassrooms.realestatemanager.controller.detail.DetailActivity
+import com.openclassrooms.realestatemanager.controller.detail.DetailFragment
+import com.openclassrooms.realestatemanager.controller.filter.FilterActivity
 import com.openclassrooms.realestatemanager.database.AppDatabase
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,7 +72,7 @@ class ListFragment : Fragment(), RecyclerClickListener.OnEstateClick {
     // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
         fragment_list_search_view.setOnClickListener {
-            val intent = Intent(context,FilterActivity::class.java)
+            val intent = Intent(context, FilterActivity::class.java)
             startActivityForResult(intent, REQUEST_FILTER_RESULT)
         }
     }

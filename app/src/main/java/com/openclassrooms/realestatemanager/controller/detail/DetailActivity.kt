@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
-import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
     private var estateId : Long = 0

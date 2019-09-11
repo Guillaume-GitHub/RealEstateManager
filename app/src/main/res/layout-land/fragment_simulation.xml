@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.SimulationFragment"
+    tools:context=".controller.simulation.SimulationFragment"
     android:orientation="horizontal"
     android:gravity="center">
 

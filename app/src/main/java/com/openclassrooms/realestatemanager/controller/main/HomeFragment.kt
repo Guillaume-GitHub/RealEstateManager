@@ -1,10 +1,7 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.main
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -22,6 +19,11 @@ import com.openclassrooms.realestatemanager.Utils.QueryBuilder
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.ItemCategoryAdapter
+import com.openclassrooms.realestatemanager.controller.detail.DetailActivity
+import com.openclassrooms.realestatemanager.controller.detail.DetailFragment
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
+import com.openclassrooms.realestatemanager.controller.filter.FilterActivity
+import com.openclassrooms.realestatemanager.controller.profile.ProfileActivity
 import com.openclassrooms.realestatemanager.model.EstateCategory
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
@@ -135,8 +137,8 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     // Start FilterActivity when search bar clicked
     private fun onClickSearchView(){
         fragment_main_search_view.setOnClickListener {
-            val intent = Intent(context,FilterActivity::class.java)
-            startActivityForResult(intent,RQ_FILTER_ACTIVITY)
+            val intent = Intent(context, FilterActivity::class.java)
+            startActivityForResult(intent, RQ_FILTER_ACTIVITY)
         }
     }
 
@@ -235,11 +237,7 @@ class HomeFragment : Fragment(), RecyclerClickListener.OnEstateClick, RecyclerCl
     private fun notifyNoUserExist(){
         val builder = androidx.appcompat.app.AlertDialog.Builder(context!!)
         builder.setTitle(getString(R.string.new_user_dialog_title))
-<<<<<<< HEAD
                 .setMessage(getString(R.string.new_user_dialog_message))
-=======
-                .setMessage(getString(R.string.new_user_dialog_title))
->>>>>>> master
                 .setNegativeButton(getString(R.string.new_user_dialog_negative_btn)) { dialog, _ -> dialog.dismiss() }
                 .setPositiveButton(getString(R.string.new_user_dialog_positive_btn)) {dialog, _ ->
                     dialog.dismiss()

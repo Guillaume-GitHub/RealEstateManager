@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.navigation.NavigationView
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
+import com.openclassrooms.realestatemanager.controller.draft.DraftActivity
+import com.openclassrooms.realestatemanager.controller.maps.MapsActivity
+import com.openclassrooms.realestatemanager.controller.profile.ProfileActivity
+import com.openclassrooms.realestatemanager.controller.simulation.SimulationActivity
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 

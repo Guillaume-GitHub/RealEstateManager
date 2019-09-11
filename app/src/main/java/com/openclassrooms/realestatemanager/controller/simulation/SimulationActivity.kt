@@ -1,9 +1,8 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.simulation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.openclassrooms.realestatemanager.R
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_simulation.*
 
 class SimulationActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.draft
 
 
 import android.annotation.SuppressLint
@@ -18,6 +18,8 @@ import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
 import com.openclassrooms.realestatemanager.Utils.SwipeToDeleteHelper
 import com.openclassrooms.realestatemanager.adapter.ItemDraftAdapter
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateFragment
 import com.openclassrooms.realestatemanager.model.entity.Draft
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import io.reactivex.schedulers.Schedulers

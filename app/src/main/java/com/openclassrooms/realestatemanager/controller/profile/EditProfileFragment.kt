@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.profile
 
 
 import android.app.Activity
@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -15,14 +14,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.model.entity.Agent
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.RequestCreator
-import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.alert_dialog_pick_image_choice.view.*
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.File

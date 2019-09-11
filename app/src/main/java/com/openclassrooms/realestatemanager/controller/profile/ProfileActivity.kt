@@ -1,15 +1,12 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.openclassrooms.realestatemanager.Injections.Injection
 import com.openclassrooms.realestatemanager.R
-import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.model.entity.Agent
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import kotlinx.android.synthetic.main.activity_profil.*

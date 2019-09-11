@@ -1,9 +1,10 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.draft
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.openclassrooms.realestatemanager.R
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateFragment
 import kotlinx.android.synthetic.main.activity_draft.*
 
 class DraftActivity : AppCompatActivity(){

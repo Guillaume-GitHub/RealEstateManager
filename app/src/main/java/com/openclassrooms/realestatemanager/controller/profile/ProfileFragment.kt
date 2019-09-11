@@ -1,8 +1,7 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.profile
 
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,8 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
-import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.ItemListAdapter
+import com.openclassrooms.realestatemanager.controller.detail.DetailActivity
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
 import com.openclassrooms.realestatemanager.model.entity.Agent
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
@@ -123,7 +123,7 @@ class ProfileFragment : Fragment(), RecyclerClickListener.OnEstateClick, View.On
     //************************* CALLBACK CLICK *************************
 
     override fun onEstateItemClick(estate: Estate) {
-        val intent = Intent(context,DetailActivity::class.java)
+        val intent = Intent(context, DetailActivity::class.java)
         intent.putExtra("ESTATE_ID", estate.estateUid)
         this.startActivity(intent)
     }

@@ -1,8 +1,6 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.detail
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -25,6 +23,7 @@ import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.adapter.RecyclerIndicatorDecoration
 import com.openclassrooms.realestatemanager.api.ApiServicesBuilder
+import com.openclassrooms.realestatemanager.controller.estate.NewEstateActivity
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.viewModel.EstateViewModel
 import com.squareup.picasso.Callback

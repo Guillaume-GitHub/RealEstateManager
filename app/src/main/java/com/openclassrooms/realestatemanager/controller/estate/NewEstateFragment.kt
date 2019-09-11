@@ -1,4 +1,4 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.estate
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
@@ -26,6 +26,7 @@ import com.openclassrooms.realestatemanager.Utils.*
 import com.openclassrooms.realestatemanager.adapter.ItemImageAdapter
 import com.openclassrooms.realestatemanager.adapter.AgentArrayAdapter
 import com.openclassrooms.realestatemanager.adapter.RecyclerIndicatorDecoration
+import com.openclassrooms.realestatemanager.controller.maps.MapsActivityForResult
 import com.openclassrooms.realestatemanager.model.entity.Estate
 import com.openclassrooms.realestatemanager.model.entity.Locality
 import com.openclassrooms.realestatemanager.model.entity.Agent
@@ -244,10 +245,10 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         //********************** fragment_new_estate_input_autocomplete_location  *****************************//
         // Get focus on autocomplete location
         fragment_new_estate_input_autocomplete_location.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
+            if (hasFocus) startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
         }
 
-        fragment_new_estate_input_autocomplete_location.setOnClickListener { startActivityForResult(Intent(context,MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
+        fragment_new_estate_input_autocomplete_location.setOnClickListener { startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
 
         //********************** fragment_new_estate_floating_btn  *****************************//
         fragment_new_estate_floating_btn.setOnClickListener { this.showAddingImageDialog() }

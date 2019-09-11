@@ -1,8 +1,7 @@
-package com.openclassrooms.realestatemanager.controller
+package com.openclassrooms.realestatemanager.controller.filter
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.CompoundButton
-import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.appyvet.materialrangebar.RangeBar
 import com.google.android.libraries.places.api.Places
