@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.room.TypeConverter;
 
+import com.openclassrooms.realestatemanager.R;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -135,6 +137,6 @@ public class Utils {
      * @param context
      */
     public static void noInternetConnectionToast(Context context){
-        Toast.makeText(context,"Check Internet Connection", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
     }
 }
