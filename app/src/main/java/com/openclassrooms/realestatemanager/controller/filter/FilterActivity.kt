@@ -22,6 +22,7 @@ import com.google.android.material.chip.Chip
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.AddressCompenentsHelper
 import com.openclassrooms.realestatemanager.Utils.FiltersHelper
+import com.openclassrooms.realestatemanager.Utils.Utils
 import kotlinx.android.synthetic.main.activity_filter.*
 import kotlinx.android.synthetic.main.nearby_chip_filters.*
 
@@ -108,7 +109,17 @@ class FilterActivity : AppCompatActivity(), RangeBar.OnRangeBarChangeListener, C
 
     private fun setUpAddLocation(){
         activity_filter_location_editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if(hasFocus) this.startPlacesAutocomplete()
+            when (true){
+                hasFocus -> {
+                    if (Utils.isInternetAvailable(this)) this.startPlacesAutocomplete()
+                    else Utils.noInternetConnectionToast(this)
+                }
+            }
+        }
+
+        activity_filter_location_editText.setOnClickListener {
+            if (Utils.isInternetAvailable(this)) this.startPlacesAutocomplete()
+            else Utils.noInternetConnectionToast(this)
         }
     }
 
