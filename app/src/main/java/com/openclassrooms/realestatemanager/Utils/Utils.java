@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.room.TypeConverter;
 
@@ -129,4 +130,11 @@ public class Utils {
        return new SimpleDateFormat("d MMM yyyy HH:mm", Locale.getDefault()).format(date);
     }
 
+    /**
+     * Affiche un message Toast pour avertir l'utilisateur de vérifier sa connection internet
+     * @param context
+     */
+    public static void noInternetConnectionToast(Context context){
+        Toast.makeText(context,"Check Internet Connection", Toast.LENGTH_LONG).show();
+    }
 }

@@ -245,10 +245,18 @@ class NewEstateFragment : Fragment(), OnDeleteImageButtonClick {
         //********************** fragment_new_estate_input_autocomplete_location  *****************************//
         // Get focus on autocomplete location
         fragment_new_estate_input_autocomplete_location.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
+            when (true){
+                hasFocus -> {
+                    if (Utils.isInternetAvailable(context)) startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
+                    else Utils.noInternetConnectionToast(context)
+                }
+            }
         }
 
-        fragment_new_estate_input_autocomplete_location.setOnClickListener { startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE) }
+        fragment_new_estate_input_autocomplete_location.setOnClickListener {
+            if (Utils.isInternetAvailable(context)) startActivityForResult(Intent(context, MapsActivityForResult::class.java), MAPS_REQUEST_CODE)
+            else Utils.noInternetConnectionToast(context)
+        }
 
         //********************** fragment_new_estate_floating_btn  *****************************//
         fragment_new_estate_floating_btn.setOnClickListener { this.showAddingImageDialog() }
