@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.openclassrooms.realestatemanager.R
 import com.openclassrooms.realestatemanager.Utils.RecyclerClickListener
+import com.openclassrooms.realestatemanager.Utils.Utils
 import com.openclassrooms.realestatemanager.model.entity.Draft
 
 class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -25,7 +26,7 @@ class ItemDraftViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         val priceText = mDraft.price?.toInt().toString()
         if (mDraft.price != null ) this.price.text = "$ $priceText"
 
-        this.date.text = "${this.date.text} ${mDraft.lastModification}"
+        this.date.text = "${this.date.text} ${Utils.getFormattedDate(mDraft.lastModification)}"
 
         this.image.apply {
             val img = mDraft.images

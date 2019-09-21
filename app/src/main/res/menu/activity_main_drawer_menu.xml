@@ -36,10 +36,12 @@
             android:id="@+id/activity_main_drawer_profile"
             android:icon="@drawable/ic_twotone_account_circle_24px"
             android:title="@string/drawer_menu_profile" />
+<!--
         <item
             android:id="@+id/activity_main_drawer_settings"
             android:icon="@drawable/ic_twotone_settings_24px"
             android:title="@string/drawer_menu_settings" />
+-->
     </group>
 
 </menu>
